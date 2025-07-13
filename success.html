@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thank You - PraxisTwin</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-blue: #0052CC;
+            --primary-blue-dark: #003B9B;
+            --primary-blue-light: #4C9AFF;
+            --accent-blue: #00A3FF;
+            --neutral-900: #0C1116;
+            --neutral-800: #161B22;
+            --neutral-700: #21262D;
+            --neutral-600: #30363D;
+            --neutral-400: #656D76;
+            --neutral-300: #8B949E;
+            --neutral-200: #C9D1D9;
+            --neutral-100: #F0F6FC;
+            --success-green: #238636;
+            --gradient-primary: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-blue-dark) 100%);
+            --gradient-accent: linear-gradient(135deg, var(--accent-blue) 0%, var(--primary-blue-light) 100%);
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
+            --shadow-md: 0 4px 12px rgba(0,0,0,0.1);
+            --shadow-lg: 0 8px 24px rgba(0,0,0,0.12);
+            --shadow-xl: 0 16px 40px rgba(0,0,0,0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.7;
+            color: var(--neutral-900);
+            background: #FAFBFC;
+            font-weight: 400;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .success-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 60px 40px;
+            text-align: center;
+            background: white;
+            border-radius: 20px;
+            box-shadow: var(--shadow-xl);
+            border: 1px solid var(--neutral-200);
+        }
+
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 32px;
+            font-size: 2.5rem;
+            animation: success-bounce 0.6s ease-out;
+        }
+
+        @keyframes success-bounce {
+            0% {
+                transform: scale(0.3);
+                opacity: 0;
+            }
+            50% {
+                transform: scale(1.1);
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .success-title {
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: var(--neutral-900);
+            margin-bottom: 16px;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .success-subtitle {
+            font-size: 1.25rem;
+            color: var(--neutral-600);
+            margin-bottom: 32px;
+            line-height: 1.6;
+        }
+
+        .success-message {
+            background: linear-gradient(135deg, var(--neutral-100) 0%, white 100%);
+            padding: 32px;
+            border-radius: 16px;
+            border: 2px solid var(--primary-blue-light);
+            margin-bottom: 40px;
+        }
+
+        .success-message h3 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--neutral-900);
+            margin-bottom: 16px;
+        }
+
+        .success-message p {
+            font-size: 1.1rem;
+            color: var(--neutral-600);
+            line-height: 1.7;
+        }
+
+        .next-steps {
+            text-align: left;
+            margin-bottom: 40px;
+        }
+
+        .next-steps h4 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--neutral-900);
+            margin-bottom: 16px;
+            text-align: center;
+        }
+
+        .next-steps ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .next-steps li {
+            padding: 12px 0;
+            border-bottom: 1px solid var(--neutral-200);
+            position: relative;
+            padding-left: 40px;
+        }
+
+        .next-steps li:last-child {
+            border-bottom: none;
+        }
+
+        .next-steps li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            top: 12px;
+            width: 24px;
+            height: 24px;
+            background: var(--success-green);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 16px 32px;
+            border: none;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background: var(--gradient-primary);
+            color: white;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--primary-blue);
+            border: 2px solid var(--primary-blue);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary-blue);
+            color: white;
+        }
+
+        .contact-info {
+            background: var(--neutral-100);
+            padding: 24px;
+            border-radius: 12px;
+            margin-top: 32px;
+        }
+
+        .contact-info h5 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--neutral-900);
+            margin-bottom: 12px;
+        }
+
+        .contact-info p {
+            font-size: 0.95rem;
+            color: var(--neutral-600);
+            margin-bottom: 8px;
+        }
+
+        /* Floating particles animation */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--primary-blue-light);
+            border-radius: 50%;
+            opacity: 0.3;
+            animation: float-particle 8s linear infinite;
+        }
+
+        @keyframes float-particle {
+            0% {
+                transform: translateY(100vh) translateX(-20px);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.3;
+            }
+            90% {
+                opacity: 0.3;
+            }
+            100% {
+                transform: translateY(-20vh) translateX(20px);
+                opacity: 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .success-container {
+                margin: 20px;
+                padding: 40px 24px;
+            }
+
+            .success-title {
+                font-size: 2rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating particles -->
+    <div class="particles" id="particles"></div>
+
+    <div class="success-container">
+        <div class="success-icon">
+            ✅
+        </div>
+        
+        <h1 class="success-title">System Analysis Complete!</h1>
+        <p class="success-subtitle">Thank you for your interest in PraxisTwin. Your consultation request has been successfully submitted.</p>
+        
+        <div class="success-message">
+            <h3>🚀 What Happens Next?</h3>
+            <p>Our PraxisTwin specialists have received your information and will contact you within 24 hours to discuss your strategic system deployment and operational transformation opportunities.</p>
+        </div>
+
+        <div class="next-steps">
+            <h4>Your Next Steps</h4>
+            <ul>
+                <li><strong>Initial Consultation:</strong> Our team will reach out within 24 hours to schedule a detailed discussion about your specific needs and challenges.</li>
+                <li><strong>System Assessment:</strong> We'll analyze your current operations and identify key areas where PraxisTwin can deliver immediate value.</li>
+                <li><strong>Custom Proposal:</strong> Receive a tailored proposal outlining your PraxisTwin system configuration and implementation roadmap.</li>
+                <li><strong>Deployment Planning:</strong> Together, we'll create a strategic deployment plan that aligns with your business objectives and timeline.</li>
+            </ul>
+        </div>
+
+        <div class="cta-buttons">
+            <a href="/" class="btn btn-primary">Return to Homepage</a>
+            <a href="/#perspectives" class="btn btn-secondary">Explore PraxisTwin Insights</a>
+        </div>
+
+        <div class="contact-info">
+            <h5>Need immediate assistance?</h5>
+            <p>While you wait for our team to contact you, feel free to explore our case studies and learn more about PraxisTwin system implementations.</p>
+            <p><strong>Emergency Contact:</strong> For urgent inquiries, please mention "Priority" in your original message.</p>
+        </div>
+    </div>
+
+    <script>
+        // Create floating particles
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const numberOfParticles = 15;
+
+            for (let i = 0; i < numberOfParticles; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                
+                // Random positioning and timing
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 8 + 's';
+                particle.style.animationDuration = (Math.random() * 4 + 6) + 's';
+                
+                // Random size variation
+                const size = Math.random() * 3 + 2;
+                particle.style.width = size + 'px';
+                particle.style.height = size + 'px';
+                
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Initialize particles when page loads
+        document.addEventListener('DOMContentLoaded', createParticles);
+
+        // Add a subtle success sound effect (optional)
+        // Uncomment the following lines if you want to add an audio notification
+        // const successAudio = new Audio('data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmAaBTuAzvLZeSMFLYHO8tiJNwkYaLvt559NEAxPqOPwtmMcBjiS2DP');
+        // successAudio.play().catch(() => {}); // Catch error if autoplay is blocked
+    </script>
+</body>
+</html>

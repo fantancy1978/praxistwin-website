@@ -1,0 +1,30 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "static/images"
+public_folder: "/images"
+
+collections:
+  - name: "case-studies"
+    label: "Case Studies"
+    folder: "case-studies"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Date", name: "date", widget: "datetime"}
+      - {label: "Featured Image", name: "thumbnail", widget: "image"}
+      - {label: "Body", name: "body", widget: "markdown"}
+
+  - name: "perspectives"
+    label: "Perspectives" 
+    folder: "perspectives"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Date", name: "date", widget: "datetime"}
+      - {label: "Author", name: "author", widget: "string"}
+      - {label: "Featured Image", name: "thumbnail", widget: "image"}
+      - {label: "Body", name: "body", widget: "markdown"}
