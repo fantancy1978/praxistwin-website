@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>[ARTICLE TITLE] | PraxisTwin Industry Insights</title>
-    <meta name="description" content="[ARTICLE DESCRIPTION - 150-160 characters]">
+    <title>PraxisTwin Insights | Industry Innovation & Technical Excellence</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -22,7 +21,6 @@
             --neutral-200: #C9D1D9;
             --neutral-100: #F0F6FC;
             --success-green: #238636;
-            --accent-gold: #FFB020;
             --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
             --shadow-md: 0 4px 12px rgba(0,0,0,0.1);
             --shadow-lg: 0 8px 24px rgba(0,0,0,0.12);
@@ -94,9 +92,47 @@
             border-radius: 8px;
         }
 
-        .nav-links a:hover {
+        .nav-links a:hover, .nav-links a.active {
             color: var(--primary-blue);
             background: rgba(0, 82, 204, 0.06);
+        }
+
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background: white;
+            min-width: 240px;
+            box-shadow: var(--shadow-lg);
+            border-radius: 12px;
+            z-index: 1;
+            top: 100%;
+            left: 0;
+            border: 1px solid var(--neutral-200);
+            padding: 8px 0;
+            margin-top: 8px;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown-content a {
+            color: var(--neutral-700);
+            padding: 12px 20px;
+            text-decoration: none;
+            display: block;
+            font-size: 14px;
+            transition: all 0.2s ease;
+            border-radius: 0;
+        }
+
+        .dropdown-content a:hover {
+            background: var(--neutral-100);
+            color: var(--primary-blue);
         }
 
         .cta-btn {
@@ -119,8 +155,8 @@
             box-shadow: var(--shadow-lg);
         }
 
-        /* Article Header */
-        .article-header {
+        /* Header Section */
+        .header-section {
             background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-blue-dark) 100%);
             color: white;
             padding: 120px 0 80px;
@@ -129,7 +165,7 @@
             overflow: hidden;
         }
 
-        .article-header::before {
+        .header-section::before {
             content: '';
             position: absolute;
             top: 0;
@@ -144,48 +180,21 @@
         .header-content {
             position: relative;
             z-index: 2;
-            max-width: 900px;
-            margin: 0 auto;
         }
 
-        .article-category {
-            background: rgba(255, 255, 255, 0.2);
-            padding: 8px 16px;
-            border-radius: 8px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            display: inline-block;
-            margin-bottom: 20px;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        .article-title {
-            font-size: 3.2rem;
+        .header-title {
+            font-size: 3.5rem;
             font-weight: 300;
             margin-bottom: 24px;
-            line-height: 1.2;
+            line-height: 1.1;
         }
 
-        .article-subtitle {
+        .header-subtitle {
             font-size: 1.3rem;
             opacity: 0.9;
+            max-width: 900px;
+            margin: 0 auto;
             line-height: 1.6;
-            margin-bottom: 30px;
-        }
-
-        .article-meta {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            font-size: 0.95rem;
-            opacity: 0.8;
-        }
-
-        .meta-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
         }
 
         /* Main Content */
@@ -193,249 +202,74 @@
             padding: 80px 0;
         }
 
-        .back-link {
-            background: var(--neutral-100);
-            padding: 16px 24px;
-            border-radius: 12px;
-            text-align: center;
-            margin-bottom: 60px;
-        }
-
-        .back-link a {
-            color: var(--primary-blue);
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.2s ease;
-        }
-
-        .back-link a:hover {
-            color: var(--primary-blue-dark);
-        }
-
-        .article-content {
-            max-width: 800px;
-            margin: 0 auto;
-            background: white;
-            padding: 60px;
-            border-radius: 20px;
-            box-shadow: var(--shadow-sm);
-            border: 1px solid var(--neutral-200);
-        }
-
-        .article-content h2 {
-            font-size: 2rem;
-            font-weight: 600;
-            color: var(--primary-blue);
-            margin: 50px 0 25px 0;
-            line-height: 1.3;
-        }
-
-        .article-content h2:first-child {
-            margin-top: 0;
-        }
-
-        .article-content h3 {
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: var(--neutral-800);
-            margin: 40px 0 20px 0;
-            line-height: 1.4;
-        }
-
-        .article-content h4 {
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: var(--neutral-700);
-            margin: 30px 0 15px 0;
-            line-height: 1.4;
-        }
-
-        .article-content p {
-            margin-bottom: 20px;
-            line-height: 1.8;
-            font-size: 1.05rem;
-            color: var(--neutral-700);
-        }
-
-        .article-content ul, .article-content ol {
-            margin: 20px 0 20px 30px;
-            color: var(--neutral-700);
-        }
-
-        .article-content li {
-            margin-bottom: 8px;
-            line-height: 1.7;
-        }
-
-        .article-content strong {
-            color: var(--primary-blue);
-            font-weight: 600;
-        }
-
-        .article-content em {
-            color: var(--neutral-600);
-            font-style: italic;
-        }
-
-        /* Highlight Boxes */
-        .highlight-box {
-            background: linear-gradient(135deg, var(--neutral-100) 0%, #f8fafc 100%);
-            border-left: 4px solid var(--primary-blue);
-            padding: 30px;
-            margin: 40px 0;
-            border-radius: 0 12px 12px 0;
-        }
-
-        .highlight-box h4 {
-            color: var(--primary-blue);
-            margin-top: 0;
-            margin-bottom: 15px;
-        }
-
-        .key-insight {
-            background: linear-gradient(135deg, var(--success-green) 0%, #2ea043 100%);
-            color: white;
-            padding: 30px;
-            border-radius: 16px;
-            margin: 40px 0;
-            text-align: center;
-        }
-
-        .key-insight h4 {
-            color: white;
-            margin-bottom: 15px;
-            font-size: 1.3rem;
-        }
-
-        .key-insight p {
-            color: rgba(255, 255, 255, 0.9);
-            margin-bottom: 0;
-        }
-
-        /* Stats Grid */
-        .stats-grid {
+        /* Articles Grid */
+        .articles-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            margin: 40px 0;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
         }
 
-        .stat-card {
-            background: var(--neutral-100);
-            padding: 24px;
-            border-radius: 12px;
-            text-align: center;
-            border-left: 4px solid var(--success-green);
+        .article-card {
+            background: white;
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s ease;
+            border: 1px solid var(--neutral-200);
+            position: relative;
         }
 
-        .stat-value {
-            font-size: 2.2rem;
-            font-weight: 600;
-            color: var(--success-green);
-            margin-bottom: 8px;
+        .article-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
         }
 
-        .stat-label {
+        .article-date {
+            color: var(--neutral-500);
             font-size: 0.9rem;
-            color: var(--neutral-600);
+            margin-bottom: 16px;
             font-weight: 500;
         }
 
-        /* Quote */
-        .quote-section {
-            background: linear-gradient(135deg, var(--neutral-100) 0%, #f8fafc 100%);
-            border-left: 6px solid var(--primary-blue);
-            padding: 40px;
-            margin: 50px 0;
-            border-radius: 0 16px 16px 0;
-            position: relative;
-        }
-
-        .quote-section::before {
-            content: '"';
-            position: absolute;
-            top: -10px;
-            left: 20px;
-            font-size: 4rem;
-            color: var(--primary-blue);
-            opacity: 0.3;
-            font-family: serif;
-        }
-
-        .quote-text {
-            font-size: 1.2rem;
-            font-style: italic;
-            color: var(--neutral-800);
-            margin-bottom: 20px;
-            line-height: 1.6;
-            position: relative;
-            z-index: 2;
-        }
-
-        .quote-author {
+        .article-title {
+            font-size: 1.5rem;
             font-weight: 600;
-            color: var(--primary-blue);
+            color: var(--neutral-900);
+            margin-bottom: 16px;
+            line-height: 1.4;
+        }
+
+        .article-excerpt {
+            color: var(--neutral-600);
+            line-height: 1.6;
+            margin-bottom: 24px;
             font-size: 1rem;
         }
 
-        .quote-role {
-            color: var(--neutral-600);
-            font-size: 0.9rem;
-            margin-top: 4px;
-        }
-
-        /* Related Articles */
-        .related-articles {
-            margin-top: 80px;
-            padding: 60px 0;
-            background: linear-gradient(135deg, #f8fafc 0%, var(--neutral-100) 100%);
-            border-radius: 20px;
-        }
-
-        .related-title {
-            text-align: center;
-            font-size: 2rem;
-            font-weight: 300;
-            color: var(--neutral-900);
-            margin-bottom: 40px;
-        }
-
-        .related-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-
-        .related-card {
-            background: white;
-            border-radius: 12px;
-            padding: 24px;
-            box-shadow: var(--shadow-sm);
-            transition: all 0.3s ease;
-        }
-
-        .related-card:hover {
-            transform: translateY(-4px);
-            box-shadow: var(--shadow-md);
-        }
-
-        .related-card h4 {
-            font-size: 1.1rem;
-            margin-bottom: 12px;
-            color: var(--neutral-900);
-        }
-
-        .related-card p {
-            font-size: 0.9rem;
-            color: var(--neutral-600);
-            margin-bottom: 16px;
-        }
-
-        .related-card a {
+        .read-more-btn {
             color: var(--primary-blue);
             text-decoration: none;
             font-weight: 600;
-            font-size: 0.9rem;
+            font-size: 1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s ease;
+        }
+
+        .read-more-btn:hover {
+            color: var(--primary-blue-dark);
+            transform: translateX(4px);
+        }
+
+        .read-more-btn::after {
+            content: '→';
+            transition: transform 0.2s ease;
+        }
+
+        .read-more-btn:hover::after {
+            transform: translateX(4px);
         }
 
         /* Footer */
@@ -451,31 +285,56 @@
             margin: 0 auto;
         }
 
+        .footer-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: white;
+        }
+
+        .footer-description {
+            line-height: 1.6;
+            margin-bottom: 30px;
+            opacity: 0.8;
+        }
+
+        .footer-cta {
+            display: inline-block;
+            background: var(--primary-blue);
+            color: white;
+            padding: 14px 28px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .footer-cta:hover {
+            background: var(--primary-blue-dark);
+            transform: translateY(-2px);
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             .nav-links {
                 display: none;
             }
 
-            .article-title {
-                font-size: 2.2rem;
+            .header-title {
+                font-size: 2.5rem;
             }
 
-            .article-content {
+            .header-subtitle {
+                font-size: 1.1rem;
+            }
+
+            .articles-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .article-card {
                 padding: 30px 24px;
-            }
-
-            .article-meta {
-                flex-direction: column;
-                gap: 15px;
-            }
-
-            .stats-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .related-grid {
-                grid-template-columns: 1fr;
             }
         }
 
@@ -484,8 +343,8 @@
                 padding: 0 16px;
             }
 
-            .article-content {
-                padding: 24px 16px;
+            .article-card {
+                padding: 24px 20px;
             }
         }
     </style>
@@ -497,8 +356,16 @@
             <a href="index.html" class="logo">PraxisTwin</a>
             <ul class="nav-links">
                 <li><a href="index.html">Home</a></li>
-                <li><a href="index.html#platform">Our Architecture</a></li>
-                <li><a href="case-studies.html">Insights</a></li>
+                <li class="dropdown">
+                    <a href="index.html#platform">Our Architecture ▼</a>
+                    <div class="dropdown-content">
+                        <a href="index.html#insight-engine">The Insight Engine</a>
+                        <a href="index.html#innovator-roadmap">The Innovator's Roadmap</a>
+                        <a href="index.html#ai-analytics">AI Analytics</a>
+                        <a href="index.html#digital-twin">Digital Twin</a>
+                    </div>
+                </li>
+                <li><a href="case-studies.html" class="active">Insights</a></li>
                 <li><a href="perspectives.html">Perspectives</a></li>
                 <li><a href="index.html#contact">Contact</a></li>
             </ul>
@@ -506,138 +373,68 @@
         </div>
     </nav>
 
-    <!-- Article Header -->
-    <header class="article-header">
+    <!-- Header Section -->
+    <section class="header-section">
         <div class="container">
             <div class="header-content">
-                <div class="article-category">[CATEGORY - e.g., Digital Transformation]</div>
-                <h1 class="article-title">[ARTICLE TITLE]</h1>
-                <p class="article-subtitle">[ARTICLE SUBTITLE - Brief engaging description of what readers will learn]</p>
-                <div class="article-meta">
-                    <div class="meta-item">
-                        <span>📊</span>
-                        <span>[READING TIME] min read</span>
-                    </div>
-                    <div class="meta-item">
-                        <span>📅</span>
-                        <span>[PUBLICATION DATE]</span>
-                    </div>
-                    <div class="meta-item">
-                        <span>🏭</span>
-                        <span>[INDUSTRY FOCUS]</span>
-                    </div>
-                </div>
+                <h1 class="header-title">Industry Insights</h1>
+                <p class="header-subtitle">Expert perspectives on digital transformation, operational excellence, and the future of manufacturing intelligence for C-suite executives and R&D leaders.</p>
             </div>
         </div>
-    </header>
+    </section>
 
     <!-- Main Content -->
     <main class="main-content">
         <div class="container">
-            <div class="back-link">
-                <a href="case-studies.html">← Back to Industry Insights</a>
+            <div class="articles-grid">
+                <!-- Article 1 -->
+                <article class="article-card">
+                    <div class="article-date">January 14, 2025</div>
+                    <h2 class="article-title">Cracking the Code: Flavor Simulation in Coffee Roasting</h2>
+                    <p class="article-excerpt">Advanced digital twin technology enables precise flavor profile prediction and optimization in specialty coffee production. Discover how AI-powered simulation transforms traditional roasting into a predictable science.</p>
+                    <a href="cracking-coffee-flavor-simulation.html" class="read-more-btn">Read Full Article</a>
+                </article>
+
+                <!-- Article 2 -->
+                <article class="article-card">
+                    <div class="article-date">January 13, 2025</div>
+                    <h2 class="article-title">Beyond Simulation: The Digital Twin Revolution</h2>
+                    <p class="article-excerpt">How next-generation digital twin technology is transforming manufacturing from reactive to predictive operations. Explore the strategic implications of virtual-physical integration for operational excellence.</p>
+                    <a href="digital-twin-revolution.html" class="read-more-btn">Read Full Article</a>
+                </article>
+
+                <!-- Article 3 -->
+                <article class="article-card">
+                    <div class="article-date">January 12, 2025</div>
+                    <h2 class="article-title">Anti-Fragile Supply Chains: Predictive Twinning</h2>
+                    <p class="article-excerpt">Building resilient supply networks through predictive analytics and digital twin modeling capabilities. Learn how leading manufacturers turn disruption into competitive advantage.</p>
+                    <a href="antifragile-supply-chain.html" class="read-more-btn">Read Full Article</a>
+                </article>
+
+                <!-- Article 4 -->
+                <article class="article-card">
+                    <div class="article-date">January 11, 2025</div>
+                    <h2 class="article-title">Digital Precision in Dairy Manufacturing</h2>
+                    <p class="article-excerpt">Leveraging IoT sensors and AI analytics to optimize dairy production quality and efficiency at scale. A deep dive into the technologies revolutionizing food safety and consistency.</p>
+                    <a href="digital-precision-dairy.html" class="read-more-btn">Read Full Article</a>
+                </article>
+
+                <!-- Article 5 -->
+                <article class="article-card">
+                    <div class="article-date">January 10, 2025</div>
+                    <h2 class="article-title">Collaborative Intelligence: Empowering Teams</h2>
+                    <p class="article-excerpt">How AI-human collaboration models are revolutionizing decision-making in complex manufacturing environments. Discover the future of augmented workforce capabilities.</p>
+                    <a href="collaborative-intelligence-teams.html" class="read-more-btn">Read Full Article</a>
+                </article>
+
+                <!-- Article 6 -->
+                <article class="article-card">
+                    <div class="article-date">January 9, 2025</div>
+                    <h2 class="article-title">Agricultural Digitalization: Farm to Future</h2>
+                    <p class="article-excerpt">Comprehensive digital transformation strategies for modern agricultural operations and food production systems. Explore the intersection of sustainability and technological innovation.</p>
+                    <a href="agri-food-digitalization.html" class="read-more-btn">Read Full Article</a>
+                </article>
             </div>
-
-            <article class="article-content">
-                <!-- Introduction Section -->
-                <h2>Executive Summary</h2>
-                <p>[Write a compelling opening paragraph that hooks the reader and clearly states what problem this article addresses and what value it provides.]</p>
-                
-                <p>[Second paragraph providing context and setting up the main discussion points.]</p>
-
-                <!-- Key Insight Box -->
-                <div class="key-insight">
-                    <h4>Key Insight</h4>
-                    <p>[One sentence highlighting the most important takeaway from this article]</p>
-                </div>
-
-                <!-- Main Content Sections -->
-                <h2>[Main Section 1 Title]</h2>
-                <p>[Content for first main section. Use clear, professional language that demonstrates expertise while remaining accessible.]</p>
-
-                <h3>[Subsection Title]</h3>
-                <p>[Subsection content with specific examples or case studies.]</p>
-
-                <ul>
-                    <li><strong>Point 1:</strong> Detailed explanation of first key point</li>
-                    <li><strong>Point 2:</strong> Detailed explanation of second key point</li>
-                    <li><strong>Point 3:</strong> Detailed explanation of third key point</li>
-                </ul>
-
-                <!-- Highlight Box -->
-                <div class="highlight-box">
-                    <h4>Industry Example</h4>
-                    <p>[Provide a real-world example or case study that illustrates your points. Use specific numbers and outcomes where possible.]</p>
-                </div>
-
-                <h2>[Main Section 2 Title]</h2>
-                <p>[Continue with your main content, building logically on previous sections.]</p>
-
-                <!-- Stats Grid -->
-                <div class="stats-grid">
-                    <div class="stat-card">
-                        <div class="stat-value">[NUMBER]%</div>
-                        <div class="stat-label">[METRIC DESCRIPTION]</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-value">[NUMBER]x</div>
-                        <div class="stat-label">[IMPROVEMENT METRIC]</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-value">[CURRENCY][AMOUNT]</div>
-                        <div class="stat-label">[FINANCIAL IMPACT]</div>
-                    </div>
-                </div>
-
-                <h2>Implementation Strategy</h2>
-                <p>[Provide practical, actionable advice that readers can implement.]</p>
-
-                <h3>Phase 1: [Strategy Phase Title]</h3>
-                <p>[Detailed explanation of first implementation phase]</p>
-
-                <h3>Phase 2: [Strategy Phase Title]</h3>
-                <p>[Detailed explanation of second implementation phase]</p>
-
-                <!-- Expert Quote -->
-                <div class="quote-section">
-                    <p class="quote-text">[Expert quote that adds credibility and insight to your article. Make it specific and valuable.]</p>
-                    <div class="quote-author">[Expert Name]</div>
-                    <div class="quote-role">[Title], [Company/Organization]</div>
-                </div>
-
-                <h2>Future Outlook</h2>
-                <p>[Discuss emerging trends and future developments related to your topic.]</p>
-
-                <h2>Conclusion</h2>
-                <p>[Summarize key points and provide clear next steps for readers.]</p>
-
-                <div class="highlight-box">
-                    <h4>Ready to Transform Your Operations?</h4>
-                    <p>The strategies discussed in this article are core components of our comprehensive PraxisTwin system. Contact our team to explore how these innovations can drive measurable results in your organization.</p>
-                </div>
-            </article>
-
-            <!-- Related Articles -->
-            <section class="related-articles">
-                <div class="related-title">Related Insights</div>
-                <div class="related-grid">
-                    <div class="related-card">
-                        <h4>[Related Article 1 Title]</h4>
-                        <p>[Brief description of related article]</p>
-                        <a href="[related-article-1].html">Read More →</a>
-                    </div>
-                    <div class="related-card">
-                        <h4>[Related Article 2 Title]</h4>
-                        <p>[Brief description of related article]</p>
-                        <a href="[related-article-2].html">Read More →</a>
-                    </div>
-                    <div class="related-card">
-                        <h4>[Related Article 3 Title]</h4>
-                        <p>[Brief description of related article]</p>
-                        <a href="[related-article-3].html">Read More →</a>
-                    </div>
-                </div>
-            </section>
         </div>
     </main>
 
@@ -645,7 +442,9 @@
     <footer>
         <div class="container">
             <div class="footer-content">
-                <p>&copy; 2025 PraxisTwin. Turning industrial strategy into operational reality.</p>
+                <h3 class="footer-title">Stay Ahead with Industry Insights</h3>
+                <p class="footer-description">Subscribe to our thought leadership articles and technical innovations. Get the latest insights on digital transformation, AI analytics, and operational excellence delivered to your inbox.</p>
+                <a href="index.html#contact" class="footer-cta">Subscribe to Our Insights</a>
             </div>
         </div>
     </footer>
