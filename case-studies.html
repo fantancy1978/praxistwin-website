@@ -590,6 +590,111 @@
             line-height: 1.6;
         }
 
+        /* Related Articles Section */
+        .related-articles {
+            margin-top: 100px;
+            padding: 60px 0;
+            background: linear-gradient(135deg, #f8fafc 0%, var(--neutral-100) 100%);
+            border-radius: 20px;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 300;
+            color: var(--neutral-900);
+            margin-bottom: 16px;
+        }
+
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: var(--neutral-600);
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .articles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .article-card {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s ease;
+            border: 1px solid var(--neutral-200);
+        }
+
+        .article-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .article-category {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-blue-dark) 100%);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .article-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--neutral-900);
+            margin-bottom: 12px;
+            line-height: 1.4;
+        }
+
+        .article-excerpt {
+            color: var(--neutral-600);
+            line-height: 1.6;
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+        }
+
+        .article-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid var(--neutral-200);
+            padding-top: 20px;
+        }
+
+        .article-meta {
+            display: flex;
+            gap: 16px;
+            font-size: 0.85rem;
+            color: var(--neutral-500);
+        }
+
+        .article-link {
+            color: var(--primary-blue);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+        }
+
+        .article-link:hover {
+            color: var(--primary-blue-dark);
+            transform: translateX(4px);
+        }
+
         /* Footer */
         footer {
             background: var(--neutral-900);
@@ -693,6 +798,21 @@
 
             .stats-grid {
                 grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .articles-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .article-footer {
+                flex-direction: column;
+                gap: 12px;
+                align-items: flex-start;
             }
         }
     </style>
@@ -1219,6 +1339,106 @@
                     </div>
                 </article>
             </div>
+
+            <!-- Related Articles Section -->
+            <section class="related-articles">
+                <div class="section-header">
+                    <h2 class="section-title">Industry Insights & Technical Deep Dives</h2>
+                    <p class="section-subtitle">Explore our thought leadership articles covering emerging trends, technical innovations, and strategic perspectives in digital manufacturing.</p>
+                </div>
+                
+                <div class="articles-grid">
+                    <article class="article-card">
+                        <div class="article-header">
+                            <div class="article-category">Agricultural Innovation</div>
+                            <h3 class="article-title">Cracking the Code: Flavor Simulation in Coffee Roasting</h3>
+                            <p class="article-excerpt">Advanced digital twin technology enables precise flavor profile prediction and optimization in specialty coffee production.</p>
+                        </div>
+                        <div class="article-footer">
+                            <div class="article-meta">
+                                <span class="read-time">8 min read</span>
+                                <span class="article-date">Latest</span>
+                            </div>
+                            <a href="cracking-the-code-flavor-simulation-in-coffee-roasting.html" class="article-link">Read Article →</a>
+                        </div>
+                    </article>
+
+                    <article class="article-card">
+                        <div class="article-header">
+                            <div class="article-category">Digital Transformation</div>
+                            <h3 class="article-title">Beyond Simulation: The Digital Twin Revolution</h3>
+                            <p class="article-excerpt">How next-generation digital twin technology is transforming manufacturing from reactive to predictive operations.</p>
+                        </div>
+                        <div class="article-footer">
+                            <div class="article-meta">
+                                <span class="read-time">12 min read</span>
+                                <span class="article-date">Featured</span>
+                            </div>
+                            <a href="beyond-simulation-digital-twin.html" class="article-link">Read Article →</a>
+                        </div>
+                    </article>
+
+                    <article class="article-card">
+                        <div class="article-header">
+                            <div class="article-category">Supply Chain</div>
+                            <h3 class="article-title">Anti-Fragile Supply Chains: Predictive Twinning</h3>
+                            <p class="article-excerpt">Building resilient supply networks through predictive analytics and digital twin modeling capabilities.</p>
+                        </div>
+                        <div class="article-footer">
+                            <div class="article-meta">
+                                <span class="read-time">10 min read</span>
+                                <span class="article-date">Popular</span>
+                            </div>
+                            <a href="antifragile-supply-chain-predictive-twinning.html" class="article-link">Read Article →</a>
+                        </div>
+                    </article>
+
+                    <article class="article-card">
+                        <div class="article-header">
+                            <div class="article-category">Food Technology</div>
+                            <h3 class="article-title">Digital Precision in Dairy Manufacturing</h3>
+                            <p class="article-excerpt">Leveraging IoT sensors and AI analytics to optimize dairy production quality and efficiency at scale.</p>
+                        </div>
+                        <div class="article-footer">
+                            <div class="article-meta">
+                                <span class="read-time">9 min read</span>
+                                <span class="article-date">Technical</span>
+                            </div>
+                            <a href="digital-precision-dairy.html" class="article-link">Read Article →</a>
+                        </div>
+                    </article>
+
+                    <article class="article-card">
+                        <div class="article-header">
+                            <div class="article-category">AI & Manufacturing</div>
+                            <h3 class="article-title">Collaborative Intelligence: Empowering Teams</h3>
+                            <p class="article-excerpt">How AI-human collaboration models are revolutionizing decision-making in complex manufacturing environments.</p>
+                        </div>
+                        <div class="article-footer">
+                            <div class="article-meta">
+                                <span class="read-time">11 min read</span>
+                                <span class="article-date">Strategy</span>
+                            </div>
+                            <a href="collaborative-intelligence-empowering-teams.html" class="article-link">Read Article →</a>
+                        </div>
+                    </article>
+
+                    <article class="article-card">
+                        <div class="article-header">
+                            <div class="article-category">Agricultural Tech</div>
+                            <h3 class="article-title">Agricultural Digitalization: Farm to Future</h3>
+                            <p class="article-excerpt">Comprehensive digital transformation strategies for modern agricultural operations and food production systems.</p>
+                        </div>
+                        <div class="article-footer">
+                            <div class="article-meta">
+                                <span class="read-time">15 min read</span>
+                                <span class="article-date">Comprehensive</span>
+                            </div>
+                            <a href="agri-food-digitalization.html" class="article-link">Read Article →</a>
+                        </div>
+                    </article>
+                </div>
+            </section>
         </div>
     </main>
 
