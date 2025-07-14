@@ -141,6 +141,28 @@
             padding: 80px 0;
         }
 
+        /* Loading State */
+        .loading {
+            text-align: center;
+            padding: 60px 0;
+            color: var(--neutral-600);
+        }
+
+        .spinner {
+            border: 3px solid var(--neutral-200);
+            border-top: 3px solid var(--primary-blue);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
         .blog-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
@@ -156,6 +178,23 @@
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        .blog-card:nth-child(1) { animation-delay: 0.1s; }
+        .blog-card:nth-child(2) { animation-delay: 0.2s; }
+        .blog-card:nth-child(3) { animation-delay: 0.3s; }
+        .blog-card:nth-child(4) { animation-delay: 0.4s; }
+        .blog-card:nth-child(5) { animation-delay: 0.5s; }
+        .blog-card:nth-child(6) { animation-delay: 0.6s; }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .blog-card::before {
@@ -216,6 +255,12 @@
             transform: translateX(4px);
         }
 
+        .error-message {
+            text-align: center;
+            padding: 60px 0;
+            color: var(--neutral-600);
+        }
+
         /* Footer */
         footer {
             background: var(--neutral-900);
@@ -267,87 +312,19 @@
     <!-- Main Content -->
     <main class="main">
         <div class="container">
-            <div class="blog-grid">
-                <!-- Blog Post 1 -->
-                <article class="blog-card">
-                    <div class="blog-date">July 13, 2025</div>
-                    <h2 class="blog-title">How Digital Twin Technology is Redefining Modern Manufacturing</h2>
-                    <p class="blog-excerpt">Through collaborating with multiple manufacturing enterprises, I've discovered an interesting phenomenon: the most successful digital transformation cases all share one common trait—they implement technology not for technology's sake, but to solve specific business pain points.</p>
-                    <a href="digital-twin-manufacturing.html" class="blog-cta">Read Full Article →</a>
-                </article>
-
-                <!-- Blog Post 2 -->
-                <article class="blog-card">
-                    <div class="blog-date">July 13, 2025</div>
-                    <h2 class="blog-title">How Market Intelligence Drives Precision R&D Investment</h2>
-                    <p class="blog-excerpt">Yesterday, I had a conversation with an R&D director who shared a frustrating challenge: "Our R&D direction always lags behind market needs. By the time we develop products, the market has changed again." This perfectly illustrates the core problem with traditional R&D models.</p>
-                    <a href="market-intelligence-rd.html" class="blog-cta">Read Full Article →</a>
-                </article>
-
-                <!-- Blog Post 3 -->
-                <article class="blog-card">
-                    <div class="blog-date">July 13, 2025</div>
-                    <h2 class="blog-title">Why Agri-Food is the Next Digital Blue Ocean</h2>
-                    <p class="blog-excerpt">Many people consider agriculture a "traditional industry" unrelated to high technology. But I argue that the agri-food sector is experiencing a quiet technological revolution. From a global perspective, consumers are demanding higher standards for food safety, sustainability, and nutritional value.</p>
-                    <a href="agri-food-digitalization.html" class="blog-cta">Read Full Article →</a>
-                </article>
-
-                <!-- Blog Post 4 -->
-                <article class="blog-card">
-                    <div class="blog-date">July 13, 2025</div>
-                    <h2 class="blog-title">Beyond Simulation: Real-World Digital Twin Applications</h2>
-                    <p class="blog-excerpt">Digital twin technology has evolved far beyond basic simulation models. Today's advanced implementations are driving unprecedented operational insights and enabling real-time optimization across manufacturing, agriculture, and bioprocessing industries.</p>
-                    <a href="beyond-simulation-digital-twin.html" class="blog-cta">Read Full Article →</a>
-                </article>
-
-                <!-- Blog Post 5 -->
-                <article class="blog-card">
-                    <div class="blog-date">July 13, 2025</div>
-                    <h2 class="blog-title">From Reactive to Predictive: AI-Driven Manufacturing Intelligence</h2>
-                    <p class="blog-excerpt">The manufacturing industry is undergoing a fundamental shift from reactive problem-solving to predictive intelligence. AI-powered systems are revolutionizing how companies anticipate challenges, optimize processes, and drive continuous improvement.</p>
-                    <a href="from-reactive-to-predictive-ai.html" class="blog-cta">Read Full Article →</a>
-                </article>
-
-                <!-- Blog Post 6 -->
-                <article class="blog-card">
-                    <div class="blog-date">July 13, 2025</div>
-                    <h2 class="blog-title">ROI of Digital Architecture: Measuring Strategic Technology Investments</h2>
-                    <p class="blog-excerpt">Understanding the return on investment for digital architecture initiatives is crucial for strategic decision-making. This comprehensive analysis explores methodologies for measuring the financial impact of technology transformations in manufacturing and processing industries.</p>
-                    <a href="roi-of-digital-architecture.html" class="blog-cta">Read Full Article →</a>
-                </article>
-
-                <!-- Blog Post 7 - NEW -->
-                <article class="blog-card">
-                    <div class="blog-date">July 13, 2025</div>
-                    <h2 class="blog-title">Antifragile Supply Chain: Predictive Twinning for Operational Resilience</h2>
-                    <p class="blog-excerpt">Building supply chains that don't just survive disruption but become stronger through it. Explore how predictive digital twin technology creates antifragile operational networks that adapt, evolve, and thrive in uncertainty.</p>
-                    <a href="antifragile-supply-chain-predictive-twinning.html" class="blog-cta">Read Full Article →</a>
-                </article>
-
-                <!-- Blog Post 8 - NEW -->
-                <article class="blog-card">
-                    <div class="blog-date">July 13, 2025</div>
-                    <h2 class="blog-title">Collaborative Intelligence: Empowering Teams with AI-Augmented Decision Making</h2>
-                    <p class="blog-excerpt">The future of manufacturing isn't about replacing human expertise with AI, but creating powerful partnerships between human intelligence and machine learning. Discover how collaborative intelligence platforms are transforming industrial decision-making processes.</p>
-                    <a href="collaborative-intelligence-empowering-teams.html" class="blog-cta">Read Full Article →</a>
-                </article>
-
-                <!-- Blog Post 9 - NEW -->
-                <article class="blog-card">
-                    <div class="blog-date">July 13, 2025</div>
-                    <h2 class="blog-title">High-Fidelity Data Foundation: Building the Infrastructure for Smart Manufacturing</h2>
-                    <p class="blog-excerpt">Quality data is the cornerstone of effective digital transformation. Learn how to establish robust data foundations that enable accurate predictive modeling, reliable digital twins, and actionable intelligence across your manufacturing operations.</p>
-                    <a href="high-fidelity-data-foundation.html" class="blog-cta">Read Full Article →</a>
-                </article>
-
-                <!-- Blog Post 10 - NEW -->
-                <article class="blog-card">
-                    <div class="blog-date">July 13, 2025</div>
-                    <h2 class="blog-title">Sustainability as Competitive Advantage: Digital Innovation for Environmental Excellence</h2>
-                    <p class="blog-excerpt">Environmental sustainability isn't just about compliance—it's becoming a core competitive differentiator. Explore how digital twin technology and AI analytics are enabling manufacturers to achieve both environmental goals and operational excellence simultaneously.</p>
-                    <a href="sustainability-competitive-advantage.html" class="blog-cta">Read Full Article →</a>
-                </article>
+            <!-- Loading State -->
+            <div id="loading" class="loading">
+                <div class="spinner"></div>
+                <p>Loading insights...</p>
             </div>
+
+            <!-- Error State -->
+            <div id="error" class="error-message" style="display: none;">
+                <p>Unable to load articles. Please try again later.</p>
+            </div>
+
+            <!-- Blog Grid -->
+            <div id="blogGrid" class="blog-grid"></div>
         </div>
     </main>
 
@@ -357,5 +334,106 @@
             <p>&copy; 2025 PraxisTwin. Turning industrial strategy into operational reality.</p>
         </div>
     </footer>
+
+    <script>
+        // 自动加载博客文章
+        async function loadBlogPosts() {
+            try {
+                // GitHub API URL to get files from perspectives folder
+                const apiUrl = 'https://api.github.com/repos/fantancy1978/praxistwin-website/contents/perspectives';
+                
+                const response = await fetch(apiUrl);
+                const files = await response.json();
+                
+                // Filter only .md files
+                const markdownFiles = files.filter(file => 
+                    file.name.endsWith('.md') && file.type === 'file'
+                );
+
+                // Sort files by name (newest first)
+                markdownFiles.sort((a, b) => b.name.localeCompare(a.name));
+
+                const blogGrid = document.getElementById('blogGrid');
+                const loading = document.getElementById('loading');
+                const errorDiv = document.getElementById('error');
+
+                if (markdownFiles.length === 0) {
+                    loading.style.display = 'none';
+                    errorDiv.style.display = 'block';
+                    errorDiv.innerHTML = '<p>No articles found.</p>';
+                    return;
+                }
+
+                // Load content for each file
+                for (const file of markdownFiles) {
+                    try {
+                        const contentResponse = await fetch(file.download_url);
+                        const content = await contentResponse.text();
+                        
+                        // Parse markdown content
+                        const title = extractTitle(content);
+                        const excerpt = extractExcerpt(content);
+                        const htmlFileName = file.name.replace('.md', '.html');
+                        
+                        // Create blog card
+                        const blogCard = createBlogCard(title, excerpt, htmlFileName);
+                        blogGrid.appendChild(blogCard);
+                    } catch (error) {
+                        console.warn(`Failed to load content for ${file.name}:`, error);
+                    }
+                }
+
+                // Hide loading
+                loading.style.display = 'none';
+
+            } catch (error) {
+                console.error('Error loading blog posts:', error);
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('error').style.display = 'block';
+            }
+        }
+
+        // Extract title from markdown content
+        function extractTitle(content) {
+            const titleMatch = content.match(/^#\s+(.+)$/m);
+            return titleMatch ? titleMatch[1] : 'Untitled Article';
+        }
+
+        // Extract excerpt from markdown content
+        function extractExcerpt(content) {
+            // Remove title and get first paragraph
+            const withoutTitle = content.replace(/^#\s+.+$/m, '').trim();
+            const firstParagraph = withoutTitle.split('\n\n')[0];
+            
+            // Clean up markdown formatting
+            const cleaned = firstParagraph
+                .replace(/\*\*(.+?)\*\*/g, '$1') // Remove bold
+                .replace(/\*(.+?)\*/g, '$1')     // Remove italic
+                .replace(/`(.+?)`/g, '$1')       // Remove code
+                .replace(/\[(.+?)\]\(.+?\)/g, '$1') // Remove links
+                .trim();
+            
+            // Truncate if too long
+            return cleaned.length > 200 ? cleaned.substring(0, 200) + '...' : cleaned;
+        }
+
+        // Create blog card element
+        function createBlogCard(title, excerpt, htmlFileName) {
+            const article = document.createElement('article');
+            article.className = 'blog-card';
+            
+            article.innerHTML = `
+                <div class="blog-date">July 13, 2025</div>
+                <h2 class="blog-title">${title}</h2>
+                <p class="blog-excerpt">${excerpt}</p>
+                <a href="${htmlFileName}" class="blog-cta">Read Full Article →</a>
+            `;
+            
+            return article;
+        }
+
+        // Load blogs when page loads
+        document.addEventListener('DOMContentLoaded', loadBlogPosts);
+    </script>
 </body>
 </html>
