@@ -9,4 +9,4 @@ The most transformative impact, however, occurs during the critical scale-up pha
 This eliminates the need for multiple expensive and wasteful factory trials. By simulating the entire process, companies can de-risk their investment, dramatically shorten the time-to-market, and launch new products with the confidence that they can be produced perfectly from day one. It transforms new product development from a high-risk gamble into a strategic, data-driven science.
 
 ---
-*Published on July 14, 2025*
+*Published on July 10, 2025*
