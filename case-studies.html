@@ -202,6 +202,34 @@
             padding: 80px 0;
         }
 
+        /* Loading Spinner */
+        .loading-spinner {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 60px 0;
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid var(--neutral-200);
+            border-top: 4px solid var(--primary-blue);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .loading-text {
+            margin-top: 20px;
+            color: var(--neutral-600);
+            text-align: center;
+        }
+
         /* Articles Grid */
         .articles-grid {
             display: grid;
@@ -218,6 +246,19 @@
             transition: all 0.3s ease;
             border: 1px solid var(--neutral-200);
             position: relative;
+            opacity: 0;
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .article-card:hover {
@@ -270,6 +311,30 @@
 
         .read-more-btn:hover::after {
             transform: translateX(4px);
+        }
+
+        /* Error Message */
+        .error-message {
+            background: #fee;
+            color: #c00;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            margin: 40px 0;
+            border: 1px solid #fcc;
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 60px 0;
+            color: var(--neutral-600);
+        }
+
+        .empty-state h3 {
+            font-size: 1.5rem;
+            margin-bottom: 16px;
+            color: var(--neutral-700);
         }
 
         /* Footer */
@@ -386,54 +451,29 @@
     <!-- Main Content -->
     <main class="main-content">
         <div class="container">
-            <div class="articles-grid">
-                <!-- Article 1 -->
-                <article class="article-card">
-                    <div class="article-date">January 14, 2025</div>
-                    <h2 class="article-title">Premium Coffee Roaster Achieves 94% Flavor Consistency</h2>
-                    <p class="article-excerpt">How a specialty coffee producer eliminated batch variability and reduced waste by 67% using AI-powered flavor prediction models and digital twin simulation technology.</p>
-                    <a href="cracking-coffee-flavor-simulation.html" class="read-more-btn">Read Full Article</a>
-                </article>
+            <!-- Loading State -->
+            <div id="loading-state" class="loading-spinner">
+                <div>
+                    <div class="spinner"></div>
+                    <div class="loading-text">Loading case studies from GitHub...</div>
+                </div>
+            </div>
 
-                <!-- Article 2 -->
-                <article class="article-card">
-                    <div class="article-date">January 13, 2025</div>
-                    <h2 class="article-title">Global Manufacturer Reduces Downtime by 78%</h2>
-                    <p class="article-excerpt">Digital twin implementation enables predictive maintenance and real-time optimization across 15 production facilities, delivering €12M in annual savings.</p>
-                    <a href="digital-twin-revolution.html" class="read-more-btn">Read Full Article</a>
-                </article>
+            <!-- Error State -->
+            <div id="error-state" class="error-message" style="display: none;">
+                <h3>Unable to load case studies</h3>
+                <p>Please check your internet connection or try again later.</p>
+            </div>
 
-                <!-- Article 3 -->
-                <article class="article-card">
-                    <div class="article-date">January 12, 2025</div>
-                    <h2 class="article-title">Food Processor Builds Resilient Supply Network</h2>
-                    <p class="article-excerpt">Advanced analytics and predictive modeling transform supply chain vulnerabilities into competitive advantages, increasing responsiveness by 340%.</p>
-                    <a href="antifragile-supply-chain.html" class="read-more-btn">Read Full Article</a>
-                </article>
+            <!-- Articles Grid -->
+            <div id="articles-container" class="articles-grid" style="display: none;">
+                <!-- Dynamic content will be loaded here -->
+            </div>
 
-                <!-- Article 4 -->
-                <article class="article-card">
-                    <div class="article-date">January 11, 2025</div>
-                    <h2 class="article-title">Dairy Producer Enhances Quality Control 10x</h2>
-                    <p class="article-excerpt">IoT integration and AI analytics deliver unprecedented precision in dairy manufacturing, achieving 99.7% quality consistency while reducing testing costs by 85%.</p>
-                    <a href="digital-precision-dairy.html" class="read-more-btn">Read Full Article</a>
-                </article>
-
-                <!-- Article 5 -->
-                <article class="article-card">
-                    <div class="article-date">January 10, 2025</div>
-                    <h2 class="article-title">Manufacturing Team Productivity Increases 45%</h2>
-                    <p class="article-excerpt">AI-human collaboration platform empowers decision-making across complex operations, reducing response time and improving worker satisfaction by 60%.</p>
-                    <a href="collaborative-intelligence-teams.html" class="read-more-btn">Read Full Article</a>
-                </article>
-
-                <!-- Article 6 -->
-                <article class="article-card">
-                    <div class="article-date">January 9, 2025</div>
-                    <h2 class="article-title">Agricultural Producer Transforms Operations</h2>
-                    <p class="article-excerpt">Complete digital transformation delivers 35% yield improvement and 50% resource optimization across 2,000-hectare farming operation.</p>
-                    <a href="agri-food-digitalization.html" class="read-more-btn">Read Full Article</a>
-                </article>
+            <!-- Empty State -->
+            <div id="empty-state" class="empty-state" style="display: none;">
+                <h3>No case studies found</h3>
+                <p>Check back soon for new case studies and success stories.</p>
             </div>
         </div>
     </main>
@@ -448,5 +488,214 @@
             </div>
         </div>
     </footer>
+
+    <script>
+        // GitHub API configuration
+        const GITHUB_CONFIG = {
+            owner: 'fantancy1978',
+            repo: 'praxistwin-website',
+            path: 'case-studies',
+            branch: 'main'
+        };
+
+        // DOM elements
+        const loadingState = document.getElementById('loading-state');
+        const errorState = document.getElementById('error-state');
+        const articlesContainer = document.getElementById('articles-container');
+        const emptyState = document.getElementById('empty-state');
+
+        // Helper function to format dates
+        function formatDate(dateString) {
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            return new Date(dateString).toLocaleDateString('en-US', options);
+        }
+
+        // Helper function to extract title from markdown content
+        function extractTitle(content) {
+            // Look for # Title at the beginning
+            const titleMatch = content.match(/^#\s+(.+)$/m);
+            if (titleMatch) {
+                return titleMatch[1].trim();
+            }
+            
+            // Fallback: look for first line that's not empty
+            const lines = content.split('\n');
+            for (let line of lines) {
+                line = line.trim();
+                if (line && !line.startsWith('#')) {
+                    return line;
+                }
+            }
+            
+            return 'Untitled Case Study';
+        }
+
+        // Helper function to extract excerpt from markdown content
+        function extractExcerpt(content, maxLength = 200) {
+            // Remove markdown headers
+            let text = content.replace(/^#+\s+.+$/gm, '');
+            
+            // Remove markdown links, bold, italic
+            text = text.replace(/\[([^\]]+)\]\([^)]+\)/g, '$1');
+            text = text.replace(/\*\*(.+?)\*\*/g, '$1');
+            text = text.replace(/\*(.+?)\*/g, '$1');
+            text = text.replace(/_(.+?)_/g, '$1');
+            
+            // Remove extra whitespace and newlines
+            text = text.replace(/\n+/g, ' ').trim();
+            
+            // Get first paragraph or first sentences up to maxLength
+            if (text.length > maxLength) {
+                text = text.substring(0, maxLength);
+                const lastSpace = text.lastIndexOf(' ');
+                if (lastSpace > 0) {
+                    text = text.substring(0, lastSpace) + '...';
+                }
+            }
+            
+            return text || 'Discover how digital transformation delivers measurable results in this case study.';
+        }
+
+        // Helper function to generate HTML filename from markdown filename
+        function getHtmlFilename(mdFilename) {
+            return mdFilename.replace(/\.md$/, '.html');
+        }
+
+        // Helper function to generate case study title
+        function generateCaseStudyTitle(filename, content) {
+            const title = extractTitle(content);
+            
+            // If title looks like a filename, create a better title
+            if (title === filename.replace(/\.md$/, '')) {
+                // Convert filename to readable title
+                return filename
+                    .replace(/\.md$/, '')
+                    .replace(/-/g, ' ')
+                    .replace(/\b\w/g, l => l.toUpperCase());
+            }
+            
+            return title;
+        }
+
+        // Fetch file list from GitHub API
+        async function fetchFileList() {
+            const url = `https://api.github.com/repos/${GITHUB_CONFIG.owner}/${GITHUB_CONFIG.repo}/contents/${GITHUB_CONFIG.path}?ref=${GITHUB_CONFIG.branch}`;
+            
+            try {
+                const response = await fetch(url);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const files = await response.json();
+                
+                // Filter for .md files only
+                return files.filter(file => 
+                    file.type === 'file' && 
+                    file.name.endsWith('.md')
+                );
+            } catch (error) {
+                console.error('Error fetching file list:', error);
+                throw error;
+            }
+        }
+
+        // Fetch file content from GitHub API
+        async function fetchFileContent(file) {
+            try {
+                const response = await fetch(file.download_url);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return await response.text();
+            } catch (error) {
+                console.error(`Error fetching content for ${file.name}:`, error);
+                throw error;
+            }
+        }
+
+        // Create article card HTML
+        function createArticleCard(file, content) {
+            const title = generateCaseStudyTitle(file.name, content);
+            const excerpt = extractExcerpt(content);
+            const htmlFilename = getHtmlFilename(file.name);
+            
+            // Use file's last modified date or current date
+            const date = formatDate(new Date());
+
+            return `
+                <article class="article-card">
+                    <div class="article-date">${date}</div>
+                    <h2 class="article-title">${title}</h2>
+                    <p class="article-excerpt">${excerpt}</p>
+                    <a href="${htmlFilename}" class="read-more-btn">Read Full Article</a>
+                </article>
+            `;
+        }
+
+        // Main function to load and display case studies
+        async function loadCaseStudies() {
+            try {
+                // Show loading state
+                loadingState.style.display = 'flex';
+                errorState.style.display = 'none';
+                articlesContainer.style.display = 'none';
+                emptyState.style.display = 'none';
+
+                // Fetch file list
+                const files = await fetchFileList();
+                
+                if (files.length === 0) {
+                    loadingState.style.display = 'none';
+                    emptyState.style.display = 'block';
+                    return;
+                }
+
+                // Fetch content for each file
+                const articles = [];
+                for (const file of files) {
+                    try {
+                        const content = await fetchFileContent(file);
+                        articles.push(createArticleCard(file, content));
+                    } catch (error) {
+                        console.warn(`Failed to load content for ${file.name}:`, error);
+                        // Continue with other files
+                    }
+                }
+
+                // Display articles
+                if (articles.length > 0) {
+                    articlesContainer.innerHTML = articles.join('');
+                    loadingState.style.display = 'none';
+                    articlesContainer.style.display = 'grid';
+                    
+                    // Add staggered animation delay to cards
+                    const cards = articlesContainer.querySelectorAll('.article-card');
+                    cards.forEach((card, index) => {
+                        card.style.animationDelay = `${index * 0.1}s`;
+                    });
+                } else {
+                    loadingState.style.display = 'none';
+                    emptyState.style.display = 'block';
+                }
+
+            } catch (error) {
+                console.error('Error loading case studies:', error);
+                loadingState.style.display = 'none';
+                errorState.style.display = 'block';
+            }
+        }
+
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            loadCaseStudies();
+        });
+
+        // Add retry functionality to error state
+        errorState.addEventListener('click', function(e) {
+            if (e.target.tagName === 'BUTTON' || e.target.textContent.includes('try again')) {
+                loadCaseStudies();
+            }
+        });
+    </script>
 </body>
 </html>
