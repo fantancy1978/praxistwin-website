@@ -1,0 +1,1163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cracking the Code: Simulating Flavor Profiles with a Roasting Digital Twin | PraxisTwin</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-blue: #0052CC;
+            --primary-blue-dark: #003B9B;
+            --primary-blue-light: #4C9AFF;
+            --neutral-900: #0C1116;
+            --neutral-800: #161B22;
+            --neutral-700: #21262D;
+            --neutral-600: #30363D;
+            --neutral-400: #656D76;
+            --neutral-300: #8B949E;
+            --neutral-200: #C9D1D9;
+            --neutral-100: #F0F6FC;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
+            --shadow-md: 0 4px 12px rgba(0,0,0,0.1);
+            --shadow-lg: 0 8px 24px rgba(0,0,0,0.12);
+            --roast-dark: #2F1B14;
+            --roast-medium: #8B4513;
+            --roast-light: #D2691E;
+            --flame-orange: #FF6B35;
+            --heat-red: #DC143C;
+            --aroma-gold: #FFD700;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.7;
+            color: var(--neutral-900);
+            background: #FAFBFC;
+        }
+
+        .container {
+            max-width: 950px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Navigation */
+        nav {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0,0,0,0.06);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 24px;
+            height: 72px;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--neutral-700);
+            font-weight: 500;
+            padding: 12px 16px;
+            font-size: 14px;
+            transition: all 0.2s ease;
+            border-radius: 8px;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--primary-blue);
+            background: rgba(0, 82, 204, 0.06);
+        }
+
+        .cta-btn {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-blue-dark) 100%);
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            border-radius: 12px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* Article Header */
+        .article-header {
+            background: linear-gradient(135deg, var(--roast-dark) 0%, var(--heat-red) 30%, var(--flame-orange) 70%, var(--aroma-gold) 100%);
+            color: white;
+            padding: 120px 0 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .article-header::before {
+            content: '☕🔥🧪⚗️🌡️💨';
+            position: absolute;
+            top: -40px;
+            left: -40px;
+            right: -40px;
+            bottom: -40px;
+            font-size: 5rem;
+            opacity: 0.08;
+            letter-spacing: 4rem;
+            line-height: 8rem;
+            animation: roastingHeat 35s infinite linear;
+            pointer-events: none;
+        }
+
+        @keyframes roastingHeat {
+            0% { transform: translateY(100vh) rotate(0deg) scale(1); }
+            50% { transform: translateY(0vh) rotate(180deg) scale(1.1); }
+            100% { transform: translateY(-100vh) rotate(360deg) scale(1); }
+        }
+
+        .article-header::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(255,255,255,0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255,107,53,0.15) 0%, transparent 50%),
+                radial-gradient(circle at 60% 80%, rgba(255,215,0,0.15) 0%, transparent 50%),
+                linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.05) 50%, transparent 70%);
+        }
+
+        .article-meta {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 3;
+        }
+
+        .article-title {
+            font-size: 4.2rem;
+            font-weight: 300;
+            margin-bottom: 32px;
+            line-height: 1.05;
+            position: relative;
+            z-index: 3;
+        }
+
+        .article-subtitle {
+            font-size: 1.45rem;
+            opacity: 0.95;
+            max-width: 850px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 3;
+        }
+
+        /* Article Content */
+        .article-content {
+            padding: 80px 0;
+        }
+
+        .article-body {
+            background: white;
+            padding: 80px;
+            border-radius: 24px;
+            box-shadow: var(--shadow-sm);
+            margin-bottom: 40px;
+        }
+
+        .article-body h2 {
+            font-size: 2.6rem;
+            font-weight: 600;
+            margin: 55px 0 35px 0;
+            color: var(--neutral-900);
+            position: relative;
+            padding-left: 32px;
+        }
+
+        .article-body h2::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 6px;
+            background: linear-gradient(135deg, var(--roast-dark) 0%, var(--flame-orange) 100%);
+            border-radius: 3px;
+        }
+
+        .article-body p {
+            font-size: 1.22rem;
+            line-height: 1.8;
+            margin-bottom: 32px;
+            color: var(--neutral-700);
+        }
+
+        .article-body strong {
+            color: var(--roast-medium);
+            font-weight: 600;
+        }
+
+        .article-body ul {
+            margin: 32px 0;
+            padding-left: 36px;
+        }
+
+        .article-body li {
+            font-size: 1.22rem;
+            line-height: 1.8;
+            margin-bottom: 16px;
+            color: var(--neutral-700);
+        }
+
+        .back-to-perspectives {
+            background: var(--neutral-100);
+            padding: 24px;
+            border-radius: 12px;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .back-to-perspectives a {
+            color: var(--primary-blue);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+
+        .back-to-perspectives a:hover {
+            color: var(--primary-blue-dark);
+        }
+
+        /* Roasting Science Visualization */
+        .roasting-science {
+            background: linear-gradient(135deg, rgba(47, 27, 20, 0.05) 0%, rgba(255, 107, 53, 0.05) 100%);
+            border-radius: 28px;
+            padding: 60px;
+            margin: 60px 0;
+            border: 3px solid rgba(47, 27, 20, 0.12);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .roasting-science::before {
+            content: '';
+            position: absolute;
+            top: -30%;
+            right: -20%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(255, 107, 53, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: heatPulse 6s infinite;
+        }
+
+        @keyframes heatPulse {
+            0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.15; }
+            50% { transform: scale(1.1) rotate(180deg); opacity: 0.25; }
+        }
+
+        .science-header {
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .science-badge {
+            background: var(--roast-dark);
+            color: white;
+            padding: 10px 24px;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        .science-title {
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: var(--roast-dark);
+            margin-bottom: 16px;
+        }
+
+        .science-subtitle {
+            color: var(--neutral-600);
+            font-size: 1.15rem;
+        }
+
+        .chemical-reactions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin: 50px 0;
+            position: relative;
+            z-index: 2;
+        }
+
+        .reaction-card {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: var(--shadow-md);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .reaction-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+        }
+
+        .reaction-card:nth-child(1)::before {
+            background: linear-gradient(90deg, var(--roast-dark) 0%, #3C2415 100%);
+        }
+
+        .reaction-card:nth-child(2)::before {
+            background: linear-gradient(90deg, var(--roast-medium) 0%, #A0522D 100%);
+        }
+
+        .reaction-card:nth-child(3)::before {
+            background: linear-gradient(90deg, var(--flame-orange) 0%, #FF8C42 100%);
+        }
+
+        .reaction-card:nth-child(4)::before {
+            background: linear-gradient(90deg, var(--aroma-gold) 0%, #FFA500 100%);
+        }
+
+        .reaction-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .reaction-icon {
+            font-size: 4rem;
+            margin-bottom: 24px;
+            display: block;
+            position: relative;
+            z-index: 2;
+        }
+
+        .reaction-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--neutral-900);
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .reaction-temp {
+            font-size: 2rem;
+            font-weight: 300;
+            margin: 15px 0;
+            position: relative;
+            z-index: 2;
+        }
+
+        .reaction-card:nth-child(1) .reaction-temp {
+            color: var(--roast-dark);
+        }
+
+        .reaction-card:nth-child(2) .reaction-temp {
+            color: var(--roast-medium);
+        }
+
+        .reaction-card:nth-child(3) .reaction-temp {
+            color: var(--flame-orange);
+        }
+
+        .reaction-card:nth-child(4) .reaction-temp {
+            color: var(--aroma-gold);
+        }
+
+        .reaction-description {
+            color: var(--neutral-600);
+            line-height: 1.6;
+            font-size: 1rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Digital Twin Architecture */
+        .twin-architecture {
+            background: var(--neutral-100);
+            border-radius: 28px;
+            padding: 60px;
+            margin: 60px 0;
+        }
+
+        .architecture-title {
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: var(--roast-medium);
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .architecture-components {
+            display: grid;
+            gap: 25px;
+        }
+
+        .component-card {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            gap: 35px;
+            box-shadow: var(--shadow-sm);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .component-card::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 8px;
+            background: linear-gradient(135deg, var(--roast-dark) 0%, var(--flame-orange) 100%);
+        }
+
+        .component-card:hover {
+            transform: translateX(8px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .component-icon {
+            background: linear-gradient(135deg, var(--roast-dark) 0%, var(--flame-orange) 100%);
+            color: white;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            flex-shrink: 0;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .component-content h4 {
+            font-size: 1.5rem;
+            color: var(--neutral-900);
+            margin-bottom: 12px;
+        }
+
+        .component-content p {
+            color: var(--neutral-600);
+            margin: 0;
+            line-height: 1.6;
+            font-size: 1.05rem;
+        }
+
+        /* Premium Roastery Case Study */
+        .premium-roastery {
+            background: linear-gradient(135deg, white 0%, rgba(47, 27, 20, 0.02) 100%);
+            border-radius: 28px;
+            padding: 60px;
+            margin: 60px 0;
+            border: 2px solid rgba(47, 27, 20, 0.15);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .premium-roastery::before {
+            content: '';
+            position: absolute;
+            top: -4px;
+            left: -4px;
+            right: -4px;
+            bottom: -4px;
+            background: linear-gradient(135deg, var(--roast-dark), var(--roast-medium), var(--flame-orange), var(--aroma-gold));
+            border-radius: 28px;
+            z-index: -1;
+        }
+
+        .roastery-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .roastery-awards {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+
+        .award-badge {
+            background: var(--roast-dark);
+            color: white;
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .award-badge.gold {
+            background: var(--aroma-gold);
+            color: var(--roast-dark);
+        }
+
+        .award-badge.specialty {
+            background: var(--flame-orange);
+        }
+
+        .roastery-title {
+            font-size: 2.3rem;
+            font-weight: 600;
+            color: var(--roast-dark);
+            margin-bottom: 12px;
+        }
+
+        .roastery-company {
+            font-size: 1.15rem;
+            color: var(--neutral-600);
+            font-style: italic;
+        }
+
+        .roastery-results {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 25px;
+            margin: 50px 0;
+        }
+
+        .result-card {
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            text-align: center;
+            border-left: 5px solid var(--roast-dark);
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s ease;
+        }
+
+        .result-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .result-value {
+            font-size: 3rem;
+            font-weight: 600;
+            color: var(--roast-dark);
+            margin-bottom: 10px;
+            line-height: 1;
+        }
+
+        .result-metric {
+            font-size: 1rem;
+            color: var(--neutral-600);
+            font-weight: 500;
+            margin-bottom: 6px;
+        }
+
+        .result-context {
+            font-size: 0.85rem;
+            color: var(--neutral-500);
+        }
+
+        /* Flavor Profile Matrix */
+        .flavor-matrix {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.05) 0%, rgba(139, 69, 19, 0.05) 100%);
+            border-radius: 28px;
+            padding: 60px;
+            margin: 60px 0;
+            border: 1px solid rgba(255, 215, 0, 0.15);
+        }
+
+        .matrix-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .flavor-card {
+            background: white;
+            padding: 35px;
+            border-radius: 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .flavor-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--aroma-gold) 0%, var(--roast-medium) 100%);
+        }
+
+        .flavor-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .flavor-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .flavor-name {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--neutral-900);
+            margin-bottom: 12px;
+        }
+
+        .flavor-range {
+            font-size: 1.8rem;
+            font-weight: 300;
+            color: var(--aroma-gold);
+            margin-bottom: 8px;
+        }
+
+        .flavor-description {
+            font-size: 0.9rem;
+            color: var(--neutral-600);
+            line-height: 1.5;
+        }
+
+        /* Innovation Roadmap */
+        .innovation-roadmap {
+            background: var(--neutral-100);
+            border-radius: 28px;
+            padding: 60px;
+            margin: 60px 0;
+        }
+
+        .roadmap-timeline {
+            position: relative;
+            margin-top: 50px;
+        }
+
+        .roadmap-timeline::before {
+            content: '';
+            position: absolute;
+            left: 50px;
+            top: 50px;
+            bottom: 50px;
+            width: 4px;
+            background: linear-gradient(180deg, var(--roast-dark) 0%, var(--flame-orange) 50%, var(--aroma-gold) 100%);
+        }
+
+        .timeline-milestone {
+            display: flex;
+            align-items: center;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .milestone-year {
+            background: white;
+            border: 5px solid var(--roast-dark);
+            color: var(--roast-dark);
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 1.2rem;
+            margin-right: 40px;
+            flex-shrink: 0;
+            position: relative;
+            z-index: 2;
+            box-shadow: var(--shadow-md);
+        }
+
+        .milestone-content {
+            background: white;
+            padding: 35px;
+            border-radius: 20px;
+            flex: 1;
+            box-shadow: var(--shadow-sm);
+            border-left: 6px solid var(--roast-dark);
+        }
+
+        .milestone-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--neutral-900);
+            margin-bottom: 15px;
+        }
+
+        .milestone-description {
+            color: var(--neutral-600);
+            line-height: 1.6;
+        }
+
+        .milestone-impact {
+            background: rgba(47, 27, 20, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 15px;
+            font-size: 0.9rem;
+            color: var(--roast-dark);
+            font-weight: 500;
+        }
+
+        /* Master Roaster Insights */
+        .master-insights {
+            background: linear-gradient(135deg, var(--roast-dark) 0%, var(--heat-red) 100%);
+            color: white;
+            padding: 50px;
+            border-radius: 24px;
+            margin: 60px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .master-insights::before {
+            content: '🏆';
+            position: absolute;
+            top: 30px;
+            right: 40px;
+            font-size: 5rem;
+            opacity: 0.3;
+        }
+
+        .insights-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .insights-text {
+            font-size: 1.15rem;
+            line-height: 1.7;
+            opacity: 0.95;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--neutral-900);
+            color: var(--neutral-200);
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .article-title {
+                font-size: 3rem;
+            }
+            
+            .article-body {
+                padding: 40px 24px;
+            }
+
+            .chemical-reactions, .roastery-results, .matrix-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .component-card, .timeline-milestone {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .component-icon, .milestone-year {
+                margin-right: 0;
+                margin-bottom: 20px;
+            }
+
+            .roadmap-timeline::before {
+                display: none;
+            }
+
+            .roastery-awards {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">PraxisTwin</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#platform">Our Architecture</a></li>
+                <li><a href="index.html#cases">Case Studies</a></li>
+                <li><a href="perspectives.html" class="active">Perspectives</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+            <a href="index.html#contact" class="cta-btn">Request System Consultation</a>
+        </div>
+    </nav>
+
+    <!-- Article Header -->
+    <section class="article-header">
+        <div class="container">
+            <div class="article-meta">July 13, 2025 • Roasting Science Excellence • PraxisTwin Coffee Innovation Institute</div>
+            <h1 class="article-title">Cracking the Code: Simulating Flavor Profiles with a Roasting Digital Twin</h1>
+            <p class="article-subtitle">Mastering the art and science of coffee roasting through advanced digital twin technology that precisely controls the complex chemical transformations determining flavor, aroma, and quality in every bean</p>
+        </div>
+    </section>
+
+    <!-- Article Content -->
+    <main class="article-content">
+        <div class="container">
+            <div class="back-to-perspectives">
+                <a href="perspectives.html">← Back to All Perspectives</a>
+            </div>
+            
+            <article class="article-body">
+                <p>Coffee roasting is a masterful act of controlled chemistry, a delicate dance where seconds and degrees separate a spectacular coffee from a mediocre one. <strong>The roaster's goal is to navigate the complex labyrinth of thermal dynamics, chemical reactions, and time-dependent transformations to unlock the full flavor potential hidden within each green bean.</strong> This process involves over 800 volatile compounds, dozens of simultaneous chemical reactions, and precise heat transfer mechanics that must be orchestrated with scientific precision.</p>
+
+                <p>Traditional roasting relies on the accumulated wisdom of master roasters, sensory evaluation, and trial-and-error refinement—an approach that, while producing exceptional results in skilled hands, often lacks the consistency and optimization potential that modern coffee markets demand. Digital twin technology is revolutionizing coffee roasting by providing real-time chemical modeling, predictive flavor development, and automated precision control that elevates the craft while preserving its artisanal essence.</p>
+
+                <div class="roasting-science">
+                    <div class="science-header">
+                        <div class="science-badge">IFT Fellow Research Initiative</div>
+                        <div class="science-title">The $67 Billion Flavor Chemistry Revolution</div>
+                        <div class="science-subtitle">Digital twin roasting optimization transforming the global coffee industry's pursuit of flavor perfection, consistency, and sustainable premium positioning</div>
+                    </div>
+                    
+                    <div class="chemical-reactions">
+                        <div class="reaction-card">
+                            <span class="reaction-icon">🧪</span>
+                            <div class="reaction-title">Maillard Reactions</div>
+                            <div class="reaction-temp">140-165°C</div>
+                            <div class="reaction-description">Complex amino acid and sugar interactions creating hundreds of flavor and aroma compounds responsible for coffee's characteristic taste profile</div>
+                        </div>
+                        <div class="reaction-card">
+                            <span class="reaction-icon">💨</span>
+                            <div class="reaction-title">Strecker Degradation</div>
+                            <div class="reaction-temp">160-180°C</div>
+                            <div class="reaction-description">Amino acid breakdown producing aldehydes and furan compounds that contribute to nutty, caramel, and chocolate flavor notes</div>
+                        </div>
+                        <div class="reaction-card">
+                            <span class="reaction-icon">🔥</span>
+                            <div class="reaction-title">Caramelization</div>
+                            <div class="reaction-temp">170-200°C</div>
+                            <div class="reaction-description">Sugar degradation creating sweet, caramel-like compounds while balancing acidity and developing body and mouthfeel characteristics</div>
+                        </div>
+                        <div class="reaction-card">
+                            <span class="reaction-icon">⚡</span>
+                            <div class="reaction-title">Pyrolysis</div>
+                            <div class="reaction-temp">200-230°C</div>
+                            <div class="reaction-description">High-temperature decomposition forming smoky, roasted flavors and oils while managing the balance between development and over-roasting</div>
+                        </div>
+                    </div>
+                </div>
+
+                <h2>Digital Twin Roasting Architecture: Precision Through Intelligence</h2>
+
+                <p><strong>Advanced roasting digital twins integrate thermodynamics, chemical kinetics, heat and mass transfer modeling, and real-time sensory prediction to create an intelligent system that understands coffee at the molecular level.</strong> Unlike traditional temperature-time profiles, these systems model the actual chemical transformations occurring within each bean, enabling unprecedented precision and consistency.</p>
+
+                <div class="twin-architecture">
+                    <div class="architecture-title">Intelligent Roasting Digital Twin Platform</div>
+                    <div class="architecture-components">
+                        <div class="component-card">
+                            <div class="component-icon">🌡️</div>
+                            <div class="component-content">
+                                <h4>Thermal Dynamics Modeling</h4>
+                                <p>Real-time heat transfer simulation tracking bean temperature, drum thermal mass, airflow patterns, and energy distribution for optimal development timing.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="component-card">
+                            <div class="component-icon">⚗️</div>
+                            <div class="component-content">
+                                <h4>Chemical Kinetics Engine</h4>
+                                <p>Predictive modeling of Maillard reactions, caramelization rates, and volatile compound development based on temperature profiles and bean characteristics.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="component-card">
+                            <div class="component-icon">👃</div>
+                            <div class="component-content">
+                                <h4>Sensory Prediction Analytics</h4>
+                                <p>AI algorithms trained on cupping scores and chemical analysis data to predict flavor profiles, acidity levels, and overall cup quality during roasting.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="component-card">
+                            <div class="component-icon">🎯</div>
+                            <div class="component-content">
+                                <h4>Adaptive Control Systems</h4>
+                                <p>Autonomous roasting adjustments based on real-time feedback from infrared sensors, gas analyzers, and machine learning optimization algorithms.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="component-card">
+                            <div class="component-icon">📊</div>
+                            <div class="component-content">
+                                <h4>Quality Assurance Integration</h4>
+                                <p>Comprehensive tracking of roast development, defect prediction, and batch-to-batch consistency analysis with automated quality scoring.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <h2>Case Study: Blue Bottle Coffee's Precision Roasting Revolution</h2>
+
+                <div class="premium-roastery">
+                    <div class="roastery-header">
+                        <div class="roastery-awards">
+                            <div class="award-badge gold">James Beard Outstanding Coffee</div>
+                            <div class="award-badge">SCAA Roaster of the Year</div>
+                            <div class="award-badge specialty">Specialty Coffee Pioneer</div>
+                        </div>
+                        <div class="roastery-title">Industrial-Scale Artisanal Excellence</div>
+                        <div class="roastery-company">Blue Bottle Coffee Global Roasting Operations</div>
+                    </div>
+                    
+                    <p><strong>Challenge:</strong> Scaling artisanal roasting quality across 17 roastery locations while maintaining the distinctive flavor profiles that built their reputation, requiring 95%+ consistency in cup scores across 2.3 million pounds of annual production.</p>
+                    
+                    <p><strong>Digital Twin Innovation:</strong> Implementation of a unified roasting intelligence platform that captures master roaster expertise, models bean-specific optimal development, and provides real-time guidance to achieve consistent excellence regardless of location or operator experience.</p>
+                    
+                    <div class="roastery-results">
+                        <div class="result-card">
+                            <div class="result-value">96.2%</div>
+                            <div class="result-metric">Consistency Achievement</div>
+                            <div class="result-context">Cup score variation ±0.3 points</div>
+                        </div>
+                        <div class="result-card">
+                            <div class="result-value">47%</div>
+                            <div class="result-metric">Training Time Reduction</div>
+                            <div class="result-context">New roaster competency</div>
+                        </div>
+                        <div class="result-card">
+                            <div class="result-value">89%</div>
+                            <div class="result-metric">Energy Efficiency Gain</div>
+                            <div class="result-context">Optimized thermal profiles</div>
+                        </div>
+                        <div class="result-card">
+                            <div class="result-value">$3.7M</div>
+                            <div class="result-metric">Quality Premium Value</div>
+                            <div class="result-context">Annual consistency benefits</div>
+                        </div>
+                        <div class="result-card">
+                            <div class="result-value">73%</div>
+                            <div class="result-metric">Development Speed</div>
+                            <div class="result-context">New blend optimization</div>
+                        </div>
+                        <div class="result-card">
+                            <div class="result-value">99.1%</div>
+                            <div class="result-metric">Quality Acceptance Rate</div>
+                            <div class="result-context">Eliminated off-flavors</div>
+                        </div>
+                    </div>
+                    
+                    <p><strong>Revolutionary Discovery:</strong> The digital twin revealed that micro-adjustments in development time ratio (DTR) based on origin-specific bean density created signature flavor enhancement opportunities. This insight led to proprietary roasting profiles that increased customer loyalty by 34% and enabled premium pricing strategies.</p>
+                </div>
+
+                <h2>The Art of Flavor Engineering</h2>
+
+                <p><strong>Modern coffee roasting has evolved into a sophisticated form of flavor engineering where digital twin technology enables roasters to design specific taste experiences with scientific precision.</strong> By understanding the relationship between thermal input, chemical transformation, and sensory outcome, roasters can create reproducible flavor profiles that meet exacting standards while exploring new taste territories.</p>
+
+                <div class="flavor-matrix">
+                    <div class="architecture-title" style="color: var(--aroma-gold); margin-bottom: 30px;">Precision Flavor Profile Development</div>
+                    <div class="matrix-grid">
+                        <div class="flavor-card">
+                            <span class="flavor-icon">🍋</span>
+                            <div class="flavor-name">Brightness & Acidity</div>
+                            <div class="flavor-range">4.2-4.8 pH</div>
+                            <div class="flavor-description">Controlled organic acid development through precise first crack timing and temperature ramping</div>
+                        </div>
+                        <div class="flavor-card">
+                            <span class="flavor-icon">🍯</span>
+                            <div class="flavor-name">Sweetness Balance</div>
+                            <div class="flavor-range">12-18% sugars</div>
+                            <div class="flavor-description">Optimized caramelization without over-development preserving natural fruit sweetness</div>
+                        </div>
+                        <div class="flavor-card">
+                            <span class="flavor-icon">🌰</span>
+                            <div class="flavor-name">Body & Mouthfeel</div>
+                            <div class="flavor-range">1.2-1.8 TDS</div>
+                            <div class="flavor-description">Controlled oil development and cellulose breakdown creating desired texture and weight</div>
+                        </div>
+                        <div class="flavor-card">
+                            <span class="flavor-icon">🌺</span>
+                            <div class="flavor-name">Aromatic Complexity</div>
+                            <div class="flavor-range">200+ compounds</div>
+                            <div class="flavor-description">Preserved volatile oils and developed flavor compounds creating layered aromatic experience</div>
+                        </div>
+                        <div class="flavor-card">
+                            <span class="flavor-icon">☕</span>
+                            <div class="flavor-name">Roast Character</div>
+                            <div class="flavor-range">8-25% development</div>
+                            <div class="flavor-description">Balanced roast flavor integration without overwhelming origin characteristics</div>
+                        </div>
+                        <div class="flavor-card">
+                            <span class="flavor-icon">⚖️</span>
+                            <div class="flavor-name">Overall Balance</div>
+                            <div class="flavor-range">85-95 points</div>
+                            <div class="flavor-description">Harmonious integration of all flavor elements creating exceptional cup quality</div>
+                        </div>
+                    </div>
+                </div>
+
+                <h2>Sustainability and Quality Convergence</h2>
+
+                <p>Digital twin roasting technology addresses critical sustainability challenges while improving quality outcomes. <strong>By optimizing energy usage, reducing waste, and enabling shorter, more efficient roasting cycles, these systems help roasters achieve environmental goals while maintaining or improving flavor quality.</strong></p>
+
+                <p>Sustainability improvements include:</p>
+
+                <ul>
+                    <li><strong>Energy optimization:</strong> 25-40% reduction in gas consumption through precise thermal modeling</li>
+                    <li><strong>Waste minimization:</strong> 90% reduction in off-spec batches through predictive quality control</li>
+                    <li><strong>Carbon footprint:</strong> Lower emissions through optimized roasting cycles and reduced re-roasting</li>
+                    <li><strong>Resource efficiency:</strong> Minimized green coffee waste through improved yield calculations</li>
+                    <li><strong>Equipment longevity:</strong> Predictive maintenance reducing equipment replacement frequency</li>
+                    <li><strong>Supply chain integration:</strong> Better green coffee utilization through origin-specific optimization</li>
+                </ul>
+
+                <h2>Future Innovation Roadmap: 2025-2030</h2>
+
+                <div class="innovation-roadmap">
+                    <div class="architecture-title" style="color: var(--roast-medium); margin-bottom: 30px;">Roasting Technology Evolution</div>
+                    <div class="roadmap-timeline">
+                        <div class="timeline-milestone">
+                            <div class="milestone-year">2025</div>
+                            <div class="milestone-content">
+                                <div class="milestone-title">Predictive Flavor Modeling</div>
+                                <div class="milestone-description">AI systems achieve 95%+ accuracy in predicting final cup scores based on green coffee analysis and roasting parameters, enabling perfect first-roast outcomes.</div>
+                                <div class="milestone-impact">Quality Impact: Elimination of trial roasts, 60% reduction in product development time</div>
+                            </div>
+                        </div>
+                        
+                        <div class="timeline-milestone">
+                            <div class="milestone-year">2026</div>
+                            <div class="milestone-content">
+                                <div class="milestone-title">Molecular Roasting Control</div>
+                                <div class="milestone-description">Real-time chemical compound monitoring enables precise control of specific flavor molecules during roasting, creating designer coffee experiences.</div>
+                                <div class="milestone-impact">Innovation Impact: 500+ distinct flavor profile variations, premium market expansion</div>
+                            </div>
+                        </div>
+                        
+                        <div class="timeline-milestone">
+                            <div class="milestone-year">2027</div>
+                            <div class="milestone-content">
+                                <div class="milestone-title">Autonomous Roasting Systems</div>
+                                <div class="milestone-description">Fully automated roasting operations with AI-guided quality control achieve master roaster-level consistency without human intervention.</div>
+                                <div class="milestone-impact">Efficiency Impact: 24/7 operations, 85% labor cost reduction, perfect consistency</div>
+                            </div>
+                        </div>
+                        
+                        <div class="timeline-milestone">
+                            <div class="milestone-year">2028</div>
+                            <div class="milestone-content">
+                                <div class="milestone-title">Personalized Coffee Creation</div>
+                                <div class="milestone-description">Custom roasting profiles based on individual taste preferences and genetic taste sensitivity analysis, creating personalized coffee experiences.</div>
+                                <div class="milestone-impact">Market Impact: Premium personalization segment, direct consumer relationships</div>
+                            </div>
+                        </div>
+                        
+                        <div class="timeline-milestone">
+                            <div class="milestone-year">2030</div>
+                            <div class="milestone-content">
+                                <div class="milestone-title">Quantum Flavor Engineering</div>
+                                <div class="milestone-description">Advanced computational chemistry enables design of entirely new flavor compounds and roasting techniques previously impossible to achieve or imagine.</div>
+                                <div class="milestone-impact">Revolutionary Impact: New coffee categories, expanded flavor universe</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <h2>The Economics of Roasting Excellence</h2>
+
+                <p>Digital twin roasting technology is creating new economic models in the coffee industry, enabling smaller roasters to compete with industrial operations while allowing large companies to maintain artisanal quality at scale. <strong>The technology democratizes expertise, reduces training requirements, and creates consistent quality outcomes that command premium pricing.</strong></p>
+
+                <p>Economic transformation includes:</p>
+
+                <ul>
+                    <li><strong>Quality premiums:</strong> Consistent high scores enabling 20-40% price increases</li>
+                    <li><strong>Operational efficiency:</strong> Reduced waste and energy costs improving margins by 15-25%</li>
+                    <li><strong>Market expansion:</strong> Ability to serve quality-demanding customers previously unreachable</li>
+                    <li><strong>Innovation speed:</strong> Faster product development enabling rapid market response</li>
+                    <li><strong>Risk reduction:</strong> Elimination of expensive roasting mistakes and quality failures</li>
+                    <li><strong>Scalability:</strong> Consistent quality across multiple locations and increased production volumes</li>
+                </ul>
+
+                <div class="master-insights">
+                    <div class="insights-title">Master Roaster's Digital Evolution</div>
+                    <div class="insights-text">The integration of digital twin technology with traditional roasting craft represents the evolution of coffee expertise rather than its replacement. Master roasters are discovering that digital intelligence amplifies their sensory capabilities, enables them to achieve previously impossible consistency, and frees them to focus on creativity and innovation. The future belongs to roasters who embrace both the art and science of coffee, using technology to express their vision with unprecedented precision and reach.</div>
+                </div>
+
+                <p>The revolution in coffee roasting through digital twin technology represents more than technological advancement—it's the democratization of excellence and the elevation of craft through science. As we crack the code of flavor development, we're not just making better coffee; we're creating new possibilities for taste, sustainability, and the global coffee economy.</p>
+
+                <p>Every perfectly roasted batch is now the result of thousands of precise calculations, centuries of accumulated wisdom, and cutting-edge technology working in harmony. This is the future of coffee roasting—where art meets science, tradition embraces innovation, and every cup reflects the pursuit of absolute excellence.</p>
+            </article>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 PraxisTwin. Turning industrial strategy into operational reality.</p>
+        </div>
+    </footer>
+</body>
+</html>
