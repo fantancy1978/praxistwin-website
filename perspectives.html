@@ -90,14 +90,9 @@
             border-radius: 8px;
         }
 
-        .nav-links a:hover {
+        .nav-links a:hover, .nav-links a.active {
             color: var(--primary-blue);
             background: rgba(0, 82, 204, 0.06);
-        }
-
-        .nav-links a.active {
-            color: var(--primary-blue);
-            background: rgba(0, 82, 204, 0.1);
         }
 
         .cta-btn {
@@ -200,4 +195,111 @@
         }
 
         .blog-excerpt {
-            color: var(--neutral-
+            color: var(--neutral-600);
+            line-height: 1.7;
+            margin-bottom: 24px;
+        }
+
+        .blog-cta {
+            color: var(--primary-blue);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .blog-cta:hover {
+            color: var(--primary-blue-dark);
+            transform: translateX(4px);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--neutral-900);
+            color: var(--neutral-200);
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .blog-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">PraxisTwin</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#platform">Our Architecture</a></li>
+                <li><a href="index.html#cases">Case Studies</a></li>
+                <li><a href="perspectives.html" class="active">Perspectives</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+            <a href="index.html#contact" class="cta-btn">Request System Consultation</a>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <section class="header">
+        <div class="container">
+            <h1>PraxisTwin Perspectives</h1>
+            <p>Expert insights on digital transformation, operational excellence, and the future of manufacturing intelligence for C-suite executives and R&D leaders.</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main">
+        <div class="container">
+            <div class="blog-grid">
+                <!-- Blog Post 1 -->
+                <article class="blog-card">
+                    <div class="blog-date">July 13, 2025</div>
+                    <h2 class="blog-title">How Digital Twin Technology is Redefining Modern Manufacturing</h2>
+                    <p class="blog-excerpt">Through collaborating with multiple manufacturing enterprises, I've discovered an interesting phenomenon: the most successful digital transformation cases all share one common trait—they implement technology not for technology's sake, but to solve specific business pain points.</p>
+                    <a href="digital-twin-manufacturing.html" class="blog-cta">Read Full Article →</a>
+                </article>
+
+                <!-- Blog Post 2 -->
+                <article class="blog-card">
+                    <div class="blog-date">July 13, 2025</div>
+                    <h2 class="blog-title">How Market Intelligence Drives Precision R&D Investment</h2>
+                    <p class="blog-excerpt">Yesterday, I had a conversation with an R&D director who shared a frustrating challenge: "Our R&D direction always lags behind market needs. By the time we develop products, the market has changed again." This perfectly illustrates the core problem with traditional R&D models.</p>
+                    <a href="market-intelligence-rd.html" class="blog-cta">Read Full Article →</a>
+                </article>
+
+                <!-- Blog Post 3 -->
+                <article class="blog-card">
+                    <div class="blog-date">July 13, 2025</div>
+                    <h2 class="blog-title">Why Agri-Food is the Next Digital Blue Ocean</h2>
+                    <p class="blog-excerpt">Many people consider agriculture a "traditional industry" unrelated to high technology. But I argue that the agri-food sector is experiencing a quiet technological revolution. From a global perspective, consumers are demanding higher standards for food safety, sustainability, and nutritional value.</p>
+                    <a href="agri-food-digitalization.html" class="blog-cta">Read Full Article →</a>
+                </article>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 PraxisTwin. Turning industrial strategy into operational reality.</p>
+        </div>
+    </footer>
+</body>
+</html>
