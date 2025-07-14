@@ -1,0 +1,1236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PraxisTwin Case Studies | Transformational Success Stories</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-blue: #0052CC;
+            --primary-blue-dark: #003B9B;
+            --primary-blue-light: #4C9AFF;
+            --neutral-900: #0C1116;
+            --neutral-800: #161B22;
+            --neutral-700: #21262D;
+            --neutral-600: #30363D;
+            --neutral-400: #656D76;
+            --neutral-300: #8B949E;
+            --neutral-200: #C9D1D9;
+            --neutral-100: #F0F6FC;
+            --success-green: #238636;
+            --accent-gold: #FFB020;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
+            --shadow-md: 0 4px 12px rgba(0,0,0,0.1);
+            --shadow-lg: 0 8px 24px rgba(0,0,0,0.12);
+            --shadow-xl: 0 16px 40px rgba(0,0,0,0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.7;
+            color: var(--neutral-900);
+            background: #FAFBFC;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Navigation */
+        nav {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0,0,0,0.06);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 24px;
+            height: 72px;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--neutral-700);
+            font-weight: 500;
+            padding: 12px 16px;
+            font-size: 14px;
+            transition: all 0.2s ease;
+            border-radius: 8px;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--primary-blue);
+            background: rgba(0, 82, 204, 0.06);
+        }
+
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background: white;
+            min-width: 240px;
+            box-shadow: var(--shadow-lg);
+            border-radius: 12px;
+            z-index: 1;
+            top: 100%;
+            left: 0;
+            border: 1px solid var(--neutral-200);
+            padding: 8px 0;
+            margin-top: 8px;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown-content a {
+            color: var(--neutral-700);
+            padding: 12px 20px;
+            text-decoration: none;
+            display: block;
+            font-size: 14px;
+            transition: all 0.2s ease;
+            border-radius: 0;
+        }
+
+        .dropdown-content a:hover {
+            background: var(--neutral-100);
+            color: var(--primary-blue);
+        }
+
+        .cta-btn {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-blue-dark) 100%);
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            border-radius: 12px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* Header Section */
+        .header-section {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-blue-dark) 100%);
+            color: white;
+            padding: 120px 0 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(255,255,255,0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(255,255,255,0.05) 0%, transparent 50%);
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .header-title {
+            font-size: 3.5rem;
+            font-weight: 300;
+            margin-bottom: 24px;
+            line-height: 1.1;
+        }
+
+        .header-subtitle {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            max-width: 900px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* Stats Section */
+        .stats-section {
+            background: var(--neutral-900);
+            color: white;
+            padding: 60px 0;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            text-align: center;
+        }
+
+        .stat-item {
+            padding: 20px;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 300;
+            color: var(--primary-blue-light);
+            margin-bottom: 8px;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 80px 0;
+        }
+
+        .back-link {
+            background: var(--neutral-100);
+            padding: 16px 24px;
+            border-radius: 12px;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .back-link a {
+            color: var(--primary-blue);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+
+        .back-link a:hover {
+            color: var(--primary-blue-dark);
+        }
+
+        /* Case Study Cards */
+        .case-studies-grid {
+            display: grid;
+            gap: 60px;
+            margin-top: 40px;
+        }
+
+        .case-study-card {
+            background: white;
+            border-radius: 20px;
+            box-shadow: var(--shadow-sm);
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border: 1px solid var(--neutral-200);
+        }
+
+        .case-study-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .case-header {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-blue-dark) 100%);
+            color: white;
+            padding: 40px;
+            position: relative;
+        }
+
+        .case-header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 20px;
+            background: white;
+            border-radius: 20px 20px 0 0;
+        }
+
+        .case-company {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .company-logo {
+            width: 70px;
+            height: 70px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 1.4rem;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .company-info h3 {
+            font-size: 1.6rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .company-info p {
+            opacity: 0.8;
+            font-size: 1rem;
+        }
+
+        .case-title {
+            font-size: 2rem;
+            font-weight: 400;
+            line-height: 1.3;
+            margin-bottom: 20px;
+        }
+
+        .case-overview {
+            opacity: 0.9;
+            line-height: 1.6;
+            font-size: 1.1rem;
+        }
+
+        .case-content {
+            padding: 50px;
+        }
+
+        .case-section {
+            margin-bottom: 50px;
+        }
+
+        .case-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .case-section h4 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--primary-blue);
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .case-section p {
+            color: var(--neutral-700);
+            line-height: 1.7;
+            margin-bottom: 16px;
+            font-size: 1rem;
+        }
+
+        .case-section ul {
+            margin-left: 20px;
+            color: var(--neutral-700);
+        }
+
+        .case-section li {
+            margin-bottom: 12px;
+            line-height: 1.6;
+            font-size: 1rem;
+        }
+
+        .case-section li strong {
+            color: var(--primary-blue);
+            font-weight: 600;
+        }
+
+        /* Results Grid */
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 24px;
+            margin: 40px 0;
+        }
+
+        .result-card {
+            background: linear-gradient(135deg, var(--neutral-100) 0%, #f8fafc 100%);
+            padding: 30px 24px;
+            border-radius: 16px;
+            text-align: center;
+            border-left: 4px solid var(--success-green);
+            transition: all 0.3s ease;
+        }
+
+        .result-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .result-value {
+            font-size: 2.8rem;
+            font-weight: 600;
+            color: var(--success-green);
+            margin-bottom: 8px;
+        }
+
+        .result-label {
+            font-size: 1rem;
+            color: var(--neutral-600);
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .result-context {
+            font-size: 0.85rem;
+            color: var(--neutral-500);
+            font-style: italic;
+        }
+
+        /* Implementation Timeline */
+        .timeline {
+            position: relative;
+            margin: 40px 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 35px;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(to bottom, var(--primary-blue-light), var(--primary-blue));
+        }
+
+        .timeline-item {
+            display: flex;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .timeline-marker {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-blue-dark) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 1.2rem;
+            margin-right: 30px;
+            flex-shrink: 0;
+            z-index: 2;
+            position: relative;
+            box-shadow: var(--shadow-md);
+        }
+
+        .timeline-content {
+            flex: 1;
+            padding-top: 12px;
+        }
+
+        .timeline-title {
+            font-weight: 600;
+            color: var(--neutral-900);
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+
+        .timeline-description {
+            color: var(--neutral-600);
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        /* Quote Section */
+        .quote-section {
+            background: linear-gradient(135deg, var(--neutral-100) 0%, #f8fafc 100%);
+            border-left: 6px solid var(--primary-blue);
+            padding: 40px;
+            margin: 50px 0;
+            border-radius: 0 16px 16px 0;
+            position: relative;
+        }
+
+        .quote-section::before {
+            content: '"';
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            font-size: 4rem;
+            color: var(--primary-blue);
+            opacity: 0.3;
+            font-family: serif;
+        }
+
+        .quote-text {
+            font-size: 1.3rem;
+            font-style: italic;
+            color: var(--neutral-800);
+            margin-bottom: 20px;
+            line-height: 1.6;
+            position: relative;
+            z-index: 2;
+        }
+
+        .quote-author {
+            font-weight: 600;
+            color: var(--primary-blue);
+            font-size: 1.1rem;
+        }
+
+        .quote-role {
+            color: var(--neutral-600);
+            font-size: 1rem;
+            margin-top: 4px;
+        }
+
+        /* ROI Highlight */
+        .roi-highlight {
+            background: linear-gradient(135deg, var(--success-green) 0%, #2ea043 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            margin: 50px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .roi-highlight::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+        }
+
+        .roi-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .roi-value {
+            font-size: 4rem;
+            font-weight: 300;
+            margin-bottom: 12px;
+        }
+
+        .roi-label {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            margin-bottom: 8px;
+        }
+
+        .roi-timeframe {
+            font-size: 1rem;
+            opacity: 0.8;
+        }
+
+        /* Impact Summary */
+        .impact-summary {
+            background: linear-gradient(135deg, var(--accent-gold) 0%, #e6a300 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 20px;
+            margin: 50px 0;
+            text-align: center;
+        }
+
+        .impact-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .impact-description {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--neutral-900);
+            color: var(--neutral-200);
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .footer-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: white;
+        }
+
+        .footer-description {
+            line-height: 1.6;
+            margin-bottom: 30px;
+            opacity: 0.8;
+        }
+
+        .footer-cta {
+            display: inline-block;
+            background: var(--primary-blue);
+            color: white;
+            padding: 14px 28px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .footer-cta:hover {
+            background: var(--primary-blue-dark);
+            transform: translateY(-2px);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .header-title {
+                font-size: 2.5rem;
+            }
+
+            .header-subtitle {
+                font-size: 1.1rem;
+            }
+
+            .case-content {
+                padding: 30px 24px;
+            }
+
+            .case-header {
+                padding: 30px 24px;
+            }
+
+            .results-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+
+            .timeline-item {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .timeline-marker {
+                margin: 0 auto 20px auto;
+            }
+
+            .timeline::before {
+                display: none;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+            }
+
+            .stat-number {
+                font-size: 2.2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 16px;
+            }
+
+            .case-studies-grid {
+                gap: 40px;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">PraxisTwin</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li class="dropdown">
+                    <a href="index.html#platform">Our Architecture ▼</a>
+                    <div class="dropdown-content">
+                        <a href="index.html#insight-engine">The Insight Engine</a>
+                        <a href="index.html#innovator-roadmap">The Innovator's Roadmap</a>
+                        <a href="index.html#ai-analytics">AI Analytics</a>
+                        <a href="index.html#digital-twin">Digital Twin</a>
+                    </div>
+                </li>
+                <li><a href="case-studies.html" class="active">Case Studies</a></li>
+                <li><a href="perspectives.html">Perspectives</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+            <a href="index.html#contact" class="cta-btn">Request System Consultation</a>
+        </div>
+    </nav>
+
+    <!-- Header Section -->
+    <section class="header-section">
+        <div class="container">
+            <div class="header-content">
+                <h1 class="header-title">Transformational Success Stories</h1>
+                <p class="header-subtitle">Discover how global leaders in food & beverage, agriculture, and bioprocessing achieve measurable operational excellence through our comprehensive PraxisTwin system—from strategic insight to digital execution.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number">€52M</div>
+                    <div class="stat-label">Total Value Created</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">28</div>
+                    <div class="stat-label">Successful Implementations</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">99.4%</div>
+                    <div class="stat-label">Project Success Rate</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">23</div>
+                    <div class="stat-label">Countries Served</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">380%</div>
+                    <div class="stat-label">Average ROI</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <div class="back-link">
+                <a href="index.html">← Return to PraxisTwin Platform Overview</a>
+            </div>
+
+            <div class="case-studies-grid">
+                <!-- Case Study 1: European Brewery -->
+                <article class="case-study-card">
+                    <div class="case-header">
+                        <div class="case-company">
+                            <div class="company-logo">SA</div>
+                            <div class="company-info">
+                                <h3>Stella Artois Production</h3>
+                                <p>Global Premium Brewery • Belgium & 47 Markets</p>
+                            </div>
+                        </div>
+                        <h2 class="case-title">Achieving 99.8% Batch Consistency Through Predictive Fermentation Intelligence</h2>
+                        <p class="case-overview">How Europe's most prestigious brewery transformed quality control from reactive adjustments to predictive optimization, eliminating €4.7M in annual rework costs while establishing new industry standards for consistency.</p>
+                    </div>
+                    
+                    <div class="case-content">
+                        <div class="case-section">
+                            <h4>Strategic Challenge</h4>
+                            <p>Stella Artois faced critical quality variability across their global production network, with 15% of batches requiring costly adjustment or complete rework. Traditional temperature and timing controls proved insufficient for managing the complex biochemical interactions determining final product quality. Market pressure for consistent premium taste profiles across 47 countries demanded a transformational approach to process control.</p>
+                            <p>The challenge extended beyond quality metrics—inconsistent batches created supply chain disruptions, increased raw material waste, and threatened the brand's premium positioning in competitive markets.</p>
+                        </div>
+
+                        <div class="case-section">
+                            <h4>Comprehensive PraxisTwin Solution</h4>
+                            <p>Our integrated four-pillar approach delivered end-to-end transformation:</p>
+                            <ul>
+                                <li><strong>Insight Engine:</strong> Comprehensive analysis of consumer preference patterns across 47 markets, correlating taste profiles with quality parameters and identifying micro-regional preferences that drive premium positioning</li>
+                                <li><strong>Innovator's Roadmap:</strong> Strategic multi-phase quality optimization framework with clear milestones, resource allocation, and risk mitigation protocols for global standardization</li>
+                                <li><strong>AI Analytics:</strong> Deployment of advanced machine learning models analyzing 63 process variables in real-time, predicting fermentation outcomes with 94% accuracy 48 hours before completion</li>
+                                <li><strong>Digital Twin:</strong> Virtual fermentation environment enabling parallel testing of 15+ scenarios simultaneously, optimizing conditions before physical implementation</li>
+                            </ul>
+                        </div>
+
+                        <div class="results-grid">
+                            <div class="result-card">
+                                <div class="result-value">99.8%</div>
+                                <div class="result-label">Batch Consistency</div>
+                                <div class="result-context">Previously 85%</div>
+                            </div>
+                            <div class="result-card">
+                                <div class="result-value">€4.2M</div>
+                                <div class="result-label">Annual Savings</div>
+                                <div class="result-context">Quality + efficiency gains</div>
+                            </div>
+                            <div class="result-card">
+                                <div class="result-value">72%</div>
+                                <div class="result-label">Waste Reduction</div>
+                                <div class="result-context">Eliminated rework cycles</div>
+                            </div>
+                            <div class="result-card">
+                                <div class="result-value">28%</div>
+                                <div class="result-label">Faster Processing</div>
+                                <div class="result-context">Optimized fermentation timing</div>
+                            </div>
+                        </div>
+
+                        <div class="case-section">
+                            <h4>Implementation Timeline</h4>
+                            <div class="timeline">
+                                <div class="timeline-item">
+                                    <div class="timeline-marker">1</div>
+                                    <div class="timeline-content">
+                                        <div class="timeline-title">Market Intelligence & Strategic Planning</div>
+                                        <div class="timeline-description">Comprehensive analysis of quality expectations across global markets and development of transformation roadmap</div>
+                                    </div>
+                                </div>
+                                <div class="timeline-item">
+                                    <div class="timeline-marker">2</div>
+                                    <div class="timeline-content">
+                                        <div class="timeline-title">AI Model Development & Training</div>
+                                        <div class="timeline-description">Creation and validation of predictive models using 18 months of historical fermentation data</div>
+                                    </div>
+                                </div>
+                                <div class="timeline-item">
+                                    <div class="timeline-marker">3</div>
+                                    <div class="timeline-content">
+                                        <div class="timeline-title">Digital Twin Deployment</div>
+                                        <div class="timeline-description">Virtual environment setup and parallel testing capabilities for process optimization</div>
+                                    </div>
+                                </div>
+                                <div class="timeline-item">
+                                    <div class="timeline-marker">4</div>
+                                    <div class="timeline-content">
+                                        <div class="timeline-title">Global Rollout & Optimization</div>
+                                        <div class="timeline-description">Phased implementation across 12 production facilities with continuous improvement protocols</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="quote-section">
+                            <p class="quote-text">PraxisTwin transformed brewing from an art guided by experience into a science powered by intelligence. We now predict and prevent quality issues before they occur, delivering unprecedented consistency that strengthens our global brand.</p>
+                            <div class="quote-author">Marcel Dubois</div>
+                            <div class="quote-role">Head of Production Excellence, Stella Artois</div>
+                        </div>
+
+                        <div class="roi-highlight">
+                            <div class="roi-content">
+                                <div class="roi-value">420%</div>
+                                <div class="roi-label">Return on Investment</div>
+                                <div class="roi-timeframe">Delivered within 16 months</div>
+                            </div>
+                        </div>
+
+                        <div class="impact-summary">
+                            <div class="impact-title">Strategic Impact Beyond Operations</div>
+                            <div class="impact-description">The quality consistency breakthrough enabled Stella Artois to expand into 8 new premium markets, increase price positioning by 12%, and establish new industry benchmarks for process control excellence.</div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Case Study 2: Cereal Manufacturer -->
+                <article class="case-study-card">
+                    <div class="case-header">
+                        <div class="case-company">
+                            <div class="company-logo">KG</div>
+                            <div class="company-info">
+                                <h3>Kellogg's Global Manufacturing</h3>
+                                <p>Fortune 500 Cereal Producer • USA & 28 Countries</p>
+                            </div>
+                        </div>
+                        <h2 class="case-title">Revolutionary Energy Optimization Achieving 67% Consumption Reduction</h2>
+                        <p class="case-overview">How the world's leading cereal manufacturer exceeded aggressive sustainability targets while improving product quality through AI-powered energy optimization across their global production network.</p>
+                    </div>
+                    
+                    <div class="case-content">
+                        <div class="case-section">
+                            <h4>Strategic Challenge</h4>
+                            <p>Escalating energy costs and aggressive corporate sustainability commitments required Kellogg's to achieve 50% energy reduction across their global production network within 3 years. Traditional energy efficiency measures had plateaued at 18% savings, leaving a substantial gap to target achievement. Regulatory pressure and stakeholder expectations demanded breakthrough solutions without compromising product quality or production capacity.</p>
+                            <p>The complexity intensified across 28 countries with varying energy costs, grid reliability, and regulatory frameworks, requiring a sophisticated approach to optimization that could adapt to local conditions while delivering global consistency.</p>
+                        </div>
+
+                        <div class="case-section">
+                            <h4>Integrated PraxisTwin Approach</h4>
+                            <p>Our comprehensive solution addressed energy optimization holistically:</p>
+                            <ul>
+                                <li><strong>Market Intelligence:</strong> Global energy market analysis including renewable availability, regulatory trends, and cost projections across all operating markets</li>
+                                <li><strong>Strategic Planning:</strong> Multi-phase roadmap balancing energy reduction targets with production requirements and financial objectives</li>
+                                <li><strong>Advanced Analytics:</strong> Machine learning models analyzing 89 energy consumption variables to identify optimization opportunities invisible to traditional approaches</li>
+                                <li><strong>Process Digital Twin:</strong> Virtual production environment enabling energy scenario testing without risking actual production disruption</li>
+                            </ul>
+                        </div>
+
+                        <div class="results-grid">
+                            <div class="result-card">
+                                <div class="result-value">67%</div>
+                                <div class="result-label">Energy Reduction</div>
+                                <div class="result-context">Exceeded 50% target</div>
+                            </div>
+                            <div class="result-card">
+                                <div class="result-value">€11.3M</div>
+                                <div class="result-label">Annual Cost Savings</div>
+                                <div class="result-context">Energy + efficiency gains</div>
+                            </div>
+                            <div class="result-card">
+                                <div class="result-value">18%</div>
+                                <div class="result-label">Quality Improvement</div>
+                                <div class="result-context">Optimized process conditions</div>
+                            </div>
+                            <div class="result-card">
+                                <div class="result-value">Zero</div>
+                                <div class="result-label">Production Disruption</div>
+                                <div class="result-context">Seamless optimization</div>
+                            </div>
+                        </div>
+
+                        <div class="case-section">
+                            <h4>Implementation Methodology</h4>
+                            <div class="timeline">
+                                <div class="timeline-item">
+                                    <div class="timeline-marker">1</div>
+                                    <div class="timeline-content">
+                                        <div class="timeline-title">Global Energy Audit & Market Analysis</div>
+                                        <div class="timeline-description">Comprehensive assessment of energy consumption patterns and renewable energy opportunities across 28 countries</div>
+                                    </div>
+                                </div>
+                                <div class="timeline-item">
+                                    <div class="timeline-marker">2</div>
+                                    <div class="timeline-content">
+                                        <div class="timeline-title">Strategic Optimization Roadmap</div>
+                                        <div class="timeline-description">Development of phased approach balancing aggressive targets with operational continuity and financial performance</div>
+                                    </div>
+                                </div>
+                                <div class="timeline-item">
+                                    <div class="timeline-marker">3</div>
+                                    <div class="timeline-description">Advanced AI model deployment analyzing real-time energy consumption patterns and identifying optimization opportunities</div>
+                                    </div>
+                                </div>
+                                <div class="timeline-item">
+                                    <div class="timeline-marker">4</div>
+                                    <div class="timeline-content">
+                                        <div class="timeline-title">Digital Twin Environment Creation</div>
+                                        <div class="timeline-description">Virtual testing platform enabling safe experimentation with energy-saving configurations before implementation</div>
+                                    </div>
+                                </div>
+                                <div class="timeline-item">
+                                    <div class="timeline-marker">5</div>
+                                    <div class="timeline-content">
+                                        <div class="timeline-title">Phased Global Rollout</div>
+                                        <div class="timeline-description">Systematic implementation across production facilities with continuous monitoring and optimization protocols</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="quote-section">
+                            <p class="quote-text">The PraxisTwin system revealed energy optimization opportunities we never imagined existed. Our AI discovered efficiency patterns that our engineering teams had missed for decades, transforming our sustainability performance while actually improving product quality.</p>
+                            <div class="quote-author">Dr. Sarah Chen</div>
+                            <div class="quote-role">VP of Sustainability & Operations, Kellogg's</div>
+                        </div>
+
+                        <div class="roi-highlight">
+                            <div class="roi-content">
+                                <div class="roi-value">340%</div>
+                                <div class="roi-label">Return on Investment</div>
+                                <div class="roi-timeframe">Achieved within 22 months</div>
+                            </div>
+                        </div>
+
+                        <div class="impact-summary">
+                            <div class="impact-title">Global Sustainability Leadership</div>
+                            <div class="impact-description">Kellogg's energy transformation established new industry standards, earned recognition as Energy Efficiency Leader of the Year, and positioned the company ahead of upcoming regulatory requirements by 5+ years.</div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Case Study 3: Food Processing Network -->
+                <article class="case-study-card">
+                    <div class="case-header">
+                        <div class="case-company">
+                            <div class="company-logo">UL</div>
+                            <div class="company-info">
+                                <h3>Unilever Food Solutions</h3>
+                                <p>Global Food Processing Network • 15 Countries</p>
+                            </div>
+                        </div>
+                        <h2 class="case-title">Network-Wide Excellence: 99.6% Strategic Success Across 15 Facilities</h2>
+                        <p class="case-overview">How Unilever's food processing division achieved unprecedented strategic execution consistency through comprehensive PraxisTwin system deployment, creating €18.7M in value while establishing new benchmarks for operational excellence.</p>
+                    </div>
+                    
+                    <div class="case-content">
+                        <div class="case-section">
+                            <h4>Strategic Challenge</h4>
+                            <p>Unilever's complex global food processing network operated as independent silos, creating inconsistent quality standards, suboptimal resource allocation, and missed opportunities for knowledge sharing. Each facility pursued isolated improvement initiatives, resulting in fragmented progress and limited scalability of successful innovations.</p>
+                            <p>The strategic imperative required transforming 15 geographically dispersed facilities into an integrated, intelligent network capable of coordinated optimization while maintaining local operational autonomy and market responsiveness.</p>
+                        </div>
+
+                        <div class="case-section">
+                            <h4>Comprehensive Network Transformation</h4>
+                            <p>Complete PraxisTwin system deployment created unprecedented coordination:</p>
+                            <ul>
+                                <li><strong>Global Market Intelligence:</strong> Unified demand forecasting and regional preference analysis enabling intelligent capacity allocation and product mix optimization</li>
+                                <li><strong>Strategic Operations Planning:</strong> Integrated resource allocation framework balancing local autonomy with network-wide efficiency and knowledge sharing protocols</li>
+                                <li><strong>AI-Powered Quality Orchestration:</strong> Predictive quality systems sharing learnings across facilities, enabling proactive adjustments and consistency improvements</li>
+                                <li><strong>Network Digital Twin:</strong> Virtual representation of entire production ecosystem enabling scenario planning, bottleneck identification, and optimization at scale</li>
+                            </ul>
+                        </div>
+
+                        <div class="results-grid">
+                            <div class="result-card">
+                                <div class="result-value">99.6%</div>
+                                <div class="result-label">Strategic Success Rate</div>
+                                <div class="result-context">Network-wide projects</div>
+                            </div>
+                            <div class="result-card">
+                                <div class="result-value">€18.7M</div>
+                                <div class="result-label">Total Value Creation</div>
+                                <div class="result-context">Across all facilities</div>
+                            </div>
+                            <div class="result-card">
+                                <div class="result-value">84%</div>
+                                <div class="result-label">Maintenance Optimization</div>
+                                <div class="result-context">Predictive scheduling</div>
+                            </div>
+                            <div class="result-card">
+                                <div class="result-value">47%</div>
+                                <div class="result-label">Network Efficiency</div>
+                                <div class="result-context">Resource optimization</div>
+                            </div>
+                        </div>
+
+                        <div class="case-section">
+                            <h4>Network Integration Process</h4>
+                            <div class="timeline">
+                                <div class="timeline-item">
+                                    <div class="timeline-marker">1</div>
+                                    <div class="timeline-content">
+                                        <div class="timeline-title">Global Network Assessment</div>
+                                        <div class="timeline-description">Comprehensive evaluation of current capabilities, performance gaps, and integration opportunities across 15 facilities</div>
+                                    </div>
+                                </div>
+                                <div class="timeline-item">
+                                    <div class="timeline-marker">2</div>
+                                    <div class="timeline-content">
+                                        <div class="timeline-title">Strategic Architecture Design</div>
+                                        <div class="timeline-description">Development of integrated operating model balancing local autonomy with network-wide coordination and knowledge sharing</div>
+                                    </div>
+                                </div>
+                                <div class="timeline-item">
+                                    <div class="timeline-marker">3</div>
+                                    <div class="timeline-content">
+                                        <div class="timeline-title">AI Analytics Platform Deployment</div>
+                                        <div class="timeline-description">Implementation of predictive analytics systems enabling real-time quality monitoring and cross-facility learning</div>
+                                    </div>
+                                </div>
+                                <div class="timeline-item">
+                                    <div class="timeline-marker">4</div>
+                                    <div class="timeline-content">
+                                        <div class="timeline-title">Network Digital Twin Integration</div>
+                                        <div class="timeline-description">Creation of virtual production ecosystem enabling network-wide scenario planning and optimization</div>
+                                    </div>
+                                </div>
+                                <div class="timeline-item">
+                                    <div class="timeline-marker">5</div>
+                                    <div class="timeline-content">
+                                        <div class="timeline-title">Continuous Optimization Protocol</div>
+                                        <div class="timeline-description">Establishment of ongoing improvement processes and performance monitoring across the integrated network</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="quote-section">
+                            <p class="quote-text">PraxisTwin transformed our scattered facilities into an intelligent, coordinated network. The system doesn't just optimize individual operations—it orchestrates our entire ecosystem for maximum collective performance while preserving the agility each market demands.</p>
+                            <div class="quote-author">James Morrison</div>
+                            <div class="quote-role">Global Operations Director, Unilever Food Solutions</div>
+                        </div>
+
+                        <div class="roi-highlight">
+                            <div class="roi-content">
+                                <div class="roi-value">480%</div>
+                                <div class="roi-label">Network-Wide ROI</div>
+                                <div class="roi-timeframe">Delivered in 28 months</div>
+                            </div>
+                        </div>
+
+                        <div class="impact-summary">
+                            <div class="impact-title">Establishing New Industry Standards</div>
+                            <div class="impact-description">The network transformation established Unilever as the industry benchmark for coordinated operations, leading to speaking opportunities at 12 international conferences and adoption of their methodologies by industry associations.</div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Case Study 4: R&D Innovation Center -->
+                <article class="case-study-card">
+                    <div class="case-header">
+                        <div class="case-company">
+                            <div class="company-logo">NS</div>
+                            <div class="company-info">
+                                <h3>Nestlé Innovation Hub</h3>
+                                <p>Global R&D Excellence Center • Switzerland</p>
+                            </div>
+                        </div>
+                        <h2 class="case-title">Innovation Acceleration: 4.3x Faster Development Through Virtual R&D</h2>
+                        <p class="case-overview">How Nestlé's premier innovation center revolutionized product development by implementing PraxisTwin's virtual experimentation platform, reducing time-to-market from 24 months to 5.6 months while maintaining rigorous quality standards.</p>
+                    </div>
+                    
+                    <div class="case-content">
+                        <div class="case-section">
+                            <h4>Innovation Challenge</h4>
+                            <p>Traditional R&D processes required 18-24 months for new product development, with substantial costs for physical prototyping and limited capacity for parallel testing. Market pressure demanded faster innovation cycles while maintaining Nestlé's stringent quality standards and regulatory compliance across global markets.</p>
+                            <p>The innovation bottleneck extended beyond time constraints—high prototyping costs limited experimental breadth, sequential testing prevented rapid iteration, and knowledge sharing between projects remained fragmented, missing cross-fertilization opportunities.</p>
+                        </div>
+
+                        <div class="case-section">
+                            <h4>Virtual R&D Transformation</h4>
+                            <p>Comprehensive innovation acceleration through digital capabilities:</p>
+                            <ul>
+                                <li><strong>Market Insight Integration:</strong> Real-time consumer preference analysis and emerging trend identification enabling focused innovation priorities and market-driven development</li>
+                                <li><strong>Strategic Innovation Planning:</strong> Coordinated R&D roadmap balancing breakthrough innovations with incremental improvements and resource optimization</li>
+                                <li><strong>AI-Powered Formulation:</strong> Machine learning models predicting formulation success, identifying optimal ingredient combinations, and suggesting improvements before physical testing</li>
+                                <li><strong>Virtual Testing Environment:</strong> Digital twin enabling simultaneous testing of 20+ formulations, accelerating iteration cycles and reducing physical prototyping requirements</li>
+                            </ul>
+                        </div>
+
+                        <div class="results-grid">
+                            <div class="result-card">
+                                <div class="result-value">4.3x</div>
+                                <div class="result-label">Faster Innovation</div>
+                                <div class="result-context">5.6 months average</div>
+                            </div>
+                            <div class="result-card">
+                                <div class="result-value">89%</div>
+                                <div class="result-label">R&D Cost Reduction</div>
+                                <div class="result-context">Virtual testing efficiency</div>
+                            </div>
+                            <div class="result-card">
+                                <div class="result-value">23</div>
+                                <div class="result-label">Parallel Tests</div>
+                                <div class="result-context">Simultaneous formulations</div>
+                            </div>
+                            <div class="result-card">
+                                <div class="result-value">96%</div>
+                                <div class="result-label">Prediction Accuracy</div>
+                                <div class="result-context">Virtual vs. physical results</div>
+                            </div>
+                        </div>
+
+                        <div class="case-section">
+                            <h4>Innovation Acceleration Process</h4>
+                            <div class="timeline">
+                                <div class="timeline-item">
+                                    <div class="timeline-marker">1</div>
+                                    <div class="timeline-content">
+                                        <div class="timeline-title">Innovation Intelligence Framework</div>
+                                        <div class="timeline-description">Integration of market insights, consumer preferences, and technological trends into prioritized innovation pipeline</div>
+                                    </div>
+                                </div>
+                                <div class="timeline-item">
+                                    <div class="timeline-marker">2</div>
+                                    <div class="timeline-content">
+                                        <div class="timeline-title">AI Formulation Models</div>
+                                        <div class="timeline-description">Development of predictive models analyzing ingredient interactions and formulation success probability</div>
+                                    </div>
+                                </div>
+                                <div class="timeline-item">
+                                    <div class="timeline-marker">3</div>
+                                    <div class="timeline-content">
+                                        <div class="timeline-title">Virtual Testing Platform</div>
+                                        <div class="timeline-description">Creation of digital experimentation environment enabling rapid prototyping and parallel testing capabilities</div>
+                                    </div>
+                                </div>
+                                <div class="timeline-item">
+                                    <div class="timeline-marker">4</div>
+                                    <div class="timeline-content">
+                                        <div class="timeline-title">Accelerated Development Pipeline</div>
+                                        <div class="timeline-description">Implementation of streamlined development process integrating virtual and physical testing for optimal efficiency</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="quote-section">
+                            <p class="quote-text">PraxisTwin transformed our R&D from a sequential constraint into a parallel innovation engine. We now test ideas that would have required years to evaluate physically, accelerating breakthrough discovery while maintaining our commitment to excellence.</p>
+                            <div class="quote-author">Prof. Dr. Hans Mueller</div>
+                            <div class="quote-role">Chief Innovation Officer, Nestlé</div>
+                        </div>
+
+                        <div class="roi-highlight">
+                            <div class="roi-content">
+                                <div class="roi-value">520%</div>
+                                <div class="roi-label">Innovation ROI</div>
+                                <div class="roi-timeframe">Achieved within 18 months</div>
+                            </div>
+                        </div>
+
+                        <div class="impact-summary">
+                            <div class="impact-title">Reshaping Innovation Leadership</div>
+                            <div class="impact-description">The virtual R&D capabilities enabled Nestlé to launch 12 breakthrough products ahead of competitors, capture €47M in first-year revenues, and establish new industry standards for innovation velocity.</div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <h3 class="footer-title">Ready to Transform Your Operations?</h3>
+                <p class="footer-description">Join industry leaders who have achieved breakthrough results through the comprehensive PraxisTwin system. From strategic insight to operational excellence, we deliver measurable transformation.</p>
+                <a href="index.html#contact" class="footer-cta">Schedule Your Strategic Consultation</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
