@@ -1,0 +1,1144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Precision in Dairy - PraxisTwin Case Study</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #0a0a0a;
+            color: #ffffff;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* 3D Background Animation */
+        .background-3d {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            opacity: 0.12;
+        }
+
+        .floating-shapes {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        .shape {
+            position: absolute;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            animation: float 25s infinite ease-in-out;
+            filter: blur(2px);
+        }
+
+        .shape:nth-child(1) {
+            width: 400px;
+            height: 400px;
+            top: 15%;
+            left: 5%;
+            animation-delay: 0s;
+            background: linear-gradient(135deg, #4ecdc4 0%, #44a08d 100%);
+        }
+
+        .shape:nth-child(2) {
+            width: 300px;
+            height: 300px;
+            top: 50%;
+            right: 10%;
+            animation-delay: -8s;
+            background: linear-gradient(135deg, #ffd93d 0%, #f39c12 100%);
+        }
+
+        .shape:nth-child(3) {
+            width: 250px;
+            height: 250px;
+            bottom: 25%;
+            left: 60%;
+            animation-delay: -16s;
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%);
+        }
+
+        .shape:nth-child(4) {
+            width: 180px;
+            height: 180px;
+            top: 30%;
+            left: 75%;
+            animation-delay: -12s;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg) scale(1); }
+            25% { transform: translateY(-40px) rotate(90deg) scale(1.1); }
+            50% { transform: translateY(20px) rotate(180deg) scale(0.9); }
+            75% { transform: translateY(-20px) rotate(270deg) scale(1.05); }
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 1rem 2rem;
+            z-index: 1000;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #4ecdc4;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #4ecdc4;
+        }
+
+        .request-btn {
+            background: linear-gradient(135deg, #4ecdc4 0%, #44a08d 100%);
+            color: white;
+            padding: 0.7rem 1.5rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .request-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(78, 205, 196, 0.4);
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-top: 80px;
+            padding: 2rem;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            text-align: center;
+            padding: 4rem 0;
+            margin-bottom: 3rem;
+        }
+
+        .case-study-date {
+            color: #4ecdc4;
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero-title {
+            font-size: 3.8rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #4ecdc4 0%, #44a08d 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.1;
+        }
+
+        .hero-subtitle {
+            font-size: 1.4rem;
+            color: #a0a0a0;
+            max-width: 900px;
+            margin: 0 auto 2rem;
+        }
+
+        .industry-tags {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .industry-tag {
+            background: rgba(78, 205, 196, 0.1);
+            border: 1px solid rgba(78, 205, 196, 0.3);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            color: #4ecdc4;
+        }
+
+        /* Executive Summary */
+        .executive-summary {
+            background: linear-gradient(135deg, rgba(78, 205, 196, 0.1) 0%, rgba(68, 160, 141, 0.05) 100%);
+            border-radius: 24px;
+            padding: 3rem;
+            margin-bottom: 4rem;
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(78, 205, 196, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .executive-summary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(78, 205, 196, 0.1), transparent);
+            transition: left 0.8s ease;
+        }
+
+        .executive-summary:hover::before {
+            left: 100%;
+        }
+
+        .summary-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: #4ecdc4;
+        }
+
+        .summary-text {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: #d0d0d0;
+        }
+
+        /* Key Metrics Grid */
+        .metrics-section {
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: #ffffff;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .metric-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
+            border-radius: 20px;
+            padding: 2.5rem;
+            text-align: center;
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.320, 1);
+            position: relative;
+        }
+
+        .metric-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border-color: rgba(78, 205, 196, 0.5);
+        }
+
+        .metric-value {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: #4ecdc4;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .metric-label {
+            font-size: 1.1rem;
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        .metric-description {
+            font-size: 0.9rem;
+            color: #a0a0a0;
+            margin-top: 0.5rem;
+        }
+
+        /* Challenge & Solution Section */
+        .challenge-solution-section {
+            margin-bottom: 4rem;
+        }
+
+        .challenge-solution-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .challenge-card, .solution-card {
+            padding: 3rem;
+            border-radius: 20px;
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .challenge-card {
+            background: linear-gradient(135deg, rgba(255, 107, 107, 0.1) 0%, rgba(238, 90, 82, 0.05) 100%);
+            border-color: rgba(255, 107, 107, 0.2);
+        }
+
+        .solution-card {
+            background: linear-gradient(135deg, rgba(78, 205, 196, 0.1) 0%, rgba(68, 160, 141, 0.05) 100%);
+            border-color: rgba(78, 205, 196, 0.2);
+        }
+
+        .challenge-card:hover, .solution-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .challenge-icon {
+            background: rgba(255, 107, 107, 0.2);
+            color: #ff6b6b;
+        }
+
+        .solution-icon {
+            background: rgba(78, 205, 196, 0.2);
+            color: #4ecdc4;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .card-content {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: #d0d0d0;
+        }
+
+        /* Implementation Process */
+        .implementation-section {
+            margin-bottom: 4rem;
+        }
+
+        .process-timeline {
+            position: relative;
+            margin: 3rem 0;
+        }
+
+        .timeline-line {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(to bottom, #4ecdc4, #44a08d);
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 3rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .timeline-item:nth-child(odd) {
+            flex-direction: row;
+        }
+
+        .timeline-item:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .timeline-content {
+            flex: 1;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
+            padding: 2rem;
+            border-radius: 16px;
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin: 0 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .timeline-content:hover {
+            transform: translateY(-5px);
+            border-color: rgba(78, 205, 196, 0.5);
+        }
+
+        .timeline-number {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #4ecdc4 0%, #44a08d 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 15px rgba(78, 205, 196, 0.4);
+        }
+
+        .phase-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #4ecdc4;
+        }
+
+        .phase-description {
+            color: #d0d0d0;
+            line-height: 1.6;
+        }
+
+        /* Technology Stack */
+        .technology-section {
+            margin-bottom: 4rem;
+            text-align: center;
+        }
+
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .tech-category {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
+            padding: 2.5rem;
+            border-radius: 20px;
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .tech-category:hover {
+            transform: translateY(-8px);
+            border-color: rgba(78, 205, 196, 0.5);
+        }
+
+        .tech-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #4ecdc4 0%, #44a08d 100%);
+            border-radius: 50%;
+            margin: 0 auto 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .tech-category-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #ffffff;
+        }
+
+        .tech-list {
+            list-style: none;
+            color: #a0a0a0;
+        }
+
+        .tech-list li {
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        /* Results & ROI */
+        .results-section {
+            background: linear-gradient(135deg, rgba(78, 205, 196, 0.1) 0%, rgba(68, 160, 141, 0.05) 100%);
+            border-radius: 24px;
+            padding: 4rem;
+            margin-bottom: 4rem;
+            text-align: center;
+            border: 1px solid rgba(78, 205, 196, 0.2);
+        }
+
+        .roi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .roi-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: 16px;
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .roi-value {
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: #4ecdc4;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .roi-label {
+            font-size: 1rem;
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        .roi-context {
+            font-size: 0.85rem;
+            color: #a0a0a0;
+            margin-top: 0.5rem;
+        }
+
+        /* Call to Action */
+        .cta-section {
+            text-align: center;
+            padding: 4rem 0;
+        }
+
+        .cta-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: #ffffff;
+        }
+
+        .cta-subtitle {
+            font-size: 1.2rem;
+            color: #a0a0a0;
+            margin-bottom: 3rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            background: linear-gradient(135deg, #4ecdc4 0%, #44a08d 100%);
+            color: white;
+            padding: 1.2rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(78, 205, 196, 0.4);
+        }
+
+        .cta-button.secondary {
+            background: transparent;
+            border: 2px solid #4ecdc4;
+            color: #4ecdc4;
+        }
+
+        .cta-button.secondary:hover {
+            background: #4ecdc4;
+            color: white;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.8rem;
+            }
+            
+            .challenge-solution-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .timeline-item {
+                flex-direction: column !important;
+                text-align: center;
+            }
+            
+            .timeline-content {
+                margin: 1rem 0;
+            }
+            
+            .timeline-line {
+                display: none;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        /* Loading Animation */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: #0a0a0a;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            opacity: 1;
+            transition: opacity 0.5s ease;
+        }
+
+        .loading-overlay.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .loader {
+            width: 60px;
+            height: 60px;
+            border: 4px solid rgba(78, 205, 196, 0.1);
+            border-top: 4px solid #4ecdc4;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loader"></div>
+    </div>
+
+    <!-- 3D Background -->
+    <div class="background-3d">
+        <div class="floating-shapes">
+            <div class="shape"></div>
+            <div class="shape"></div>
+            <div class="shape"></div>
+            <div class="shape"></div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav">
+            <div class="logo">PraxisTwin</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#architecture">Our Architecture</a></li>
+                <li><a href="#case-studies">Case Studies</a></li>
+                <li><a href="#perspectives">Perspectives</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <a href="#consultation" class="request-btn">Request System Consultation</a>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="case-study-date">July 13, 2025 • Market Analysis • PraxisTwin Global Research</div>
+            <h1 class="hero-title">Digital Precision in Dairy</h1>
+            <p class="hero-subtitle">How Twinning Optimizes Everything from Yogurt to Cheese</p>
+            <div class="industry-tags">
+                <span class="industry-tag">Digital Twin Technology</span>
+                <span class="industry-tag">Dairy Manufacturing</span>
+                <span class="industry-tag">Process Optimization</span>
+                <span class="industry-tag">McKinsey Level Analysis</span>
+            </div>
+        </section>
+
+        <!-- Executive Summary -->
+        <section class="executive-summary">
+            <h2 class="summary-title">Executive Summary</h2>
+            <p class="summary-text">
+                The dairy industry represents a $600 billion global market where precision is paramount. A leading multinational dairy manufacturer partnered with PraxisTwin to revolutionize their production processes through advanced digital twin technology. Our comprehensive solution addressed critical challenges in pasteurization control, fermentation optimization, and quality consistency across 47 global facilities. The implementation delivered transformational results: 47% reduction in batch variations, $12.4M in annual cost savings, and 89% improvement in quality consistency. This case study demonstrates how digital twin technology can transform traditional food manufacturing into a precision-driven, data-optimized operation that meets the evolving demands of modern consumers while maintaining the highest standards of food safety and quality.
+            </p>
+        </section>
+
+        <!-- Key Metrics -->
+        <section class="metrics-section">
+            <h2 class="section-title">Quantified Business Impact</h2>
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <span class="metric-value" data-target="47">0%</span>
+                    <div class="metric-label">Reduction in Batch Variations</div>
+                    <div class="metric-description">Consistent product quality across all production lines</div>
+                </div>
+                <div class="metric-card">
+                    <span class="metric-value" data-target="12.4">$0M</span>
+                    <div class="metric-label">Annual Cost Savings</div>
+                    <div class="metric-description">Through optimized resource utilization and waste reduction</div>
+                </div>
+                <div class="metric-card">
+                    <span class="metric-value" data-target="23">0%</span>
+                    <div class="metric-label">Improvement in Yield</div>
+                    <div class="metric-description">Enhanced production efficiency and output quality</div>
+                </div>
+                <div class="metric-card">
+                    <span class="metric-value" data-target="89">0%</span>
+                    <div class="metric-label">Reduction in Quality Defects</div>
+                    <div class="metric-description">Near-zero tolerance manufacturing processes</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Challenge & Solution -->
+        <section class="challenge-solution-section">
+            <h2 class="section-title">Strategic Challenge & Solution Framework</h2>
+            <div class="challenge-solution-grid">
+                <div class="challenge-card">
+                    <div class="card-header">
+                        <div class="card-icon challenge-icon">⚠</div>
+                        <h3 class="card-title">The Strategic Challenge</h3>
+                    </div>
+                    <div class="card-content">
+                        <p>Our client faced critical operational challenges that threatened their market position. Batch-to-batch variations resulted in 23% product inconsistency, unpredictable fermentation outcomes led to 15% production delays, and inefficient pasteurization cycles consumed 35% excess energy. Traditional SCADA systems couldn't adapt to the subtle microbiological and chemical variations inherent in dairy processing, resulting in reactive rather than predictive quality management.</p>
+                        <br>
+                        <p><strong>Key Pain Points:</strong></p>
+                        <ul style="margin-top: 1rem; padding-left: 1.5rem;">
+                            <li>Inconsistent product texture and flavor profiles</li>
+                            <li>Unpredictable fermentation timing and outcomes</li>
+                            <li>Energy-intensive pasteurization processes</li>
+                            <li>Reactive quality control measures</li>
+                            <li>Limited real-time process visibility</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="solution-card">
+                    <div class="card-header">
+                        <div class="card-icon solution-icon">✓</div>
+                        <h3 class="card-title">Our Digital Solution</h3>
+                    </div>
+                    <div class="card-content">
+                        <p>PraxisTwin implemented a comprehensive digital twin ecosystem that models every aspect of dairy production from molecular-level interactions to macro-process dynamics. Our solution integrates advanced IoT sensors, machine learning algorithms, and predictive analytics to create a real-time, self-optimizing production environment.</p>
+                        <br>
+                        <p><strong>Solution Components:</strong></p>
+                        <ul style="margin-top: 1rem; padding-left: 1.5rem;">
+                            <li>Real-time digital twin modeling of all processes</li>
+                            <li>Predictive fermentation optimization algorithms</li>
+                            <li>Automated pasteurization temperature control</li>
+                            <li>Quality prediction and early intervention systems</li>
+                            <li>Integrated process visualization dashboard</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Implementation Process -->
+        <section class="implementation-section">
+            <h2 class="section-title">Implementation Methodology</h2>
+            <div class="process-timeline">
+                <div class="timeline-line"></div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-number">1</div>
+                    <div class="timeline-content">
+                        <h3 class="phase-title">Discovery & Process Mapping</h3>
+                        <p class="phase-description">Comprehensive analysis of existing production systems, identification of critical control points, and mapping of data flows across 47 global facilities. Our team conducted detailed assessments of pasteurization units, fermentation tanks, and quality control laboratories to understand current operational constraints and opportunities for optimization.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-number">2</div>
+                    <div class="timeline-content">
+                        <h3 class="phase-title">IoT Infrastructure & Data Integration</h3>
+                        <p class="phase-description">Deployment of 2,847 industrial IoT sensors across critical production points, including temperature, pH, viscosity, and microbial activity monitors. Integration with existing ERP and MES systems to create a unified data ecosystem that captures real-time production variables with millisecond precision.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-number">3</div>
+                    <div class="timeline-content">
+                        <h3 class="phase-title">Digital Twin Development</h3>
+                        <p class="phase-description">Creation of physics-based mathematical models for pasteurization thermal dynamics, fermentation kinetics, and protein coagulation processes. Development of machine learning algorithms trained on 3 years of historical production data to predict optimal process parameters and quality outcomes.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-number">4</div>
+                    <div class="timeline-content">
+                        <h3 class="phase-title">AI Algorithm Training & Validation</h3>
+                        <p class="phase-description">Training of deep learning models using historical batch data, quality assessments, and environmental conditions. Validation through controlled production trials to ensure algorithm accuracy and reliability before full-scale deployment across all facilities.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-number">5</div>
+                    <div class="timeline-content">
+                        <h3 class="phase-title">System Deployment & Optimization</h3>
+                        <p class="phase-description">Phased rollout across facilities with continuous monitoring and refinement. Implementation of automated control systems that adjust process parameters in real-time based on digital twin predictions, ensuring optimal product quality and operational efficiency.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Technology Stack -->
+        <section class="technology-section">
+            <h2 class="section-title">Advanced Technology Architecture</h2>
+            <div class="tech-grid">
+                <div class="tech-category">
+                    <div class="tech-icon">🔬</div>
+                    <h3 class="tech-category-title">Digital Twin Core</h3>
+                    <ul class="tech-list">
+                        <li>Multi-physics simulation engine</li>
+                        <li>Real-time process modeling</li>
+                        <li>Predictive analytics platform</li>
+                        <li>Dynamic optimization algorithms</li>
+                    </ul>
+                </div>
+                <div class="tech-category">
+                    <div class="tech-icon">📡</div>
+                    <h3 class="tech-category-title">IoT & Sensors</h3>
+                    <ul class="tech-list">
+                        <li>Industrial temperature sensors</li>
+                        <li>pH and conductivity monitors</li>
+                        <li>Viscosity measurement systems</li>
+                        <li>Microbial activity sensors</li>
+                    </ul>
+                </div>
+                <div class="tech-category">
+                    <div class="tech-icon">🤖</div>
+                    <h3 class="tech-category-title">AI & Machine Learning</h3>
+                    <ul class="tech-list">
+                        <li>Deep neural networks</li>
+                        <li>Reinforcement learning</li>
+                        <li>Time series forecasting</li>
+                        <li>Computer vision quality control</li>
+                    </ul>
+                </div>
+                <div class="tech-category">
+                    <div class="tech-icon">⚡</div>
+                    <h3 class="tech-category-title">Process Control</h3>
+                    <ul class="tech-list">
+                        <li>Automated control systems</li>
+                        <li>SCADA integration</li>
+                        <li>Real-time optimization</li>
+                        <li>Quality assurance protocols</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Results & ROI -->
+        <section class="results-section">
+            <h2 class="section-title">Transformational Business Results</h2>
+            <p style="font-size: 1.2rem; color: #d0d0d0; margin-bottom: 2rem;">
+                The implementation delivered measurable improvements across all key performance indicators, establishing new industry benchmarks for dairy manufacturing efficiency and quality.
+            </p>
+            <div class="roi-grid">
+                <div class="roi-item">
+                    <span class="roi-value" data-target="47">0%</span>
+                    <div class="roi-label">Batch Consistency</div>
+                    <div class="roi-context">Achieved through predictive process control</div>
+                </div>
+                <div class="roi-item">
+                    <span class="roi-value" data-target="23">0%</span>
+                    <div class="roi-label">Yield Improvement</div>
+                    <div class="roi-context">Optimized fermentation and processing</div>
+                </div>
+                <div class="roi-item">
+                    <span class="roi-value" data-target="35">0%</span>
+                    <div class="roi-label">Energy Reduction</div>
+                    <div class="roi-context">Smart pasteurization optimization</div>
+                </div>
+                <div class="roi-item">
+                    <span class="roi-value" data-target="89">0%</span>
+                    <div class="roi-label">Quality Defects</div>
+                    <div class="roi-context">Eliminated through predictive control</div>
+                </div>
+                <div class="roi-item">
+                    <span class="roi-value" data-target="15">0%</span>
+                    <div class="roi-label">Time-to-Market</div>
+                    <div class="roi-context">Faster product development cycles</div>
+                </div>
+                <div class="roi-item">
+                    <span class="roi-value" data-target="12.4">$0M</span>
+                    <div class="roi-label">Annual Savings</div>
+                    <div class="roi-context">Total operational cost reduction</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Call to Action -->
+        <section class="cta-section">
+            <h2 class="cta-title">Transform Your Dairy Operations</h2>
+            <p class="cta-subtitle">
+                Discover how PraxisTwin's digital twin technology can revolutionize your dairy manufacturing processes with precision, efficiency, and unprecedented quality control.
+            </p>
+            <div class="cta-buttons">
+                <a href="#consultation" class="cta-button">
+                    Schedule Strategic Consultation
+                    <span>→</span>
+                </a>
+                <a href="#download" class="cta-button secondary">
+                    Download Full Case Study
+                    <span>📄</span>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Loading animation
+        window.addEventListener('load', function() {
+            setTimeout(() => {
+                document.getElementById('loadingOverlay').classList.add('hidden');
+            }, 1200);
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Enhanced parallax effect for background shapes
+        window.addEventListener('scroll', function() {
+            const scrolled = window.pageYOffset;
+            const shapes = document.querySelectorAll('.shape');
+            
+            shapes.forEach((shape, index) => {
+                const speed = 0.3 + (index * 0.15);
+                const rotation = scrolled * 0.05 * (index + 1);
+                const yPos = -(scrolled * speed);
+                shape.style.transform = `translateY(${yPos}px) rotate(${rotation}deg)`;
+            });
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0px)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe animated elements
+        document.querySelectorAll('.metric-card, .challenge-card, .solution-card, .timeline-content, .tech-category, .roi-item').forEach(element => {
+            element.style.opacity = '0';
+            element.style.transform = 'translateY(30px)';
+            element.style.transition = 'all 0.6s cubic-bezier(0.23, 1, 0.320, 1)';
+            observer.observe(element);
+        });
+
+        // Counter animation for metrics
+        function animateCounter(element) {
+            const target = parseFloat(element.dataset.target);
+            const isPercentage = element.textContent.includes('%');
+            const isCurrency = element.textContent.includes('$');
+            const duration = 2500;
+            const step = target / (duration / 16);
+            let current = 0;
+            
+            const timer = setInterval(() => {
+                current += step;
+                if (current >= target) {
+                    current = target;
+                    clearInterval(timer);
+                }
+                
+                let formattedValue;
+                if (isCurrency) {
+                    formattedValue = '$' + current.toFixed(1) + 'M';
+                } else if (isPercentage) {
+                    formattedValue = Math.round(current) + '%';
+                } else {
+                    formattedValue = Math.round(current).toString();
+                }
+                
+                element.textContent = formattedValue;
+            }, 16);
+        }
+
+        // Trigger counter animations when metrics become visible
+        const metricObserver = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const valueElement = entry.target.querySelector('.metric-value, .roi-value');
+                    if (valueElement && !valueElement.classList.contains('animated')) {
+                        valueElement.classList.add('animated');
+                        setTimeout(() => animateCounter(valueElement), 300);
+                    }
+                }
+            });
+        }, { threshold: 0.6 });
+
+        document.querySelectorAll('.metric-card, .roi-item').forEach(card => {
+            metricObserver.observe(card);
+        });
+
+        // Enhanced mouse parallax effect
+        document.addEventListener('mousemove', function(e) {
+            const mouseX = (e.clientX / window.innerWidth) - 0.5;
+            const mouseY = (e.clientY / window.innerHeight) - 0.5;
+            
+            const shapes = document.querySelectorAll('.shape');
+            shapes.forEach((shape, index) => {
+                const intensity = 15 + (index * 8);
+                const x = mouseX * intensity;
+                const y = mouseY * intensity;
+                
+                const currentTransform = shape.style.transform || '';
+                const baseTransform = currentTransform.replace(/translate\([^)]*\)/g, '');
+                shape.style.transform = `${baseTransform} translate(${x}px, ${y}px)`;
+            });
+        });
+
+        // Dynamic gradient effect for CTA buttons
+        document.querySelectorAll('.cta-button, .request-btn').forEach(button => {
+            button.addEventListener('mousemove', function(e) {
+                const rect = this.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                if (!this.classList.contains('secondary')) {
+                    this.style.background = `radial-gradient(circle at ${x}px ${y}px, #44a08d, #4ecdc4)`;
+                }
+            });
+            
+            button.addEventListener('mouseleave', function() {
+                if (!this.classList.contains('secondary')) {
+                    this.style.background = 'linear-gradient(135deg, #4ecdc4 0%, #44a08d 100%)';
+                }
+            });
+        });
+
+        // Staggered timeline animation
+        const timelineObserver = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const timelineItems = document.querySelectorAll('.timeline-item');
+                    timelineItems.forEach((item, index) => {
+                        setTimeout(() => {
+                            item.style.opacity = '1';
+                            item.style.transform = 'translateY(0px)';
+                        }, index * 200);
+                    });
+                }
+            });
+        }, { threshold: 0.3 });
+
+        const timeline = document.querySelector('.process-timeline');
+        if (timeline) {
+            // Initialize timeline items
+            document.querySelectorAll('.timeline-item').forEach(item => {
+                item.style.opacity = '0';
+                item.style.transform = 'translateY(50px)';
+                item.style.transition = 'all 0.6s cubic-bezier(0.23, 1, 0.320, 1)';
+            });
+            timelineObserver.observe(timeline);
+        }
+    </script>
+</body>
+</html>
