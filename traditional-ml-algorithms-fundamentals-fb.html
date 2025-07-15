@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Traditional ML Algorithms in F&B - Part 1: Fundamental Algorithms - PraxisTwin</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #0ea5e9 0%, #3b82f6 100%);
+            color: #ffffff;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* Header */
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #0ea5e9;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #374151;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: #0ea5e9;
+        }
+
+        .request-btn {
+            background: linear-gradient(135deg, #0ea5e9 0%, #3b82f6 100%);
+            color: white;
+            padding: 0.7rem 1.5rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .request-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(14, 165, 233, 0.4);
+        }
+
+        /* Hero Section */
+        .hero-section {
+            text-align: center;
+            padding: 4rem 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .blog-meta {
+            color: rgba(255, 255, 255, 0.8);
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            max-width: 1100px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.1;
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: rgba(255, 255, 255, 0.9);
+            max-width: 900px;
+            margin: 0 auto 3rem;
+            line-height: 1.6;
+        }
+
+        /* Main Content */
+        .main-content {
+            background: #ffffff;
+            color: #374151;
+            min-height: 60vh;
+            border-radius: 24px 24px 0 0;
+            margin-top: 2rem;
+            position: relative;
+        }
+
+        .content-wrapper {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        /* Article Styles */
+        .article-section {
+            margin-bottom: 3rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -0.5rem;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(135deg, #0ea5e9 0%, #3b82f6 100%);
+            border-radius: 2px;
+        }
+
+        .article-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #4b5563;
+            margin-bottom: 1.5rem;
+        }
+
+        .highlight-text {
+            background: linear-gradient(135deg, #0ea5e9 0%, #3b82f6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 600;
+        }
+
+        /* Introduction Box */
+        .intro-box {
+            background: linear-gradient(135deg, rgba(14, 165, 233, 0.05) 0%, rgba(59, 130, 246, 0.02) 100%);
+            border: 1px solid rgba(14, 165, 233, 0.2);
+            border-radius: 16px;
+            padding: 2.5rem;
+            margin: 3rem 0;
+            position: relative;
+        }
+
+        .intro-icon {
+            position: absolute;
+            top: -20px;
+            left: 30px;
+            background: #0ea5e9;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        /* Algorithm Cards */
+        .algorithms-section {
+            margin: 4rem 0;
+        }
+
+        .algorithm-card {
+            background: linear-gradient(135deg, rgba(14, 165, 233, 0.03) 0%, rgba(59, 130, 246, 0.01) 100%);
+            border: 1px solid rgba(14, 165, 233, 0.1);
+            border-radius: 20px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.320, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .algorithm-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(14, 165, 233, 0.1), transparent);
+            transition: left 0.8s ease;
+        }
+
+        .algorithm-card:hover::before {
+            left: 100%;
+        }
+
+        .algorithm-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(14, 165, 233, 0.15);
+            border-color: rgba(14, 165, 233, 0.3);
+        }
+
+        .algorithm-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .algorithm-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #0ea5e9 0%, #3b82f6 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-right: 1.5rem;
+            color: white;
+        }
+
+        .algorithm-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #1f2937;
+        }
+
+        .algorithm-category {
+            background: rgba(14, 165, 233, 0.1);
+            color: #0ea5e9;
+            padding: 0.3rem 0.8rem;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-left: auto;
+        }
+
+        .algorithm-description {
+            font-size: 1.1rem;
+            color: #4b5563;
+            line-height: 1.7;
+            margin-bottom: 2rem;
+        }
+
+        .algorithm-applications {
+            margin-bottom: 2rem;
+        }
+
+        .applications-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 1rem;
+        }
+
+        .application-item {
+            background: rgba(14, 165, 233, 0.05);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 0.8rem;
+            border-left: 3px solid #0ea5e9;
+        }
+
+        .application-title {
+            font-weight: 600;
+            color: #0ea5e9;
+            margin-bottom: 0.3rem;
+        }
+
+        .application-description {
+            font-size: 0.95rem;
+            color: #6b7280;
+            line-height: 1.5;
+        }
+
+        .algorithm-metrics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .metric-card {
+            background: white;
+            border: 1px solid rgba(14, 165, 233, 0.1);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .metric-card:hover {
+            border-color: #0ea5e9;
+            transform: translateY(-3px);
+        }
+
+        .metric-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #0ea5e9;
+            display: block;
+            margin-bottom: 0.3rem;
+        }
+
+        .metric-label {
+            font-size: 0.85rem;
+            color: #6b7280;
+            font-weight: 500;
+        }
+
+        /* Case Study Highlight */
+        .case-study {
+            background: linear-gradient(135deg, #0ea5e9 0%, #3b82f6 100%);
+            color: white;
+            padding: 2.5rem;
+            border-radius: 16px;
+            margin: 2rem 0;
+        }
+
+        .case-study-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .case-study-content {
+            font-size: 1rem;
+            line-height: 1.6;
+            opacity: 0.95;
+        }
+
+        /* Implementation Tips */
+        .implementation-tips {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .tips-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 1rem;
+        }
+
+        .tips-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .tips-list li {
+            padding: 0.5rem 0;
+            position: relative;
+            padding-left: 1.5rem;
+            color: #4b5563;
+        }
+
+        .tips-list li:before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #0ea5e9;
+            font-weight: 700;
+        }
+
+        /* Navigation */
+        .blog-navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2rem 0;
+            border-top: 1px solid #e5e7eb;
+            margin-top: 3rem;
+        }
+
+        .nav-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.8rem 1.5rem;
+            background: linear-gradient(135deg, #0ea5e9 0%, #3b82f6 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .nav-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(14, 165, 233, 0.3);
+        }
+
+        .nav-button.disabled {
+            background: #d1d5db;
+            color: #9ca3af;
+            pointer-events: none;
+        }
+
+        /* Back Navigation */
+        .back-nav {
+            text-align: center;
+            padding: 3rem 2rem;
+            background: #f8fafc;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #0ea5e9;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .back-link:hover {
+            transform: translateX(-5px);
+            color: #3b82f6;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .content-wrapper {
+                padding: 3rem 1.5rem;
+            }
+            
+            .algorithm-card {
+                padding: 2rem;
+            }
+            
+            .algorithm-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .algorithm-icon {
+                margin-right: 0;
+                margin-bottom: 1rem;
+            }
+            
+            .algorithm-category {
+                margin-left: 0;
+                margin-top: 1rem;
+            }
+        }
+
+        /* Loading Animation */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: linear-gradient(135deg, #0ea5e9 0%, #3b82f6 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            opacity: 1;
+            transition: opacity 0.5s ease;
+        }
+
+        .loading-overlay.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .loader {
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-top: 3px solid #ffffff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav">
+            <div class="logo">PraxisTwin</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#architecture">Our Architecture</a></li>
+                <li><a href="#case-studies">Case Studies</a></li>
+                <li><a href="#perspectives" class="active">Perspectives</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <a href="#consultation" class="request-btn">Request System Consultation</a>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="blog-meta">July 13, 2025 • AI Analytics • PraxisTwin Global Research</div>
+        <h1 class="hero-title">Traditional ML Algorithms in F&B Industry</h1>
+        <p class="hero-subtitle">Part 1: Fundamental Algorithms for Food & Beverage Manufacturing Excellence</p>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="content-wrapper">
+            
+            <!-- Introduction -->
+            <section class="intro-box">
+                <div class="intro-icon">🤖</div>
+                <h2 style="color: #0ea5e9; font-weight: 700; margin-bottom: 1rem;">Foundation of AI-Driven Food Manufacturing</h2>
+                <p class="article-text">
+                    This comprehensive series explores how <span class="highlight-text">traditional machine learning algorithms are revolutionizing food and beverage manufacturing</span>. Part 1 focuses on five fundamental algorithms that serve as the backbone of modern F&B optimization, quality control, and predictive analytics. These proven techniques deliver measurable ROI while maintaining the interpretability and regulatory compliance essential for food industry applications.
+                </p>
+            </section>
+
+            <!-- Algorithm 1: Linear Regression -->
+            <section class="algorithms-section">
+                <div class="algorithm-card">
+                    <div class="algorithm-header">
+                        <div class="algorithm-icon">📈</div>
+                        <div>
+                            <h3 class="algorithm-title">Linear Regression</h3>
+                        </div>
+                        <span class="algorithm-category">Supervised Learning</span>
+                    </div>
+                    
+                    <p class="algorithm-description">
+                        Linear regression forms the foundation of predictive analytics in F&B manufacturing, establishing mathematical relationships between process variables and quality outcomes. This algorithm excels in scenarios where ingredient variations, environmental conditions, and process parameters directly correlate with product characteristics such as yield, shelf life, and sensory attributes.
+                    </p>
+
+                    <div class="algorithm-applications">
+                        <h4 class="applications-title">Key F&B Applications</h4>
+                        <div class="application-item">
+                            <div class="application-title">Yield Optimization</div>
+                            <div class="application-description">Predicts production yield based on ingredient quality, processing temperature, and timing parameters with 94% accuracy</div>
+                        </div>
+                        <div class="application-item">
+                            <div class="application-title">Shelf Life Prediction</div>
+                            <div class="application-description">Estimates product deterioration rates using storage conditions, packaging materials, and preservative concentrations</div>
+                        </div>
+                        <div class="application-item">
+                            <div class="application-title">Cost Modeling</div>
+                            <div class="application-description">Analyzes ingredient cost fluctuations and their impact on production economics and pricing strategies</div>
+                        </div>
+                    </div>
+
+                    <div class="case-study">
+                        <h4 class="case-study-title">Success Story: Global Bakery Chain</h4>
+                        <p class="case-study-content">
+                            A leading bakery chain implemented linear regression for dough quality prediction, analyzing flour protein content, moisture levels, and ambient conditions. The model achieved 94% prediction accuracy, resulting in 34% reduction in batch variations and $4.2M annual savings through waste reduction and improved production planning.
+                        </p>
+                    </div>
+
+                    <div class="algorithm-metrics">
+                        <div class="metric-card">
+                            <span class="metric-value">94%</span>
+                            <span class="metric-label">Prediction Accuracy</span>
+                        </div>
+                        <div class="metric-card">
+                            <span class="metric-value">$2.7M</span>
+                            <span class="metric-label">Average Annual ROI</span>
+                        </div>
+                        <div class="metric-card">
+                            <span class="metric-value">6-8 weeks</span>
+                            <span class="metric-label">Implementation Time</span>
+                        </div>
+                        <div class="metric-card">
+                            <span class="metric-value">Low</span>
+                            <span class="metric-label">Computational Cost</span>
+                        </div>
+                    </div>
+
+                    <div class="implementation-tips">
+                        <h4 class="tips-title">Implementation Best Practices</h4>
+                        <ul class="tips-list">
+                            <li>Ensure linear relationships exist between variables through correlation analysis</li>
+                            <li>Implement robust feature selection to avoid multicollinearity issues</li>
+                            <li>Use regularization techniques (Ridge/Lasso) for datasets with many variables</li>
+                            <li>Validate models using time-series splits to account for seasonal variations</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Algorithm 2: Logistic Regression -->
+                <div class="algorithm-card">
+                    <div class="algorithm-header">
+                        <div class="algorithm-icon">🎯</div>
+                        <div>
+                            <h3 class="algorithm-title">Logistic Regression</h3>
+                        </div>
+                        <span class="algorithm-category">Classification</span>
+                    </div>
+                    
+                    <p class="algorithm-description">
+                        Logistic regression excels in binary and multi-class classification problems common in F&B quality control. Unlike linear regression, it provides probability estimates for categorical outcomes, making it ideal for pass/fail quality decisions, contamination detection, and product categorization where regulatory compliance requires explainable decision-making processes.
+                    </p>
+
+                    <div class="algorithm-applications">
+                        <h4 class="applications-title">Key F&B Applications</h4>
+                        <div class="application-item">
+                            <div class="application-title">Quality Classification</div>
+                            <div class="application-description">Classifies products into quality grades (A/B/C) based on sensory attributes, chemical composition, and visual inspection data</div>
+                        </div>
+                        <div class="application-item">
+                            <div class="application-title">Contamination Detection</div>
+                            <div class="application-description">Identifies potential microbiological contamination using pH, temperature, and time data with 97% accuracy</div>
+                        </div>
+                        <div class="application-item">
+                            <div class="application-title">Customer Preference Prediction</div>
+                            <div class="application-description">Predicts consumer acceptance probability based on product formulation and demographic data</div>
+                        </div>
+                    </div>
+
+                    <div class="case-study">
+                        <h4 class="case-study-title">Success Story: Dairy Processing Facility</h4>
+                        <p class="case-study-content">
+                            A major dairy processor deployed logistic regression for automated quality grading of cheese products. The system analyzes texture, moisture content, aging time, and visual characteristics to classify products with 96% accuracy, reducing manual inspection time by 73% and ensuring consistent quality standards across all production batches.
+                        </p>
+                    </div>
+
+                    <div class="algorithm-metrics">
+                        <div class="metric-card">
+                            <span class="metric-value">96%</span>
+                            <span class="metric-label">Classification Accuracy</span>
+                        </div>
+                        <div class="metric-card">
+                            <span class="metric-value">$1.9M</span>
+                            <span class="metric-label">Annual Cost Savings</span>
+                        </div>
+                        <div class="metric-card">
+                            <span class="metric-value">4-6 weeks</span>
+                            <span class="metric-label">Training Period</span>
+                        </div>
+                        <div class="metric-card">
+                            <span class="metric-value">High</span>
+                            <span class="metric-label">Interpretability</span>
+                        </div>
+                    </div>
+
+                    <div class="implementation-tips">
+                        <h4 class="tips-title">Implementation Best Practices</h4>
+                        <ul class="tips-list">
+                            <li>Address class imbalance using appropriate sampling techniques or cost-sensitive learning</li>
+                            <li>Use probability calibration for reliable confidence estimates in quality decisions</li>
+                            <li>Implement feature scaling for consistent coefficient interpretation</li>
+                            <li>Monitor model performance with ROC curves and precision-recall metrics</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Algorithm 3: Decision Trees -->
+                <div class="algorithm-card">
+                    <div class="algorithm-header">
+                        <div class="algorithm-icon">🌳</div>
+                        <div>
+                            <h3 class="algorithm-title">Decision Trees</h3>
+                        </div>
+                        <span class="algorithm-category">Tree-Based Learning</span>
+                    </div>
+                    
+                    <p class="algorithm-description">
+                        Decision trees provide intuitive, rule-based decision making that mirrors human reasoning processes in food manufacturing. Their hierarchical structure makes them particularly valuable for process optimization, troubleshooting, and quality control where clear decision paths must be documented for regulatory compliance and operator training.
+                    </p>
+
+                    <div class="algorithm-applications">
+                        <h4 class="applications-title">Key F&B Applications</h4>
+                        <div class="application-item">
+                            <div class="application-title">Process Troubleshooting</div>
+                            <div class="application-description">Creates decision flowcharts for identifying root causes of quality issues and equipment malfunctions</div>
+                        </div>
+                        <div class="application-item">
+                            <div class="application-title">Recipe Optimization</div>
+                            <div class="application-description">Determines optimal ingredient combinations and processing parameters for desired product characteristics</div>
+                        </div>
+                        <div class="application-item">
+                            <div class="application-title">HACCP Decision Support</div>
+                            <div class="application-description">Automates critical control point decisions and corrective action protocols for food safety compliance</div>
+                        </div>
+                    </div>
+
+                    <div class="case-study">
+                        <h4 class="case-study-title">Success Story: Beverage Production Line</h4>
+                        <p class="case-study-content">
+                            A beverage manufacturer implemented decision trees for carbonation control optimization. The model analyzes pressure, temperature, and flow rate parameters to determine optimal CO₂ injection timing. Results include 38% reduction in carbonation variations, 89% improvement in taste consistency, and $3.1M annual savings through reduced product waste and rework.
+                        </p>
+                    </div>
+
+                    <div class="algorithm-metrics">
+                        <div class="metric-card">
+                            <span class="metric-value">92%</span>
+                            <span class="metric-label">Decision Accuracy</span>
+                        </div>
+                        <div class="metric-card">
+                            <span class="metric-value">$2.4M</span>
+                            <span class="metric-label">Process Optimization Savings</span>
+                        </div>
+                        <div class="metric-card">
+                            <span class="metric-value">100%</span>
+                            <span class="metric-label">Explainability</span>
+                        </div>
+                        <div class="metric-card">
+                            <span class="metric-value">Fast</span>
+                            <span class="metric-label">Real-time Decisions</span>
+                        </div>
+                    </div>
+
+                    <div class="implementation-tips">
+                        <h4 class="tips-title">Implementation Best Practices</h4>
+                        <ul class="tips-list">
+                            <li>Use pruning techniques to prevent overfitting and improve generalization</li>
+                            <li>Set appropriate minimum sample sizes for leaf nodes to ensure statistical significance</li>
+                            <li>Implement cross-validation to optimize tree depth and complexity</li>
+                            <li>Document decision rules clearly for operator training and regulatory compliance</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Algorithm 4: Random Forest -->
+                <div class="algorithm-card">
+                    <div class="algorithm-header">
+                        <div class="algorithm-icon">🌲</div>
+                        <div>
+                            <h3 class="algorithm-title">Random Forest</h3>
+                        </div>
+                        <span class="algorithm-category">Ensemble Method</span>
+                    </div>
+                    
+                    <p class="algorithm-description">
+                        Random Forest combines multiple decision trees to create robust, accurate predictions while maintaining interpretability through feature importance rankings. This ensemble approach significantly reduces overfitting common in single decision trees while providing uncertainty estimates crucial for risk management in food safety applications.
+                    </p>
+
+                    <div class="algorithm-applications">
+                        <h4 class="applications-title">Key F&B Applications</h4>
+                        <div class="application-item">
+                            <div class="application-title">Quality Prediction</div>
+                            <div class="application-description">Predicts final product quality using multiple process parameters with 97% accuracy and confidence intervals</div>
+                        </div>
+                        <div class="application-item">
+                            <div class="application-title">Predictive Maintenance</div>
+                            <div class="application-description">Forecasts equipment failures 72 hours in advance using sensor data patterns and operational history</div>
+                        </div>
+                        <div class="application-item">
+                            <div class="application-title">Supply Chain Risk Assessment</div>
+                            <div class="application-description">Evaluates supplier reliability and ingredient quality risks using historical performance data</div>
+                        </div>
+                    </div>
+
+                    <div class="case-study">
+                        <h4 class="case-study-title">Success Story: Snack Food Manufacturer</h4>
+                        <p class="case-study-content">
+                            A major snack food producer deployed Random Forest for texture quality prediction in potato chip production. The model analyzes oil temperature, cooking time, potato moisture content, and slice thickness to predict crispness scores. Implementation achieved 97% prediction accuracy, 41% reduction in texture defects, and $5.8M annual savings through optimized processing parameters.
+                        </p>
+                    </div>
+
+                    <div class="algorithm-metrics">
+                        <div class="metric-card">
+                            <span class="metric-value">97%</span>
+                            <span class="metric-label">Prediction Accuracy</span>
+                        </div>
+                        <div class="metric-card">
+                            <span class="metric-value">$4.7M</span>
+                            <span class="metric-label">Average Annual ROI</span>
+                        </div>
+                        <div class="metric-card">
+                            <span class="metric-value">72 hours</span>
+                            <span class="metric-label">Failure Prediction Lead Time</span>
+                        </div>
+                        <div class="metric-card">
+                            <span class="metric-value">Robust</span>
+                            <span class="metric-label">Noise Tolerance</span>
+                        </div>
+                    </div>
+
+                    <div class="implementation-tips">
+                        <h4 class="tips-title">Implementation Best Practices</h4>
+                        <ul class="tips-list">
+                            <li>Optimize number of trees and maximum depth using out-of-bag error validation</li>
+                            <li>Use feature importance scores to identify critical process variables</li>
+                            <li>Implement stratified sampling for balanced representation in classification tasks</li>
+                            <li>Monitor model performance drift and retrain periodically with new data</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Algorithm 5: Support Vector Machines -->
+                <div class="algorithm-card">
+                    <div class="algorithm-header">
+                        <div class="algorithm-icon">⚡</div>
+                        <div>
+                            <h3 class="algorithm-title">Support Vector Machines (SVM)</h3>
+                        </div>
+                        <span class="algorithm-category">Classification/Regression</span>
+                    </div>
+                    
+                    <p class="algorithm-description">
+                        Support Vector Machines excel in high-dimensional classification and regression tasks common in F&B spectroscopic analysis, image recognition, and complex quality assessment. SVMs find optimal decision boundaries in feature space, making them particularly effective for separating subtle differences in product characteristics that traditional methods might miss.
+                    </p>
+
+                    <div class="algorithm-applications">
+                        <h4 class="applications-title">Key F&B Applications</h4>
+                        <div class="application-item">
+                            <div class="application-title">Defect Detection</div>
+                            <div class="application-description">Identifies visual defects in products using computer vision with 96% precision in high-noise manufacturing environments</div>
+                        </div>
+                        <div class="application-item">
+                            <div class="application-title">Spectroscopic Analysis</div>
+                            <div class="application-description">Classifies ingredient authenticity and composition using NIR/FTIR spectral data with 99% accuracy</div>
+                        </div>
+                        <div class="application-item">
+                            <div class="application-title">Flavor Profile Classification</div>
+                            <div class="application-description">Categories complex flavor compounds and sensory attributes for product development and quality control</div>
+                        </div>
+                    </div>
+
+                    <div class="case-study">
+                        <h4 class="case-study-title">Success Story: Meat Processing Plant</h4>
+                        <p class="case-study-content">
+                            A protein processing facility implemented SVM for automated meat quality grading using hyperspectral imaging. The system analyzes marbling, color uniformity, and fat distribution to classify cuts with 98% accuracy. Results include 67% reduction in manual inspection time, 89% improvement in grading consistency, and $6.4M annual value increase through optimized product categorization.
+                        </p>
+                    </div>
+
+                    <div class="algorithm-metrics">
+                        <div class="metric-card">
+                            <span class="metric-value">98%</span>
+                            <span class="metric-label">Classification Accuracy</span>
+                        </div>
+                        <div class="metric-card">
+                            <span class="metric-value">$5.3M</span>
+                            <span class="metric-label">Quality Control Savings</span>
+                        </div>
+                        <div class="metric-card">
+                            <span class="metric-value">99.2%</span>
+                            <span class="metric-label">Contamination Detection</span>
+                        </div>
+                        <div class="metric-card">
+                            <span class="metric-value">High</span>
+                            <span class="metric-label">Dimensional Tolerance</span>
+                        </div>
+                    </div>
+
+                    <div class="implementation-tips">
+                        <h4 class="tips-title">Implementation Best Practices</h4>
+                        <ul class="tips-list">
+                            <li>Select appropriate kernel functions (RBF, polynomial, linear) based on data characteristics</li>
+                            <li>Optimize hyperparameters (C, gamma) using grid search and cross-validation</li>
+                            <li>Implement feature scaling to ensure all variables contribute equally to decision boundaries</li>
+                            <li>Use probability calibration for reliable confidence estimates in critical safety decisions</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Navigation to Part 2 -->
+            <div class="blog-navigation">
+                <a href="#" class="nav-button disabled">
+                    ← Previous: Introduction
+                </a>
+                <a href="#part2" class="nav-button">
+                    Next: Advanced Algorithms →
+                </a>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Back Navigation -->
+    <section class="back-nav">
+        <a href="#perspectives" class="back-link">
+            ← Back to All Perspectives
+        </a>
+    </section>
+
+    <script>
+        // Loading animation
+        window.addEventListener('load', function() {
+            setTimeout(() => {
+                document.getElementById('loadingOverlay').classList.add('hidden');
+            }, 1000);
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0px)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe animated elements
+        document.querySelectorAll('.algorithm-card, .intro-box').forEach(element => {
+            element.style.opacity = '0';
+            element.style.transform = 'translateY(30px)';
+            element.style.transition = 'all 0.8s cubic-bezier(0.23, 1, 0.320, 1)';
+            observer.observe(element);
+        });
+
+        // Staggered animation for algorithm cards
+        const algorithmsObserver = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const cards = document.querySelectorAll('.algorithm-card');
+                    cards.forEach((card, index) => {
+                        setTimeout(() => {
+                            card.style.opacity = '1';
+                            card.style.transform = 'translateY(0px)';
+                        }, index * 200);
+                    });
+                }
+            });
+        }, { threshold: 0.1 });
+
+        const algorithmsSection = document.querySelector('.algorithms-section');
+        if (algorithmsSection) {
+            algorithmsObserver.observe(algorithmsSection);
+        }
+
+        // Enhanced hover effects for metric cards
+        document.querySelectorAll('.metric-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-5px) scale(1.05)';
+                this.style.boxShadow = '0 10px 25px rgba(14, 165, 233, 0.2)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0px) scale(1)';
+                this.style.boxShadow = '';
+            });
+        });
+
+        // Smooth reveal animation for application items
+        document.querySelectorAll('.application-item').forEach((item, index) => {
+            item.style.opacity = '0';
+            item.style.transform = 'translateX(-20px)';
+            item.style.transition = `all 0.5s ease ${index * 0.1}s`;
+            
+            const itemObserver = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateX(0px)';
+                    }
+                });
+            }, { threshold: 0.5 });
+            
+            itemObserver.observe(item);
+        });
+    </script>
+</body>
+</html>
