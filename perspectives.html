@@ -141,28 +141,6 @@
             padding: 80px 0;
         }
 
-        /* Loading State */
-        .loading {
-            text-align: center;
-            padding: 60px 0;
-            color: var(--neutral-600);
-        }
-
-        .spinner {
-            border: 3px solid var(--neutral-200);
-            border-top: 3px solid var(--primary-blue);
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 20px;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
         .blog-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
@@ -219,6 +197,17 @@
             opacity: 1;
         }
 
+        .blog-category {
+            display: inline-block;
+            background: var(--primary-blue-light);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            margin-bottom: 12px;
+        }
+
         .blog-date {
             font-size: 0.85rem;
             color: var(--neutral-400);
@@ -255,24 +244,6 @@
             transform: translateX(4px);
         }
 
-        .error-message {
-            text-align: center;
-            padding: 60px 0;
-            color: var(--neutral-600);
-        }
-
-        /* Blog Categories */
-        .blog-category {
-            display: inline-block;
-            background: var(--primary-blue-light);
-            color: white;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 500;
-            margin-bottom: 12px;
-        }
-
         /* Footer */
         footer {
             background: var(--neutral-900);
@@ -301,15 +272,15 @@
     <!-- Navigation -->
     <nav>
         <div class="nav-container">
-            <a href="../index.html" class="logo">PraxisTwin</a>
+            <a href="index.html" class="logo">PraxisTwin</a>
             <ul class="nav-links">
-                <li><a href="../index.html">Home</a></li>
-                <li><a href="../index.html#platform">Our Architecture</a></li>
-                <li><a href="../index.html#cases">Case Studies</a></li>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#platform">Our Architecture</a></li>
+                <li><a href="index.html#cases">Case Studies</a></li>
                 <li><a href="perspectives.html" class="active">Perspectives</a></li>
-                <li><a href="../index.html#contact">Contact</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
             </ul>
-            <a href="../index.html#contact" class="cta-btn">Request System Consultation</a>
+            <a href="index.html#contact" class="cta-btn">Request System Consultation</a>
         </div>
     </nav>
 
@@ -324,19 +295,64 @@
     <!-- Main Content -->
     <main class="main">
         <div class="container">
-            <!-- Loading State -->
-            <div id="loading" class="loading">
-                <div class="spinner"></div>
-                <p>Loading insights...</p>
-            </div>
-
-            <!-- Error State -->
-            <div id="error" class="error-message" style="display: none;">
-                <p>Unable to load articles. Please try again later.</p>
-            </div>
-
             <!-- Blog Grid -->
-            <div id="blogGrid" class="blog-grid"></div>
+            <div class="blog-grid">
+                
+                <!-- Blog Card 1 -->
+                <article class="blog-card">
+                    <div class="blog-category">AI Analytics</div>
+                    <div class="blog-date">July 13, 2025</div>
+                    <h2 class="blog-title">Predictive Analytics & Forecasting Revolution</h2>
+                    <p class="blog-excerpt">Transforming F&B Operations Through Advanced Time Series Analysis, Demand Forecasting, and Predictive Maintenance. Discover how predictive analytics achieves average ROI of $21.3M annually while delivering 92% prediction accuracy.</p>
+                    <a href="perspectives/predictive-analytics-revolution.html" class="blog-cta">Read Full Article →</a>
+                </article>
+
+                <!-- Blog Card 2 -->
+                <article class="blog-card">
+                    <div class="blog-category">Sustainability AI</div>
+                    <div class="blog-date">July 14, 2025</div>
+                    <h2 class="blog-title">Sustainability AI & Green Manufacturing Revolution</h2>
+                    <p class="blog-excerpt">Transforming F&B Operations Through AI-Driven Energy Optimization, Waste Reduction, and Carbon Intelligence for ESG Excellence. Learn how sustainability AI achieves 58% carbon footprint reduction and 73% waste elimination.</p>
+                    <a href="perspectives/sustainability-ai-green-manufacturing.html" class="blog-cta">Read Full Article →</a>
+                </article>
+
+                <!-- Blog Card 3 -->
+                <article class="blog-card">
+                    <div class="blog-category">R&D Strategy</div>
+                    <div class="blog-date">July 14, 2025</div>
+                    <h2 class="blog-title">Architecting the Future: Using Market Intelligence to Steer R&D</h2>
+                    <p class="blog-excerpt">How the PraxisTwin Insight Engine transforms R&D from technology-pushed to market-pulled innovation, de-risking investments and accelerating time-to-market in processing industries.</p>
+                    <a href="perspectives/rd-market-intelligence.html" class="blog-cta">Read Full Article →</a>
+                </article>
+
+                <!-- Blog Card 4 -->
+                <article class="blog-card">
+                    <div class="blog-category">Market Intelligence</div>
+                    <div class="blog-date">July 14, 2025</div>
+                    <h2 class="blog-title">Navigating the Now: How the Insight Engine Creates Tangible Value</h2>
+                    <p class="blog-excerpt">Transforming passive data into active strategic assets that drive immediate commercial value in F&B and bioprocessing industries through real-time market intelligence and 4.2x ROI improvement.</p>
+                    <a href="perspectives/market-intelligence-rd.html" class="blog-cta">Read Full Article →</a>
+                </article>
+
+                <!-- Blog Card 5 -->
+                <article class="blog-card">
+                    <div class="blog-category">Digital Transformation</div>
+                    <div class="blog-date">July 13, 2025</div>
+                    <h2 class="blog-title">The Harvest of the Future: Digital Twins in Vertical Farming</h2>
+                    <p class="blog-excerpt">How vertical farming powered by intelligent digital twin technology is transforming food production, delivering unprecedented yields while using a fraction of traditional agriculture's resources and environmental footprint.</p>
+                    <a href="perspectives/vertical-farming-digital-twins.html" class="blog-cta">Read Full Article →</a>
+                </article>
+
+                <!-- Blog Card 6 -->
+                <article class="blog-card">
+                    <div class="blog-category">Machine Learning</div>
+                    <div class="blog-date">July 13, 2025</div>
+                    <h2 class="blog-title">Traditional ML Algorithms in F&B Industry: Fundamental Algorithms for Excellence</h2>
+                    <p class="blog-excerpt">While industry buzz gravitates towards complex neural networks, the true foundation of intelligent manufacturing lies in mastering traditional ML algorithms. Discover the proven algorithms driving operational excellence.</p>
+                    <a href="perspectives/traditional-ml-algorithms.html" class="blog-cta">Read Full Article →</a>
+                </article>
+
+            </div>
         </div>
     </main>
 
@@ -346,190 +362,5 @@
             <p>&copy; 2025 PraxisTwin. Turning industrial strategy into operational reality.</p>
         </div>
     </footer>
-
-    <script>
-        // Blog metadata mapping
-        const blogMetadata = {
-            'predictive-analytics-revolution.html': {
-                title: 'Predictive Analytics & Forecasting Revolution',
-                category: 'AI Analytics',
-                excerpt: 'Transforming F&B Operations Through Advanced Time Series Analysis, Demand Forecasting, and Predictive Maintenance',
-                date: 'July 13, 2025'
-            },
-            'sustainability-ai-green-manufacturing.html': {
-                title: 'Sustainability AI & Green Manufacturing Revolution',
-                category: 'Sustainability AI',
-                excerpt: 'Transforming F&B Operations Through AI-Driven Energy Optimization, Waste Reduction, and Carbon Intelligence for ESG Excellence',
-                date: 'July 14, 2025'
-            },
-            'rd-market-intelligence.html': {
-                title: 'Architecting the Future: Using Market Intelligence to Steer R&D',
-                category: 'R&D Strategy',
-                excerpt: 'How the PraxisTwin Insight Engine transforms R&D from technology-pushed to market-pulled innovation, de-risking investments and accelerating time-to-market',
-                date: 'July 14, 2025'
-            },
-            'market-intelligence-rd.html': {
-                title: 'Navigating the Now: How the Insight Engine Creates Tangible Value',
-                category: 'Market Intelligence',
-                excerpt: 'Transforming passive data into active strategic assets that drive immediate commercial value in F&B and bioprocessing industries through real-time market intelligence',
-                date: 'July 14, 2025'
-            }
-        };
-
-        // 自动加载博客文章
-        async function loadBlogPosts() {
-            try {
-                // GitHub API URL to get files from perspectives folder
-                const apiUrl = 'https://api.github.com/repos/fantancy1978/praxistwin-website/contents/perspectives';
-                
-                const response = await fetch(apiUrl);
-                const files = await response.json();
-                
-                // Filter HTML files and exclude perspectives.html
-                const htmlFiles = files.filter(file => 
-                    file.name.endsWith('.html') && 
-                    file.type === 'file' && 
-                    file.name !== 'perspectives.html'
-                );
-
-                // Sort files by name (newest first)
-                htmlFiles.sort((a, b) => b.name.localeCompare(a.name));
-
-                const blogGrid = document.getElementById('blogGrid');
-                const loading = document.getElementById('loading');
-                const errorDiv = document.getElementById('error');
-
-                if (htmlFiles.length === 0) {
-                    loading.style.display = 'none';
-                    errorDiv.style.display = 'block';
-                    errorDiv.innerHTML = '<p>No articles found.</p>';
-                    return;
-                }
-
-                // Create blog cards from HTML files
-                htmlFiles.forEach(file => {
-                    const metadata = blogMetadata[file.name];
-                    if (metadata) {
-                        const blogCard = createBlogCard(
-                            metadata.title,
-                            metadata.excerpt,
-                            metadata.category,
-                            metadata.date,
-                            file.name
-                        );
-                        blogGrid.appendChild(blogCard);
-                    } else {
-                        // Fallback for files not in metadata
-                        const title = file.name.replace('.html', '').replace(/-/g, ' ');
-                        const blogCard = createBlogCard(
-                            title,
-                            'Expert insights on digital transformation and operational excellence.',
-                            'Industry Insights',
-                            'July 2025',
-                            file.name
-                        );
-                        blogGrid.appendChild(blogCard);
-                    }
-                });
-
-                // If we also want to show .md files, load them too
-                await loadMarkdownFiles(files, blogGrid);
-
-                // Hide loading
-                loading.style.display = 'none';
-
-            } catch (error) {
-                console.error('Error loading blog posts:', error);
-                document.getElementById('loading').style.display = 'none';
-                document.getElementById('error').style.display = 'block';
-            }
-        }
-
-        // Load markdown files as well (optional)
-        async function loadMarkdownFiles(files, blogGrid) {
-            const markdownFiles = files.filter(file => 
-                file.name.endsWith('.md') && file.type === 'file'
-            );
-
-            for (const file of markdownFiles) {
-                try {
-                    const contentResponse = await fetch(file.download_url);
-                    const content = await contentResponse.text();
-                    
-                    // Parse markdown content
-                    const title = extractTitle(content);
-                    const excerpt = extractExcerpt(content);
-                    const category = extractCategory(content);
-                    const date = extractDate(content);
-                    const htmlFileName = file.name.replace('.md', '.html');
-                    
-                    // Only create card if HTML version doesn't exist
-                    if (!blogMetadata[htmlFileName]) {
-                        const blogCard = createBlogCard(title, excerpt, category, date, htmlFileName);
-                        blogGrid.appendChild(blogCard);
-                    }
-                } catch (error) {
-                    console.warn(`Failed to load content for ${file.name}:`, error);
-                }
-            }
-        }
-
-        // Extract title from markdown content
-        function extractTitle(content) {
-            const titleMatch = content.match(/^#\s+(.+)$/m);
-            return titleMatch ? titleMatch[1] : 'Untitled Article';
-        }
-
-        // Extract category from markdown content
-        function extractCategory(content) {
-            const categoryMatch = content.match(/\*\*Category:\*\*\s*(.+)/i) || 
-                                 content.match(/\*\*Theme:\*\*\s*(.+)/i);
-            return categoryMatch ? categoryMatch[1] : 'Industry Insights';
-        }
-
-        // Extract date from markdown content
-        function extractDate(content) {
-            const dateMatch = content.match(/\*\*Date:\*\*\s*(.+)/i) ||
-                             content.match(/Published on:\s*(.+)/i);
-            return dateMatch ? dateMatch[1] : 'July 2025';
-        }
-
-        // Extract excerpt from markdown content
-        function extractExcerpt(content) {
-            // Remove title and get first paragraph
-            const withoutTitle = content.replace(/^#\s+.+$/m, '').trim();
-            const firstParagraph = withoutTitle.split('\n\n')[0];
-            
-            // Clean up markdown formatting
-            const cleaned = firstParagraph
-                .replace(/\*\*(.+?)\*\*/g, '$1') // Remove bold
-                .replace(/\*(.+?)\*/g, '$1')     // Remove italic
-                .replace(/`(.+?)`/g, '$1')       // Remove code
-                .replace(/\[(.+?)\]\(.+?\)/g, '$1') // Remove links
-                .trim();
-            
-            // Truncate if too long
-            return cleaned.length > 200 ? cleaned.substring(0, 200) + '...' : cleaned;
-        }
-
-        // Create blog card element
-        function createBlogCard(title, excerpt, category, date, htmlFileName) {
-            const article = document.createElement('article');
-            article.className = 'blog-card';
-            
-            article.innerHTML = `
-                <div class="blog-category">${category}</div>
-                <div class="blog-date">${date}</div>
-                <h2 class="blog-title">${title}</h2>
-                <p class="blog-excerpt">${excerpt}</p>
-                <a href="${htmlFileName}" class="blog-cta">Read Full Article →</a>
-            `;
-            
-            return article;
-        }
-
-        // Load blogs when page loads
-        document.addEventListener('DOMContentLoaded', loadBlogPosts);
-    </script>
 </body>
 </html>
