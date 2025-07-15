@@ -1,0 +1,1080 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Traditional ML Algorithms in F&B - Part 2: Advanced Algorithms - PraxisTwin</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #1e40af 0%, #0ea5e9 100%);
+            color: #ffffff;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* Header */
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1e40af;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #374151;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: #1e40af;
+        }
+
+        .request-btn {
+            background: linear-gradient(135deg, #1e40af 0%, #0ea5e9 100%);
+            color: white;
+            padding: 0.7rem 1.5rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .request-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(30, 64, 175, 0.4);
+        }
+
+        /* Hero Section */
+        .hero-section {
+            text-align: center;
+            padding: 4rem 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .blog-meta {
+            color: rgba(255, 255, 255, 0.8);
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            max-width: 1100px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.1;
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: rgba(255, 255, 255, 0.9);
+            max-width: 900px;
+            margin: 0 auto 3rem;
+            line-height: 1.6;
+        }
+
+        /* Main Content */
+        .main-content {
+            background: #ffffff;
+            color: #374151;
+            min-height: 60vh;
+            border-radius: 24px 24px 0 0;
+            margin-top: 2rem;
+            position: relative;
+        }
+
+        .content-wrapper {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        /* Article Styles */
+        .article-section {
+            margin-bottom: 3rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -0.5rem;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(135deg, #1e40af 0%, #0ea5e9 100%);
+            border-radius: 2px;
+        }
+
+        .article-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #4b5563;
+            margin-bottom: 1.5rem;
+        }
+
+        .highlight-text {
+            background: linear-gradient(135deg, #1e40af 0%, #0ea5e9 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 600;
+        }
+
+        /* Introduction Box */
+        .intro-box {
+            background: linear-gradient(135deg, rgba(30, 64, 175, 0.05) 0%, rgba(14, 165, 233, 0.02) 100%);
+            border: 1px solid rgba(30, 64, 175, 0.2);
+            border-radius: 16px;
+            padding: 2.5rem;
+            margin: 3rem 0;
+            position: relative;
+        }
+
+        .intro-icon {
+            position: absolute;
+            top: -20px;
+            left: 30px;
+            background: #1e40af;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        /* Algorithm Cards */
+        .algorithms-section {
+            margin: 4rem 0;
+        }
+
+        .algorithm-card {
+            background: linear-gradient(135deg, rgba(30, 64, 175, 0.03) 0%, rgba(14, 165, 233, 0.01) 100%);
+            border: 1px solid rgba(30, 64, 175, 0.1);
+            border-radius: 20px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.320, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .algorithm-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(30, 64, 175, 0.1), transparent);
+            transition: left 0.8s ease;
+        }
+
+        .algorithm-card:hover::before {
+            left: 100%;
+        }
+
+        .algorithm-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(30, 64, 175, 0.15);
+            border-color: rgba(30, 64, 175, 0.3);
+        }
+
+        .algorithm-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .algorithm-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #1e40af 0%, #0ea5e9 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-right: 1.5rem;
+            color: white;
+        }
+
+        .algorithm-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #1f2937;
+        }
+
+        .algorithm-category {
+            background: rgba(30, 64, 175, 0.1);
+            color: #1e40af;
+            padding: 0.3rem 0.8rem;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-left: auto;
+        }
+
+        .algorithm-description {
+            font-size: 1.1rem;
+            color: #4b5563;
+            line-height: 1.7;
+            margin-bottom: 2rem;
+        }
+
+        .algorithm-applications {
+            margin-bottom: 2rem;
+        }
+
+        .applications-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 1rem;
+        }
+
+        .application-item {
+            background: rgba(30, 64, 175, 0.05);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 0.8rem;
+            border-left: 3px solid #1e40af;
+        }
+
+        .application-title {
+            font-weight: 600;
+            color: #1e40af;
+            margin-bottom: 0.3rem;
+        }
+
+        .application-description {
+            font-size: 0.95rem;
+            color: #6b7280;
+            line-height: 1.5;
+        }
+
+        .algorithm-metrics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .metric-card {
+            background: white;
+            border: 1px solid rgba(30, 64, 175, 0.1);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .metric-card:hover {
+            border-color: #1e40af;
+            transform: translateY(-3px);
+        }
+
+        .metric-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #1e40af;
+            display: block;
+            margin-bottom: 0.3rem;
+        }
+
+        .metric-label {
+            font-size: 0.85rem;
+            color: #6b7280;
+            font-weight: 500;
+        }
+
+        /* Case Study Highlight */
+        .case-study {
+            background: linear-gradient(135deg, #1e40af 0%, #0ea5e9 100%);
+            color: white;
+            padding: 2.5rem;
+            border-radius: 16px;
+            margin: 2rem 0;
+        }
+
+        .case-study-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .case-study-content {
+            font-size: 1rem;
+            line-height: 1.6;
+            opacity: 0.95;
+        }
+
+        /* Implementation Tips */
+        .implementation-tips {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .tips-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 1rem;
+        }
+
+        .tips-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .tips-list li {
+            padding: 0.5rem 0;
+            position: relative;
+            padding-left: 1.5rem;
+            color: #4b5563;
+        }
+
+        .tips-list li:before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #1e40af;
+            font-weight: 700;
+        }
+
+        /* Advanced Algorithm Callout */
+        .advanced-callout {
+            background: #f0f9ff;
+            border: 2px solid #1e40af;
+            border-radius: 16px;
+            padding: 2.5rem;
+            margin: 3rem 0;
+            position: relative;
+        }
+
+        .callout-icon {
+            position: absolute;
+            top: -20px;
+            left: 30px;
+            background: #1e40af;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .callout-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #1e40af;
+            margin-bottom: 1rem;
+        }
+
+        .callout-text {
+            color: #374151;
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+
+        /* Navigation */
+        .blog-navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2rem 0;
+            border-top: 1px solid #e5e7eb;
+            margin-top: 3rem;
+        }
+
+        .nav-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.8rem 1.5rem;
+            background: linear-gradient(135deg, #1e40af 0%, #0ea5e9 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .nav-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(30, 64, 175, 0.3);
+        }
+
+        .nav-button.disabled {
+            background: #d1d5db;
+            color: #9ca3af;
+            pointer-events: none;
+        }
+
+        /* Back Navigation */
+        .back-nav {
+            text-align: center;
+            padding: 3rem 2rem;
+            background: #f8fafc;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #1e40af;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .back-link:hover {
+            transform: translateX(-5px);
+            color: #0ea5e9;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .content-wrapper {
+                padding: 3rem 1.5rem;
+            }
+            
+            .algorithm-card {
+                padding: 2rem;
+            }
+            
+            .algorithm-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .algorithm-icon {
+                margin-right: 0;
+                margin-bottom: 1rem;
+            }
+            
+            .algorithm-category {
+                margin-left: 0;
+                margin-top: 1rem;
+            }
+        }
+
+        /* Loading Animation */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: linear-gradient(135deg, #1e40af 0%, #0ea5e9 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            opacity: 1;
+            transition: opacity 0.5s ease;
+        }
+
+        .loading-overlay.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .loader {
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-top: 3px solid #ffffff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav">
+            <div class="logo">PraxisTwin</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#architecture">Our Architecture</a></li>
+                <li><a href="#case-studies">Case Studies</a></li>
+                <li><a href="#perspectives" class="active">Perspectives</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <a href="#consultation" class="request-btn">Request System Consultation</a>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="blog-meta">July 13, 2025 • AI Analytics • PraxisTwin Global Research</div>
+        <h1 class="hero-title">Traditional ML Algorithms in F&B Industry</h1>
+        <p class="hero-subtitle">Part 2: Advanced Algorithms for Strategic Optimization and Business Intelligence</p>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="content-wrapper">
+            
+            <!-- Introduction -->
+            <section class="intro-box">
+                <div class="intro-icon">🚀</div>
+                <h2 style="color: #1e40af; font-weight: 700; margin-bottom: 1rem;">Advanced Analytics for Competitive Advantage</h2>
+                <p class="article-text">
+                    Part 2 explores <span class="highlight-text">five advanced traditional machine learning algorithms</span> that unlock strategic insights and operational optimization opportunities in food and beverage manufacturing. These sophisticated techniques address complex business challenges including market segmentation, demand forecasting, pattern recognition, and dimensionality reduction while maintaining the reliability and interpretability essential for F&B industry applications.
+                </p>
+            </section>
+
+            <!-- Advanced Algorithms Callout -->
+            <section class="advanced-callout">
+                <div class="callout-icon">⚡</div>
+                <h3 class="callout-title">Why Advanced Traditional Algorithms Matter</h3>
+                <p class="callout-text">
+                    <strong>While fundamental algorithms solve operational problems, advanced algorithms unlock strategic opportunities.</strong> These sophisticated techniques enable F&B manufacturers to discover hidden patterns in consumer behavior, optimize complex supply chains, predict market trends, and reduce data complexity for better decision-making. Unlike deep learning, they maintain full transparency while delivering enterprise-scale insights.
+                </p>
+            </section>
+
+            <!-- Algorithm 1: K-Means Clustering -->
+            <section class="algorithms-section">
+                <div class="algorithm-card">
+                    <div class="algorithm-header">
+                        <div class="algorithm-icon">🔗</div>
+                        <div>
+                            <h3 class="algorithm-title">K-Means Clustering</h3>
+                        </div>
+                        <span class="algorithm-category">Unsupervised Learning</span>
+                    </div>
+                    
+                    <p class="algorithm-description">
+                        K-Means clustering discovers hidden patterns and natural groupings in F&B data without requiring labeled examples. This unsupervised algorithm segments customers, products, processes, and suppliers into meaningful clusters, enabling targeted strategies and optimization opportunities that might otherwise remain invisible in complex datasets.
+                    </p>
+
+                    <div class="algorithm-applications">
+                        <h4 class="applications-title">Key F&B Applications</h4>
+                        <div class="application-item">
+                            <div class="application-title">Customer Segmentation</div>
+                            <div class="application-description">Identifies 5-7 distinct consumer preference groups enabling targeted product development and marketing strategies with 23% revenue growth</div>
+                        </div>
+                        <div class="application-item">
+                            <div class="application-title">Product Portfolio Optimization</div>
+                            <div class="application-description">Groups products by performance characteristics to optimize manufacturing schedules and inventory management strategies</div>
+                        </div>
+                        <div class="application-item">
+                            <div class="application-title">Supplier Risk Assessment</div>
+                            <div class="application-description">Segments suppliers based on quality, reliability, and cost metrics for strategic sourcing decisions and risk mitigation</div>
+                        </div>
+                    </div>
+
+                    <div class="case-study">
+                        <h4 class="case-study-title">Success Story: International Beverage Company</h4>
+                        <p class="case-study-content">
+                            A global beverage manufacturer deployed K-Means clustering to segment their customer base across 47 markets. The analysis revealed six distinct consumer preference clusters, enabling targeted product formulations for each segment. Results include 23% increase in market penetration, 31% improvement in customer satisfaction scores, and $18.4M additional revenue through precision marketing and product optimization.
+                        </p>
+                    </div>
+
+                    <div class="algorithm-metrics">
+                        <div class="metric-card">
+                            <span class="metric-value">23%</span>
+                            <span class="metric-label">Revenue Growth</span>
+                        </div>
+                        <div class="metric-card">
+                            <span class="metric-value">31%</span>
+                            <span class="metric-label">Cost Reduction</span>
+                        </div>
+                        <div class="metric-card">
+                            <span class="metric-value">5-7</span>
+                            <span class="metric-label">Optimal Clusters</span>
+                        </div>
+                        <div class="metric-card">
+                            <span class="metric-value">Fast</span>
+                            <span class="metric-label">Convergence Speed</span>
+                        </div>
+                    </div>
+
+                    <div class="implementation-tips">
+                        <h4 class="tips-title">Implementation Best Practices</h4>
+                        <ul class="tips-list">
+                            <li>Use elbow method and silhouette analysis to determine optimal number of clusters</li>
+                            <li>Standardize features to prevent scale bias in distance calculations</li>
+                            <li>Initialize centroids using K-means++ for more stable results</li>
+                            <li>Validate cluster stability through multiple runs with different initializations</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Algorithm 2: XGBoost -->
+                <div class="algorithm-card">
+                    <div class="algorithm-header">
+                        <div class="algorithm-icon">⚡</div>
+                        <div>
+                            <h3 class="algorithm-title">XGBoost (Gradient Boosting)</h3>
+                        </div>
+                        <span class="algorithm-category">Ensemble Method</span>
+                    </div>
+                    
+                    <p class="algorithm-description">
+                        XGBoost represents the pinnacle of traditional machine learning performance, combining multiple weak learners into powerful predictive models. This gradient boosting framework excels in complex prediction tasks where high accuracy is paramount, making it ideal for demand forecasting, quality prediction, and multi-variable optimization in F&B operations.
+                    </p>
+
+                    <div class="algorithm-applications">
+                        <h4 class="applications-title">Key F&B Applications</h4>
+                        <div class="application-item">
+                            <div class="application-title">Demand Forecasting</div>
+                            <div class="application-description">Predicts product demand across 200+ SKUs with 94% accuracy, considering seasonality, promotions, and market trends</div>
+                        </div>
+                        <div class="application-item">
+                            <div class="application-title">Quality Score Prediction</div>
+                            <div class="application-description">Combines multiple quality indicators into comprehensive scores for final product assessment and grading</div>
+                        </div>
+                        <div class="application-item">
+                            <div class="application-title">Supply Chain Optimization</div>
+                            <div class="application-description">Multi-objective optimization for inventory management, considering cost, freshness, and stockout risk factors</div>
+                        </div>
+                    </div>
+
+                    <div class="case-study">
+                        <h4 class="case-study-title">Success Story: Multinational Food Processor</h4>
+                        <p class="case-study-content">
+                            A major food processing company implemented XGBoost for demand forecasting across their global supply chain. The model analyzes historical sales, weather patterns, promotional activities, and economic indicators to predict demand 12 weeks ahead. Implementation achieved 94% forecasting accuracy, 67% reduction in stockouts, $14.7M inventory cost savings, and 89% improvement in supply chain efficiency.
+                        </p>
+                    </div>
+
+                    <div class="algorithm-metrics">
+                        <div class="metric-card">
+                            <span class="metric-value">94%</span>
+                            <span class="metric-label">Forecasting Accuracy</span>
+                        </div>
+                        <div class="metric-card">
+                            <span class="metric-value">$6.8M</span>
+                            <span class="metric-label">Average Annual ROI</span>
+                        </div>
+                        <div class="metric-card">
+                            <span class="metric-value">15x</span>
+                            <span class="metric-label">Faster Than Neural Nets</span>
+                        </div>
+                        <div class="metric-card">
+                            <span class="metric-value">SHAP</span>
+                            <span class="metric-label">Feature Importance</span>
+                        </div>
+                    </div>
+
+                    <div class="implementation-tips">
+                        <h4 class="tips-title">Implementation Best Practices</h4>
+                        <ul class="tips-list">
+                            <li>Use early stopping to prevent overfitting and optimize training time</li>
+                            <li>Tune hyperparameters systematically using Bayesian optimization</li>
+                            <li>Implement feature importance analysis with SHAP values for interpretability</li>
+                            <li>Use cross-validation with time-aware splits for temporal data</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Algorithm 3: Naive Bayes -->
+                <div class="algorithm-card">
+                    <div class="algorithm-header">
+                        <div class="algorithm-icon">🎲</div>
+                        <div>
+                            <h3 class="algorithm-title">Naive Bayes</h3>
+                        </div>
+                        <span class="algorithm-category">Probabilistic Classifier</span>
+                    </div>
+                    
+                    <p class="algorithm-description">
+                        Naive Bayes provides probabilistic classification based on Bayes' theorem, offering transparent probability estimates essential for risk management in food safety. Despite its "naive" assumption of feature independence, this algorithm consistently delivers reliable performance in text analysis, contamination detection, and quality assessment applications.
+                    </p>
+
+                    <div class="algorithm-applications">
+                        <h4 class="applications-title">Key F&B Applications</h4>
+                        <div class="application-item">
+                            <div class="application-title">Food Safety Classification</div>
+                            <div class="application-description">Classifies potential contamination risks based on environmental conditions, storage time, and processing parameters with 96% accuracy</div>
+                        </div>
+                        <div class="application-item">
+                            <div class="application-title">Sensory Analysis</div>
+                            <div class="application-description">Predicts consumer acceptance based on sensory attributes, demographics, and preference patterns</div>
+                        </div>
+                        <div class="application-item">
+                            <div class="application-title">Regulatory Compliance</div>
+                            <div class="application-description">Assesses compliance probability for regulatory submissions using ingredient lists and processing methods</div>
+                        </div>
+                    </div>
+
+                    <div class="case-study">
+                        <h4 class="case-study-title">Success Story: Frozen Food Manufacturer</h4>
+                        <p class="case-study-content">
+                            A frozen food company deployed Naive Bayes for automated food safety risk assessment. The system analyzes temperature logs, storage duration, and packaging integrity to classify contamination risk levels. Results include 96% accuracy in risk prediction, 78% reduction in false alarms, $4.9M savings through prevented recalls, and 100% regulatory compliance over 18 months of operation.
+                        </p>
+                    </div>
+
+                    <div class="algorithm-metrics">
+                        <div class="metric-card">
+                            <span class="metric-value">96%</span>
+                            <span class="metric-label">Safety Classification</span>
+                        </div>
+                        <div class="metric-card">
+                            <span class="metric-value">$3.2M</span>
+                            <span class="metric-label">Risk Prevention Savings</span>
+                        </div>
+                        <div class="metric-card">
+                            <span class="metric-value">Real-time</span>
+                            <span class="metric-label">Processing Speed</span>
+                        </div>
+                        <div class="metric-card">
+                            <span class="metric-value">100%</span>
+                            <span class="metric-label">Regulatory Compliance</span>
+                        </div>
+                    </div>
+
+                    <div class="implementation-tips">
+                        <h4 class="tips-title">Implementation Best Practices</h4>
+                        <ul class="tips-list">
+                            <li>Handle zero probabilities using Laplace smoothing or additive smoothing</li>
+                            <li>Use Gaussian Naive Bayes for continuous features, Multinomial for discrete counts</li>
+                            <li>Validate independence assumptions through correlation analysis</li>
+                            <li>Implement probability calibration for reliable confidence estimates</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Algorithm 4: Association Rules Learning -->
+                <div class="algorithm-card">
+                    <div class="algorithm-header">
+                        <div class="algorithm-icon">🛒</div>
+                        <div>
+                            <h3 class="algorithm-title">Association Rules Learning</h3>
+                        </div>
+                        <span class="algorithm-category">Pattern Discovery</span>
+                    </div>
+                    
+                    <p class="algorithm-description">
+                        Association rules learning uncovers hidden relationships between products, ingredients, and consumer behaviors through market basket analysis. This algorithm identifies patterns like "customers who buy X also buy Y" with statistical confidence measures, enabling strategic product placement, cross-selling opportunities, and supply chain optimization.
+                    </p>
+
+                    <div class="algorithm-applications">
+                        <h4 class="applications-title">Key F&B Applications</h4>
+                        <div class="application-item">
+                            <div class="application-title">Market Basket Analysis</div>
+                            <div class="application-description">Discovers product purchase relationships with 89% confidence, enabling strategic product placement and promotional strategies</div>
+                        </div>
+                        <div class="application-item">
+                            <div class="application-title">Menu Engineering</div>
+                            <div class="application-description">Identifies complementary food pairings and optimal menu combinations for restaurants and food service operations</div>
+                        </div>
+                        <div class="application-item">
+                            <div class="application-title">Ingredient Interaction Analysis</div>
+                            <div class="application-description">Reveals ingredient combinations that enhance flavor, shelf life, or nutritional value in product development</div>
+                        </div>
+                    </div>
+
+                    <div class="case-study">
+                        <h4 class="case-study-title">Success Story: Retail Grocery Chain</h4>
+                        <p class="case-study-content">
+                            A major grocery retailer implemented association rules learning across 847 stores to optimize product placement and promotions. The analysis revealed 2,347 significant product associations, leading to strategic merchandising changes. Results include 18% increase in average transaction value, 27% improvement in cross-selling effectiveness, $22.6M additional revenue, and 34% increase in customer basket size.
+                        </p>
+                    </div>
+
+                    <div class="algorithm-metrics">
+                        <div class="metric-card">
+                            <span class="metric-value">89%</span>
+                            <span class="metric-label">Association Confidence</span>
+                        </div>
+                        <div class="metric-card">
+                            <span class="metric-value">18%</span>
+                            <span class="metric-label">Transaction Value Increase</span>
+                        </div>
+                        <div class="metric-card">
+                            <span class="metric-value">2,347</span>
+                            <span class="metric-label">Rules Discovered</span>
+                        </div>
+                        <div class="metric-card">
+                            <span class="metric-value">Scalable</span>
+                            <span class="metric-label">Large Dataset Handling</span>
+                        </div>
+                    </div>
+
+                    <div class="implementation-tips">
+                        <h4 class="tips-title">Implementation Best Practices</h4>
+                        <ul class="tips-list">
+                            <li>Set appropriate minimum support and confidence thresholds to filter meaningful rules</li>
+                            <li>Use lift and conviction metrics to identify truly interesting associations</li>
+                            <li>Implement efficient algorithms like Apriori or FP-Growth for large datasets</li>
+                            <li>Validate rules across different time periods to ensure stability</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Algorithm 5: Principal Component Analysis -->
+                <div class="algorithm-card">
+                    <div class="algorithm-header">
+                        <div class="algorithm-icon">📊</div>
+                        <div>
+                            <h3 class="algorithm-title">Principal Component Analysis (PCA)</h3>
+                        </div>
+                        <span class="algorithm-category">Dimensionality Reduction</span>
+                    </div>
+                    
+                    <p class="algorithm-description">
+                        Principal Component Analysis reduces complex, high-dimensional data into meaningful, lower-dimensional representations while preserving essential information. PCA is invaluable for spectroscopic analysis, sensory evaluation, and quality assessment where hundreds of variables must be condensed into actionable insights for decision-making.
+                    </p>
+
+                    <div class="algorithm-applications">
+                        <h4 class="applications-title">Key F&B Applications</h4>
+                        <div class="application-item">
+                            <div class="application-title">Spectroscopic Data Analysis</div>
+                            <div class="application-description">Reduces NIR/FTIR spectral data from 1,000+ wavelengths to 5-10 principal components for ingredient authentication</div>
+                        </div>
+                        <div class="application-item">
+                            <div class="application-title">Sensory Profile Optimization</div>
+                            <div class="application-description">Simplifies complex sensory attributes into key flavor dimensions for product development and quality control</div>
+                        </div>
+                        <div class="application-item">
+                            <div class="application-title">Process Monitoring</div>
+                            <div class="application-description">Combines multiple process variables into composite indicators for real-time manufacturing oversight</div>
+                        </div>
+                    </div>
+
+                    <div class="case-study">
+                        <h4 class="case-study-title">Success Story: Wine Quality Assessment</h4>
+                        <p class="case-study-content">
+                            A premium winery implemented PCA for comprehensive wine quality assessment, analyzing 47 chemical and sensory variables. The technique reduced complexity to 6 principal components explaining 89% of quality variance. Implementation enabled automated quality grading with 94% accuracy, 73% reduction in analysis time, $2.8M annual savings through optimized quality control, and enhanced product consistency across vintages.
+                        </p>
+                    </div>
+
+                    <div class="algorithm-metrics">
+                        <div class="metric-card">
+                            <span class="metric-value">89%</span>
+                            <span class="metric-label">Variance Explained</span>
+                        </div>
+                        <div class="metric-card">
+                            <span class="metric-value">73%</span>
+                            <span class="metric-label">Analysis Time Reduction</span>
+                        </div>
+                        <div class="metric-card">
+                            <span class="metric-value">5-10</span>
+                            <span class="metric-label">Key Components</span>
+                        </div>
+                        <div class="metric-card">
+                            <span class="metric-value">No Labels</span>
+                            <span class="metric-label">Unsupervised Method</span>
+                        </div>
+                    </div>
+
+                    <div class="implementation-tips">
+                        <h4 class="tips-title">Implementation Best Practices</h4>
+                        <ul class="tips-list">
+                            <li>Standardize variables before PCA to ensure equal contribution</li>
+                            <li>Use scree plots and cumulative variance to determine optimal component count</li>
+                            <li>Interpret component loadings to understand which variables drive each dimension</li>
+                            <li>Validate results with independent datasets to ensure generalizability</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Navigation to Part 1 -->
+            <div class="blog-navigation">
+                <a href="#part1" class="nav-button">
+                    ← Previous: Fundamental Algorithms
+                </a>
+                <a href="#" class="nav-button disabled">
+                    Next: Deep Learning Series →
+                </a>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Back Navigation -->
+    <section class="back-nav">
+        <a href="#perspectives" class="back-link">
+            ← Back to All Perspectives
+        </a>
+    </section>
+
+    <script>
+        // Loading animation
+        window.addEventListener('load', function() {
+            setTimeout(() => {
+                document.getElementById('loadingOverlay').classList.add('hidden');
+            }, 1000);
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0px)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe animated elements
+        document.querySelectorAll('.algorithm-card, .intro-box, .advanced-callout').forEach(element => {
+            element.style.opacity = '0';
+            element.style.transform = 'translateY(30px)';
+            element.style.transition = 'all 0.8s cubic-bezier(0.23, 1, 0.320, 1)';
+            observer.observe(element);
+        });
+
+        // Staggered animation for algorithm cards
+        const algorithmsObserver = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const cards = document.querySelectorAll('.algorithm-card');
+                    cards.forEach((card, index) => {
+                        setTimeout(() => {
+                            card.style.opacity = '1';
+                            card.style.transform = 'translateY(0px)';
+                        }, index * 200);
+                    });
+                }
+            });
+        }, { threshold: 0.1 });
+
+        const algorithmsSection = document.querySelector('.algorithms-section');
+        if (algorithmsSection) {
+            algorithmsObserver.observe(algorithmsSection);
+        }
+
+        // Enhanced hover effects for metric cards
+        document.querySelectorAll('.metric-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-5px) scale(1.05)';
+                this.style.boxShadow = '0 10px 25px rgba(30, 64, 175, 0.2)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0px) scale(1)';
+                this.style.boxShadow = '';
+            });
+        });
+
+        // Smooth reveal animation for application items
+        document.querySelectorAll('.application-item').forEach((item, index) => {
+            item.style.opacity = '0';
+            item.style.transform = 'translateX(-20px)';
+            item.style.transition = `all 0.5s ease ${index * 0.1}s`;
+            
+            const itemObserver = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateX(0px)';
+                    }
+                });
+            }, { threshold: 0.5 });
+            
+            itemObserver.observe(item);
+        });
+
+        // Special animation for advanced callout
+        const calloutObserver = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'scale(1)';
+                }
+            });
+        }, { threshold: 0.3 });
+
+        const advancedCallout = document.querySelector('.advanced-callout');
+        if (advancedCallout) {
+            advancedCallout.style.opacity = '0';
+            advancedCallout.style.transform = 'scale(0.95)';
+            advancedCallout.style.transition = 'all 0.6s cubic-bezier(0.23, 1, 0.320, 1)';
+            calloutObserver.observe(advancedCallout);
+        }
+    </script>
+</body>
+</html>
