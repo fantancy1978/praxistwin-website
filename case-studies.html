@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PraxisTwin Case Studies | Real-World Digital Transformation Success</title>
+    <title>Case Studies | PraxisTwin Success Stories</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -20,11 +20,9 @@
             --neutral-300: #8B949E;
             --neutral-200: #C9D1D9;
             --neutral-100: #F0F6FC;
-            --success-green: #238636;
             --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
             --shadow-md: 0 4px 12px rgba(0,0,0,0.1);
             --shadow-lg: 0 8px 24px rgba(0,0,0,0.12);
-            --shadow-xl: 0 16px 40px rgba(0,0,0,0.15);
         }
 
         * {
@@ -155,90 +153,111 @@
             box-shadow: var(--shadow-lg);
         }
 
-        /* Header Section */
-        .header-section {
+        /* Header */
+        .header {
             background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-blue-dark) 100%);
             color: white;
             padding: 120px 0 80px;
             text-align: center;
-            position: relative;
-            overflow: hidden;
         }
 
-        .header-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: 
-                radial-gradient(circle at 20% 30%, rgba(255,255,255,0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 70%, rgba(255,255,255,0.05) 0%, transparent 50%);
-        }
-
-        .header-content {
-            position: relative;
-            z-index: 2;
-        }
-
-        .header-title {
-            font-size: 3.5rem;
+        .header h1 {
+            font-size: 3rem;
             font-weight: 300;
-            margin-bottom: 24px;
-            line-height: 1.1;
+            margin-bottom: 20px;
         }
 
-        .header-subtitle {
-            font-size: 1.3rem;
+        .header p {
+            font-size: 1.2rem;
             opacity: 0.9;
-            max-width: 900px;
+            max-width: 800px;
             margin: 0 auto;
-            line-height: 1.6;
         }
 
         /* Main Content */
-        .main-content {
+        .main {
             padding: 80px 0;
         }
 
-        /* Articles Grid */
-        .articles-grid {
+        /* Loading State */
+        .loading {
+            text-align: center;
+            padding: 60px 0;
+            color: var(--neutral-600);
+        }
+
+        .spinner {
+            border: 3px solid var(--neutral-200);
+            border-top: 3px solid var(--primary-blue);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .case-studies-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 32px;
             margin-top: 40px;
         }
 
-        .article-card {
+        .case-study-card {
             background: white;
-            border-radius: 16px;
-            padding: 40px;
-            box-shadow: var(--shadow-sm);
-            transition: all 0.3s ease;
             border: 1px solid var(--neutral-200);
+            padding: 32px;
+            border-radius: 16px;
+            transition: all 0.3s ease;
             position: relative;
+            overflow: hidden;
             opacity: 0;
+            transform: translateY(20px);
             animation: fadeInUp 0.6s ease forwards;
         }
 
+        .case-study-card:nth-child(1) { animation-delay: 0.1s; }
+        .case-study-card:nth-child(2) { animation-delay: 0.2s; }
+        .case-study-card:nth-child(3) { animation-delay: 0.3s; }
+        .case-study-card:nth-child(4) { animation-delay: 0.4s; }
+        .case-study-card:nth-child(5) { animation-delay: 0.5s; }
+        .case-study-card:nth-child(6) { animation-delay: 0.6s; }
+
         @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
 
-        .article-card:hover {
-            transform: translateY(-4px);
-            box-shadow: var(--shadow-lg);
+        .case-study-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-blue-dark) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
 
-        .article-category {
+        .case-study-card:hover {
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-8px);
+            border-color: var(--primary-blue-light);
+        }
+
+        .case-study-card:hover::before {
+            opacity: 1;
+        }
+
+        .case-study-category {
             display: inline-block;
             background: var(--primary-blue-light);
             color: white;
@@ -249,93 +268,63 @@
             margin-bottom: 12px;
         }
 
-        .article-date {
-            color: var(--neutral-500);
-            font-size: 0.9rem;
+        .case-study-date {
+            font-size: 0.85rem;
+            color: var(--neutral-400);
             margin-bottom: 16px;
-            font-weight: 500;
         }
 
-        .article-title {
-            font-size: 1.5rem;
+        .case-study-title {
+            font-size: 1.4rem;
             font-weight: 600;
             color: var(--neutral-900);
             margin-bottom: 16px;
             line-height: 1.4;
         }
 
-        .article-excerpt {
+        .case-study-excerpt {
             color: var(--neutral-600);
-            line-height: 1.6;
+            line-height: 1.7;
             margin-bottom: 24px;
-            font-size: 1rem;
         }
 
-        .read-more-btn {
+        .case-study-cta {
             color: var(--primary-blue);
             text-decoration: none;
             font-weight: 600;
-            font-size: 1rem;
+            font-size: 0.95rem;
+            transition: all 0.2s ease;
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            transition: all 0.2s ease;
         }
 
-        .read-more-btn:hover {
+        .case-study-cta:hover {
             color: var(--primary-blue-dark);
             transform: translateX(4px);
         }
 
-        .read-more-btn::after {
+        .case-study-cta::after {
             content: '→';
             transition: transform 0.2s ease;
         }
 
-        .read-more-btn:hover::after {
+        .case-study-cta:hover::after {
             transform: translateX(4px);
+        }
+
+        .error-message {
+            text-align: center;
+            padding: 60px 0;
+            color: var(--neutral-600);
         }
 
         /* Footer */
         footer {
             background: var(--neutral-900);
             color: var(--neutral-200);
-            padding: 60px 0;
+            padding: 40px 0;
             text-align: center;
-        }
-
-        .footer-content {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .footer-title {
-            font-size: 1.5rem;
-            font-weight: 600;
-            margin-bottom: 16px;
-            color: white;
-        }
-
-        .footer-description {
-            line-height: 1.6;
-            margin-bottom: 30px;
-            opacity: 0.8;
-        }
-
-        .footer-cta {
-            display: inline-block;
-            background: var(--primary-blue);
-            color: white;
-            padding: 14px 28px;
-            border-radius: 12px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-
-        .footer-cta:hover {
-            background: var(--primary-blue-dark);
-            transform: translateY(-2px);
         }
 
         /* Responsive */
@@ -343,32 +332,13 @@
             .nav-links {
                 display: none;
             }
-
-            .header-title {
-                font-size: 2.5rem;
+            
+            .header h1 {
+                font-size: 2rem;
             }
-
-            .header-subtitle {
-                font-size: 1.1rem;
-            }
-
-            .articles-grid {
+            
+            .case-studies-grid {
                 grid-template-columns: 1fr;
-                gap: 20px;
-            }
-
-            .article-card {
-                padding: 30px 24px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .container {
-                padding: 0 16px;
-            }
-
-            .article-card {
-                padding: 24px 20px;
             }
         }
     </style>
@@ -397,99 +367,236 @@
         </div>
     </nav>
 
-    <!-- Header Section -->
-    <section class="header-section">
+    <!-- Header -->
+    <section class="header">
         <div class="container">
-            <div class="header-content">
-                <h1 class="header-title">Case Studies</h1>
-                <p class="header-subtitle">Real-world applications showcasing how digital transformation, AI analytics, and operational excellence drive measurable results across manufacturing, agriculture, and bioprocessing industries.</p>
-            </div>
+            <h1>PraxisTwin Success Stories</h1>
+            <p>Real-world implementations showcasing how our complete PraxisTwin system delivers measurable results across strategy, R&D, and operational execution for global manufacturers.</p>
         </div>
     </section>
 
     <!-- Main Content -->
-    <main class="main-content">
+    <main class="main">
         <div class="container">
-            <!-- Articles Grid -->
-            <div class="articles-grid">
-                
-                <!-- Case Study 1 - Digital Twin Dairy Producer (需要创建HTML文件) -->
-                <article class="article-card">
-                    <div class="article-category">Digital Twin</div>
-                    <div class="article-date">July 15, 2025</div>
-                    <h2 class="article-title">How a Digital Twin Reduced Downtime by 40% for a Dairy Powder Producer</h2>
-                    <p class="article-excerpt">A leading dairy cooperative specializing in high-value infant formula powder was experiencing frequent, unscheduled production shutdowns due to excessive wall build-up in their spray drying towers. Discover how digital twin technology transformed their operations.</p>
-                    <a href="case-studies/digital-twin-reduces-downtime-for-dairy-powder-producer.html" class="read-more-btn">Read Full Article</a>
-                </article>
-
-                <!-- Case Study 2 - Digital Precision Dairy (实际存在) -->
-                <article class="article-card">
-                    <div class="article-category">Digital Twin</div>
-                    <div class="article-date">July 15, 2025</div>
-                    <h2 class="article-title">Digital Precision in Dairy: How Twinning Optimizes Everything from Yogurt to Cheese</h2>
-                    <p class="article-excerpt">The dairy industry is a delicate dance of science and tradition. From the precise temperature control of pasteurization to the complex microbial art of fermentation, success hinges on consistency and precision across every process step.</p>
-                    <a href="case-studies/digital-precision-in-dairy-processing.html" class="read-more-btn">Read Full Article</a>
-                </article>
-
-                <!-- Case Study 3 - AI Analytics Spray Drying (需要创建HTML文件) -->
-                <article class="article-card">
-                    <div class="article-category">AI Analytics</div>
-                    <div class="article-date">July 15, 2025</div>
-                    <h2 class="article-title">Beyond Automation: Creating Value with AI Analytics in Spray Drying</h2>
-                    <p class="article-excerpt">The spray dryer is a cornerstone of the modern food industry, responsible for creating everything from milk powder and instant coffee to encapsulated flavors and protein isolates. However, it's also one of the most complex operations to optimize.</p>
-                    <a href="case-studies/value-of-ai-analytics-in-spray-drying.html" class="read-more-btn">Read Full Article</a>
-                </article>
-
-                <!-- Case Study 4 - Product Development -->
-                <article class="article-card">
-                    <div class="article-category">Product Development</div>
-                    <div class="article-date">July 14, 2025</div>
-                    <h2 class="article-title">From Concept to Consumer: Accelerating New Product Development</h2>
-                    <p class="article-excerpt">Transforming product development cycles from 18 months to 8 months through AI-driven formulation optimization and predictive market analysis. Learn how leading F&B companies accelerate innovation while reducing development costs by 45%.</p>
-                    <a href="case-studies/from-concept-to-consumer-product-development.html" class="read-more-btn">Read Full Article</a>
-                </article>
-
-                <!-- Case Study 5 - Supply Chain Resilience -->
-                <article class="article-card">
-                    <div class="article-category">Supply Chain</div>
-                    <div class="article-date">July 14, 2025</div>
-                    <h2 class="article-title">Antifragile Supply Chain: Predictive Twinning for Resilience</h2>
-                    <p class="article-excerpt">Building supply chain resilience through predictive digital twins that anticipate disruptions and automatically implement mitigation strategies. Discover how global food manufacturers achieve 90% reduction in supply chain risks.</p>
-                    <a href="case-studies/antifragile-supply-chain-predictive-twinning.html" class="read-more-btn">Read Full Article</a>
-                </article>
-
-                <!-- Case Study 6 - Quality Control -->
-                <article class="article-card">
-                    <div class="article-category">Quality Control</div>
-                    <div class="article-date">July 13, 2025</div>
-                    <h2 class="article-title">Consistency and Safety in Protein Processing</h2>
-                    <p class="article-excerpt">Implementing AI-driven quality control systems that ensure consistent protein processing while maintaining the highest safety standards. Learn how predictive analytics eliminates quality variations and reduces waste by 45%.</p>
-                    <a href="case-studies/consistency-and-safety-in-protein-processing.html" class="read-more-btn">Read Full Article</a>
-                </article>
-
+            <!-- Loading State -->
+            <div id="loading" class="loading">
+                <div class="spinner"></div>
+                <p>Loading success stories...</p>
             </div>
+
+            <!-- Error State -->
+            <div id="error" class="error-message" style="display: none;">
+                <p>Unable to load case studies. Please try again later.</p>
+            </div>
+
+            <!-- Case Studies Grid -->
+            <div id="caseStudiesGrid" class="case-studies-grid"></div>
         </div>
     </main>
 
     <!-- Footer -->
     <footer>
         <div class="container">
-            <div class="footer-content">
-                <h3 class="footer-title">Explore More Success Stories</h3>
-                <p class="footer-description">Discover how industry leaders achieve transformational results through digital innovation. Connect with our team to explore similar opportunities for your organization.</p>
-                <a href="index.html#contact" class="footer-cta">Discuss Your Use Case</a>
-            </div>
+            <p>&copy; 2025 PraxisTwin. Turning industrial strategy into operational reality.</p>
         </div>
     </footer>
 
     <script>
-        // Add staggered animation delays to cards
-        document.addEventListener('DOMContentLoaded', function() {
-            const cards = document.querySelectorAll('.article-card');
-            cards.forEach((card, index) => {
-                card.style.animationDelay = `${index * 0.1}s`;
-            });
-        });
+        // Case study metadata for better categorization
+        const caseStudyMetadata = {
+            'digital-twin-reduces-downtime-for-dairy-powder-producer': {
+                category: 'Digital Twin',
+                date: 'July 15, 2025'
+            },
+            'digital-precision-in-dairy-processing': {
+                category: 'Digital Twin',
+                date: 'July 15, 2025'
+            },
+            'value-of-ai-analytics-in-spray-drying': {
+                category: 'AI Analytics',
+                date: 'July 15, 2025'
+            },
+            'antifragile-supply-chain-predictive-twinning': {
+                category: 'Supply Chain',
+                date: 'July 14, 2025'
+            },
+            'from-concept-to-consumer-product-development': {
+                category: 'Product Development',
+                date: 'July 14, 2025'
+            },
+            'consistency-and-safety-in-protein-processing': {
+                category: 'Quality Control',
+                date: 'July 13, 2025'
+            }
+        };
+
+        // 自动加载case studies
+        async function loadCaseStudies() {
+            try {
+                // GitHub API URL to get files from case-studies folder
+                const apiUrl = 'https://api.github.com/repos/fantancy1978/praxistwin-website/contents/case-studies';
+                
+                const response = await fetch(apiUrl);
+                const files = await response.json();
+                
+                // Filter .md and .html files, prioritize .md files for content parsing
+                const relevantFiles = files.filter(file => 
+                    (file.name.endsWith('.md') || file.name.endsWith('.html')) && 
+                    file.type === 'file' &&
+                    file.name !== 'case-studies.html' // Exclude the main page
+                );
+
+                // Group files by base name to avoid duplicates
+                const fileGroups = new Map();
+                relevantFiles.forEach(file => {
+                    const baseName = file.name.replace(/\.(md|html)$/, '');
+                    if (!fileGroups.has(baseName)) {
+                        fileGroups.set(baseName, { md: null, html: null });
+                    }
+                    
+                    if (file.name.endsWith('.md')) {
+                        fileGroups.get(baseName).md = file;
+                    } else {
+                        fileGroups.get(baseName).html = file;
+                    }
+                });
+
+                // Sort by base name (newest first)
+                const sortedGroups = Array.from(fileGroups.entries()).sort((a, b) => b[0].localeCompare(a[0]));
+
+                const caseStudiesGrid = document.getElementById('caseStudiesGrid');
+                const loading = document.getElementById('loading');
+                const errorDiv = document.getElementById('error');
+
+                if (sortedGroups.length === 0) {
+                    loading.style.display = 'none';
+                    errorDiv.style.display = 'block';
+                    errorDiv.innerHTML = '<p>No case studies found.</p>';
+                    return;
+                }
+
+                // Load content for each file group
+                for (const [baseName, files] of sortedGroups) {
+                    try {
+                        // Prefer .md files for content parsing, but ensure we have an .html file to link to
+                        const sourceFile = files.md || files.html;
+                        const linkTarget = files.html ? `case-studies/${files.html.name}` : `case-studies/${baseName}.html`;
+                        
+                        if (sourceFile && sourceFile.name.endsWith('.md')) {
+                            // Parse markdown content
+                            const contentResponse = await fetch(sourceFile.download_url);
+                            const content = await contentResponse.text();
+                            
+                            const title = extractTitle(content);
+                            const excerpt = extractExcerpt(content);
+                            const category = getCategory(baseName);
+                            const date = getDate(baseName);
+                            
+                            // Create case study card
+                            const caseStudyCard = createCaseStudyCard(title, excerpt, category, date, linkTarget);
+                            caseStudiesGrid.appendChild(caseStudyCard);
+                        } else if (sourceFile && sourceFile.name.endsWith('.html')) {
+                            // For HTML files, create a basic card using metadata
+                            const title = formatTitle(baseName);
+                            const excerpt = 'Discover how digital transformation delivers measurable results in this case study.';
+                            const category = getCategory(baseName);
+                            const date = getDate(baseName);
+                            
+                            const caseStudyCard = createCaseStudyCard(title, excerpt, category, date, linkTarget);
+                            caseStudiesGrid.appendChild(caseStudyCard);
+                        }
+                    } catch (error) {
+                        console.warn(`Failed to load content for ${baseName}:`, error);
+                    }
+                }
+
+                // Hide loading
+                loading.style.display = 'none';
+
+            } catch (error) {
+                console.error('Error loading case studies:', error);
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('error').style.display = 'block';
+            }
+        }
+
+        // Extract title from markdown content
+        function extractTitle(content) {
+            const titleMatch = content.match(/^#\s+(.+)$/m);
+            return titleMatch ? titleMatch[1] : 'Untitled Case Study';
+        }
+
+        // Extract excerpt from markdown content
+        function extractExcerpt(content) {
+            // Remove title and get first paragraph
+            const withoutTitle = content.replace(/^#\s+.+$/m, '').trim();
+            const firstParagraph = withoutTitle.split('\n\n')[0];
+            
+            // Clean up markdown formatting
+            const cleaned = firstParagraph
+                .replace(/\*\*(.+?)\*\*/g, '$1') // Remove bold
+                .replace(/\*(.+?)\*/g, '$1')     // Remove italic
+                .replace(/`(.+?)`/g, '$1')       // Remove code
+                .replace(/\[(.+?)\]\(.+?\)/g, '$1') // Remove links
+                .trim();
+            
+            // Truncate if too long
+            return cleaned.length > 200 ? cleaned.substring(0, 200) + '...' : cleaned;
+        }
+
+        // Get category based on filename or metadata
+        function getCategory(baseName) {
+            const metadata = caseStudyMetadata[baseName];
+            if (metadata && metadata.category) {
+                return metadata.category;
+            }
+            
+            // Infer category from filename
+            if (baseName.includes('digital-twin')) return 'Digital Twin';
+            if (baseName.includes('ai-analytics') || baseName.includes('spray-drying')) return 'AI Analytics';
+            if (baseName.includes('supply-chain')) return 'Supply Chain';
+            if (baseName.includes('product-development') || baseName.includes('concept-to-consumer')) return 'Product Development';
+            if (baseName.includes('quality') || baseName.includes('protein') || baseName.includes('safety')) return 'Quality Control';
+            if (baseName.includes('manufacturing') || baseName.includes('precision')) return 'Manufacturing Excellence';
+            
+            return 'Case Study';
+        }
+
+        // Get date based on filename or metadata
+        function getDate(baseName) {
+            const metadata = caseStudyMetadata[baseName];
+            if (metadata && metadata.date) {
+                return metadata.date;
+            }
+            
+            return 'July 2025';
+        }
+
+        // Format title from filename
+        function formatTitle(baseName) {
+            return baseName
+                .replace(/-/g, ' ')
+                .replace(/\b\w/g, l => l.toUpperCase());
+        }
+
+        // Create case study card element
+        function createCaseStudyCard(title, excerpt, category, date, linkTarget) {
+            const article = document.createElement('article');
+            article.className = 'case-study-card';
+            
+            article.innerHTML = `
+                <div class="case-study-category">${category}</div>
+                <div class="case-study-date">${date}</div>
+                <h2 class="case-study-title">${title}</h2>
+                <p class="case-study-excerpt">${excerpt}</p>
+                <a href="${linkTarget}" class="case-study-cta">Read Full Article</a>
+            `;
+            
+            return article;
+        }
+
+        // Load case studies when page loads
+        document.addEventListener('DOMContentLoaded', loadCaseStudies);
     </script>
 </body>
 </html>
