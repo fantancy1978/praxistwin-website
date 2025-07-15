@@ -202,34 +202,6 @@
             padding: 80px 0;
         }
 
-        /* Loading Spinner */
-        .loading-spinner {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 60px 0;
-        }
-
-        .spinner {
-            width: 40px;
-            height: 40px;
-            border: 4px solid var(--neutral-200);
-            border-top: 4px solid var(--primary-blue);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        .loading-text {
-            margin-top: 20px;
-            color: var(--neutral-600);
-            text-align: center;
-        }
-
         /* Articles Grid */
         .articles-grid {
             display: grid;
@@ -322,30 +294,6 @@
 
         .read-more-btn:hover::after {
             transform: translateX(4px);
-        }
-
-        /* Error Message */
-        .error-message {
-            background: #fee;
-            color: #c00;
-            padding: 20px;
-            border-radius: 8px;
-            text-align: center;
-            margin: 40px 0;
-            border: 1px solid #fcc;
-        }
-
-        /* Empty State */
-        .empty-state {
-            text-align: center;
-            padding: 60px 0;
-            color: var(--neutral-600);
-        }
-
-        .empty-state h3 {
-            font-size: 1.5rem;
-            margin-bottom: 16px;
-            color: var(--neutral-700);
         }
 
         /* Footer */
@@ -462,56 +410,46 @@
     <!-- Main Content -->
     <main class="main-content">
         <div class="container">
-            <!-- Loading State -->
-            <div id="loading-state" class="loading-spinner">
-                <div>
-                    <div class="spinner"></div>
-                    <div class="loading-text">Loading case studies...</div>
-                </div>
-            </div>
-
-            <!-- Error State -->
-            <div id="error-state" class="error-message" style="display: none;">
-                <h3>Unable to load case studies</h3>
-                <p>Showing available case studies instead.</p>
-            </div>
-
             <!-- Articles Grid -->
-            <div id="articles-container" class="articles-grid" style="display: none;">
-                <!-- Dynamic content will be loaded here -->
-            </div>
-
-            <!-- Fallback Articles (Always Available) -->
-            <div id="fallback-articles" class="articles-grid" style="display: none;">
+            <div class="articles-grid">
                 
-                <!-- Case Study 1 -->
+                <!-- Case Study 1 - Digital Twin Dairy Producer (需要创建HTML文件) -->
                 <article class="article-card">
                     <div class="article-category">Digital Twin</div>
                     <div class="article-date">July 15, 2025</div>
                     <h2 class="article-title">How a Digital Twin Reduced Downtime by 40% for a Dairy Powder Producer</h2>
                     <p class="article-excerpt">A leading dairy cooperative specializing in high-value infant formula powder was experiencing frequent, unscheduled production shutdowns due to excessive wall build-up in their spray drying towers. Discover how digital twin technology transformed their operations.</p>
-                    <a href="case-studies/digital-twin-reduces-downtime-for-dairy-producer.html" class="read-more-btn">Read Full Article</a>
+                    <a href="case-studies/digital-twin-reduces-downtime-for-dairy-powder-producer.html" class="read-more-btn">Read Full Article</a>
                 </article>
 
-                <!-- Case Study 2 -->
+                <!-- Case Study 2 - Digital Precision Dairy (实际存在) -->
+                <article class="article-card">
+                    <div class="article-category">Digital Twin</div>
+                    <div class="article-date">July 15, 2025</div>
+                    <h2 class="article-title">Digital Precision in Dairy: How Twinning Optimizes Everything from Yogurt to Cheese</h2>
+                    <p class="article-excerpt">The dairy industry is a delicate dance of science and tradition. From the precise temperature control of pasteurization to the complex microbial art of fermentation, success hinges on consistency and precision across every process step.</p>
+                    <a href="case-studies/digital-precision-in-dairy-processing.html" class="read-more-btn">Read Full Article</a>
+                </article>
+
+                <!-- Case Study 3 - AI Analytics Spray Drying (需要创建HTML文件) -->
                 <article class="article-card">
                     <div class="article-category">AI Analytics</div>
                     <div class="article-date">July 15, 2025</div>
                     <h2 class="article-title">Beyond Automation: Creating Value with AI Analytics in Spray Drying</h2>
-                    <p class="article-excerpt">The spray dryer is a cornerstone of the modern food industry, responsible for creating everything from milk powder and instant coffee to encapsulated flavors and protein isolates. However, it is also one of the most complex and challenging unit operations to optimize.</p>
+                    <p class="article-excerpt">The spray dryer is a cornerstone of the modern food industry, responsible for creating everything from milk powder and instant coffee to encapsulated flavors and protein isolates. However, it's also one of the most complex operations to optimize.</p>
                     <a href="case-studies/value-of-ai-analytics-in-spray-drying.html" class="read-more-btn">Read Full Article</a>
                 </article>
 
-                <!-- Case Study 3 -->
+                <!-- Case Study 4 - Product Development -->
                 <article class="article-card">
                     <div class="article-category">Product Development</div>
                     <div class="article-date">July 14, 2025</div>
                     <h2 class="article-title">From Concept to Consumer: Accelerating New Product Development</h2>
-                    <p class="article-excerpt">Transforming product development cycles from 18 months to 8 months through AI-driven formulation optimization and predictive market analysis. Learn how leading F&B companies accelerate innovation while reducing development costs.</p>
+                    <p class="article-excerpt">Transforming product development cycles from 18 months to 8 months through AI-driven formulation optimization and predictive market analysis. Learn how leading F&B companies accelerate innovation while reducing development costs by 45%.</p>
                     <a href="case-studies/from-concept-to-consumer-product-development.html" class="read-more-btn">Read Full Article</a>
                 </article>
 
-                <!-- Case Study 4 -->
+                <!-- Case Study 5 - Supply Chain Resilience -->
                 <article class="article-card">
                     <div class="article-category">Supply Chain</div>
                     <div class="article-date">July 14, 2025</div>
@@ -520,7 +458,7 @@
                     <a href="case-studies/antifragile-supply-chain-predictive-twinning.html" class="read-more-btn">Read Full Article</a>
                 </article>
 
-                <!-- Case Study 5 -->
+                <!-- Case Study 6 - Quality Control -->
                 <article class="article-card">
                     <div class="article-category">Quality Control</div>
                     <div class="article-date">July 13, 2025</div>
@@ -529,21 +467,6 @@
                     <a href="case-studies/consistency-and-safety-in-protein-processing.html" class="read-more-btn">Read Full Article</a>
                 </article>
 
-                <!-- Case Study 6 -->
-                <article class="article-card">
-                    <div class="article-category">Manufacturing Excellence</div>
-                    <div class="article-date">July 13, 2025</div>
-                    <h2 class="article-title">Digital Twin Manufacturing: Beyond Simulation</h2>
-                    <p class="article-excerpt">Exploring how digital twin technology transcends traditional simulation to create intelligent, self-optimizing manufacturing systems. Real-world implementation results show 35% efficiency improvements and 60% reduction in unplanned downtime.</p>
-                    <a href="case-studies/digital-twin-manufacturing.html" class="read-more-btn">Read Full Article</a>
-                </article>
-
-            </div>
-
-            <!-- Empty State -->
-            <div id="empty-state" class="empty-state" style="display: none;">
-                <h3>No case studies found</h3>
-                <p>Check back soon for new case studies and success stories.</p>
             </div>
         </div>
     </main>
@@ -560,280 +483,12 @@
     </footer>
 
     <script>
-        // GitHub API configuration
-        const GITHUB_CONFIG = {
-            owner: 'fantancy1978',
-            repo: 'praxistwin-website',
-            path: 'case-studies',
-            branch: 'main'
-        };
-
-        // Case study metadata for better organization
-        const caseStudyMetadata = {
-            'digital-twin-reduces-downtime-for-dairy-producer.html': {
-                title: 'How a Digital Twin Reduced Downtime by 40% for a Dairy Powder Producer',
-                category: 'Digital Twin',
-                excerpt: 'A leading dairy cooperative specializing in high-value infant formula powder was experiencing frequent, unscheduled production shutdowns due to excessive wall build-up in their spray drying towers.',
-                date: 'July 15, 2025'
-            },
-            'value-of-ai-analytics-in-spray-drying.html': {
-                title: 'Beyond Automation: Creating Value with AI Analytics in Spray Drying',
-                category: 'AI Analytics',
-                excerpt: 'The spray dryer is a cornerstone of the modern food industry, responsible for creating everything from milk powder and instant coffee to encapsulated flavors and protein isolates.',
-                date: 'July 15, 2025'
-            }
-        };
-
-        // DOM elements
-        const loadingState = document.getElementById('loading-state');
-        const errorState = document.getElementById('error-state');
-        const articlesContainer = document.getElementById('articles-container');
-        const fallbackArticles = document.getElementById('fallback-articles');
-        const emptyState = document.getElementById('empty-state');
-
-        // Helper function to format dates
-        function formatDate(dateString) {
-            const options = { year: 'numeric', month: 'long', day: 'numeric' };
-            return new Date(dateString).toLocaleDateString('en-US', options);
-        }
-
-        // Helper function to extract title from markdown content
-        function extractTitle(content) {
-            const titleMatch = content.match(/^#\s+(.+)$/m);
-            if (titleMatch) {
-                return titleMatch[1].trim();
-            }
-            
-            const lines = content.split('\n');
-            for (let line of lines) {
-                line = line.trim();
-                if (line && !line.startsWith('#')) {
-                    return line;
-                }
-            }
-            
-            return 'Untitled Case Study';
-        }
-
-        // Helper function to extract excerpt from markdown content
-        function extractExcerpt(content, maxLength = 200) {
-            let text = content.replace(/^#+\s+.+$/gm, '');
-            text = text.replace(/\[([^\]]+)\]\([^)]+\)/g, '$1');
-            text = text.replace(/\*\*(.+?)\*\*/g, '$1');
-            text = text.replace(/\*(.+?)\*/g, '$1');
-            text = text.replace(/_(.+?)_/g, '$1');
-            text = text.replace(/\n+/g, ' ').trim();
-            
-            if (text.length > maxLength) {
-                text = text.substring(0, maxLength);
-                const lastSpace = text.lastIndexOf(' ');
-                if (lastSpace > 0) {
-                    text = text.substring(0, lastSpace) + '...';
-                }
-            }
-            
-            return text || 'Discover how digital transformation delivers measurable results in this case study.';
-        }
-
-        // Helper function to get category from filename or content
-        function getCategory(filename, content) {
-            if (filename.includes('digital-twin')) return 'Digital Twin';
-            if (filename.includes('ai-analytics') || filename.includes('spray-drying')) return 'AI Analytics';
-            if (filename.includes('supply-chain')) return 'Supply Chain';
-            if (filename.includes('product-development')) return 'Product Development';
-            if (filename.includes('quality') || filename.includes('protein')) return 'Quality Control';
-            if (filename.includes('manufacturing')) return 'Manufacturing Excellence';
-            return 'Case Study';
-        }
-
-        // Helper function to determine the best link for a file
-        function getBestLink(files, fileName) {
-            const baseName = fileName.replace(/\.(md|html)$/, '');
-            
-            // Look for HTML version first
-            const htmlFile = files.find(f => f.name === baseName + '.html');
-            if (htmlFile) {
-                return `case-studies/${htmlFile.name}`;
-            }
-            
-            // Look for MD version
-            const mdFile = files.find(f => f.name === baseName + '.md');
-            if (mdFile) {
-                // Assume there will be an HTML version
-                return `case-studies/${baseName}.html`;
-            }
-            
-            // Default fallback
-            return `case-studies/${fileName}`;
-        }
-
-        // Fetch file list from GitHub API
-        async function fetchFileList() {
-            const url = `https://api.github.com/repos/${GITHUB_CONFIG.owner}/${GITHUB_CONFIG.repo}/contents/${GITHUB_CONFIG.path}?ref=${GITHUB_CONFIG.branch}`;
-            
-            try {
-                const response = await fetch(url);
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                const files = await response.json();
-                
-                // Filter for .md and .html files
-                return files.filter(file => 
-                    file.type === 'file' && 
-                    (file.name.endsWith('.md') || file.name.endsWith('.html'))
-                );
-            } catch (error) {
-                console.error('Error fetching file list:', error);
-                throw error;
-            }
-        }
-
-        // Fetch file content from GitHub API
-        async function fetchFileContent(file) {
-            try {
-                const response = await fetch(file.download_url);
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                return await response.text();
-            } catch (error) {
-                console.error(`Error fetching content for ${file.name}:`, error);
-                throw error;
-            }
-        }
-
-        // Create article card HTML
-        function createArticleCard(file, content, allFiles) {
-            const metadata = caseStudyMetadata[file.name];
-            
-            let title, excerpt, category, date;
-            
-            if (metadata) {
-                title = metadata.title;
-                excerpt = metadata.excerpt;
-                category = metadata.category;
-                date = metadata.date;
-            } else {
-                title = extractTitle(content);
-                excerpt = extractExcerpt(content);
-                category = getCategory(file.name, content);
-                date = formatDate(new Date());
-            }
-
-            const link = getBestLink(allFiles, file.name);
-
-            return `
-                <article class="article-card">
-                    <div class="article-category">${category}</div>
-                    <div class="article-date">${date}</div>
-                    <h2 class="article-title">${title}</h2>
-                    <p class="article-excerpt">${excerpt}</p>
-                    <a href="${link}" class="read-more-btn">Read Full Article</a>
-                </article>
-            `;
-        }
-
-        // Main function to load and display case studies
-        async function loadCaseStudies() {
-            try {
-                // Show loading state
-                loadingState.style.display = 'flex';
-                errorState.style.display = 'none';
-                articlesContainer.style.display = 'none';
-                fallbackArticles.style.display = 'none';
-                emptyState.style.display = 'none';
-
-                // Try to fetch from GitHub API
-                try {
-                    const files = await fetchFileList();
-                    
-                    if (files.length === 0) {
-                        throw new Error('No files found');
-                    }
-
-                    // Group files by base name to avoid duplicates
-                    const fileMap = new Map();
-                    
-                    files.forEach(file => {
-                        const baseName = file.name.replace(/\.(md|html)$/, '');
-                        if (!fileMap.has(baseName)) {
-                            fileMap.set(baseName, []);
-                        }
-                        fileMap.get(baseName).push(file);
-                    });
-
-                    // Process each group and create cards
-                    const articles = [];
-                    for (const [baseName, fileGroup] of fileMap) {
-                        try {
-                            // Prefer HTML files, fallback to MD
-                            const htmlFile = fileGroup.find(f => f.name.endsWith('.html'));
-                            const mdFile = fileGroup.find(f => f.name.endsWith('.md'));
-                            
-                            const fileToProcess = htmlFile || mdFile;
-                            if (!fileToProcess) continue;
-
-                            // For HTML files, we might not be able to get content due to CORS
-                            // So use metadata or create basic card
-                            let content = '';
-                            if (fileToProcess.name.endsWith('.md')) {
-                                try {
-                                    content = await fetchFileContent(fileToProcess);
-                                } catch (contentError) {
-                                    console.warn(`Could not fetch content for ${fileToProcess.name}:`, contentError);
-                                }
-                            }
-
-                            articles.push(createArticleCard(fileToProcess, content, files));
-                        } catch (error) {
-                            console.warn(`Failed to process ${baseName}:`, error);
-                        }
-                    }
-
-                    // Display articles
-                    if (articles.length > 0) {
-                        articlesContainer.innerHTML = articles.join('');
-                        loadingState.style.display = 'none';
-                        articlesContainer.style.display = 'grid';
-                        
-                        // Add staggered animation delay to cards
-                        const cards = articlesContainer.querySelectorAll('.article-card');
-                        cards.forEach((card, index) => {
-                            card.style.animationDelay = `${index * 0.1}s`;
-                        });
-                    } else {
-                        throw new Error('No valid articles found');
-                    }
-
-                } catch (apiError) {
-                    console.warn('GitHub API failed, showing fallback content:', apiError);
-                    
-                    // Show fallback articles
-                    loadingState.style.display = 'none';
-                    errorState.style.display = 'block';
-                    fallbackArticles.style.display = 'grid';
-                    
-                    // Add staggered animation delay to fallback cards
-                    const fallbackCards = fallbackArticles.querySelectorAll('.article-card');
-                    fallbackCards.forEach((card, index) => {
-                        card.style.animationDelay = `${index * 0.1}s`;
-                    });
-                }
-
-            } catch (error) {
-                console.error('Error loading case studies:', error);
-                
-                // Show fallback content
-                loadingState.style.display = 'none';
-                errorState.style.display = 'block';
-                fallbackArticles.style.display = 'grid';
-            }
-        }
-
-        // Initialize when page loads
+        // Add staggered animation delays to cards
         document.addEventListener('DOMContentLoaded', function() {
-            loadCaseStudies();
+            const cards = document.querySelectorAll('.article-card');
+            cards.forEach((card, index) => {
+                card.style.animationDelay = `${index * 0.1}s`;
+            });
         });
     </script>
 </body>
