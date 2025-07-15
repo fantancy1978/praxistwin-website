@@ -303,17 +303,6 @@
             z-index: 2;
         }
 
-        .science-badge {
-            background: var(--roast-dark);
-            color: white;
-            padding: 10px 24px;
-            border-radius: 25px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            display: inline-block;
-            margin-bottom: 20px;
-        }
-
         .science-title {
             font-size: 2.5rem;
             font-weight: 600;
@@ -500,115 +489,6 @@
             font-size: 1.05rem;
         }
 
-        /* Premium Roastery Case Study */
-        .premium-roastery {
-            background: linear-gradient(135deg, white 0%, rgba(47, 27, 20, 0.02) 100%);
-            border-radius: 28px;
-            padding: 60px;
-            margin: 60px 0;
-            border: 2px solid rgba(47, 27, 20, 0.15);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .premium-roastery::before {
-            content: '';
-            position: absolute;
-            top: -4px;
-            left: -4px;
-            right: -4px;
-            bottom: -4px;
-            background: linear-gradient(135deg, var(--roast-dark), var(--roast-medium), var(--flame-orange), var(--aroma-gold));
-            border-radius: 28px;
-            z-index: -1;
-        }
-
-        .roastery-header {
-            text-align: center;
-            margin-bottom: 50px;
-        }
-
-        .roastery-awards {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-bottom: 25px;
-            flex-wrap: wrap;
-        }
-
-        .award-badge {
-            background: var(--roast-dark);
-            color: white;
-            padding: 8px 18px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 600;
-        }
-
-        .award-badge.gold {
-            background: var(--aroma-gold);
-            color: var(--roast-dark);
-        }
-
-        .award-badge.specialty {
-            background: var(--flame-orange);
-        }
-
-        .roastery-title {
-            font-size: 2.3rem;
-            font-weight: 600;
-            color: var(--roast-dark);
-            margin-bottom: 12px;
-        }
-
-        .roastery-company {
-            font-size: 1.15rem;
-            color: var(--neutral-600);
-            font-style: italic;
-        }
-
-        .roastery-results {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 25px;
-            margin: 50px 0;
-        }
-
-        .result-card {
-            background: white;
-            padding: 30px;
-            border-radius: 16px;
-            text-align: center;
-            border-left: 5px solid var(--roast-dark);
-            box-shadow: var(--shadow-sm);
-            transition: all 0.3s ease;
-        }
-
-        .result-card:hover {
-            transform: translateY(-6px);
-            box-shadow: var(--shadow-md);
-        }
-
-        .result-value {
-            font-size: 3rem;
-            font-weight: 600;
-            color: var(--roast-dark);
-            margin-bottom: 10px;
-            line-height: 1;
-        }
-
-        .result-metric {
-            font-size: 1rem;
-            color: var(--neutral-600);
-            font-weight: 500;
-            margin-bottom: 6px;
-        }
-
-        .result-context {
-            font-size: 0.85rem;
-            color: var(--neutral-500);
-        }
-
         /* Flavor Profile Matrix */
         .flavor-matrix {
             background: linear-gradient(135deg, rgba(255, 215, 0, 0.05) 0%, rgba(139, 69, 19, 0.05) 100%);
@@ -676,86 +556,6 @@
             line-height: 1.5;
         }
 
-        /* Innovation Roadmap */
-        .innovation-roadmap {
-            background: var(--neutral-100);
-            border-radius: 28px;
-            padding: 60px;
-            margin: 60px 0;
-        }
-
-        .roadmap-timeline {
-            position: relative;
-            margin-top: 50px;
-        }
-
-        .roadmap-timeline::before {
-            content: '';
-            position: absolute;
-            left: 50px;
-            top: 50px;
-            bottom: 50px;
-            width: 4px;
-            background: linear-gradient(180deg, var(--roast-dark) 0%, var(--flame-orange) 50%, var(--aroma-gold) 100%);
-        }
-
-        .timeline-milestone {
-            display: flex;
-            align-items: center;
-            margin-bottom: 50px;
-            position: relative;
-        }
-
-        .milestone-year {
-            background: white;
-            border: 5px solid var(--roast-dark);
-            color: var(--roast-dark);
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 600;
-            font-size: 1.2rem;
-            margin-right: 40px;
-            flex-shrink: 0;
-            position: relative;
-            z-index: 2;
-            box-shadow: var(--shadow-md);
-        }
-
-        .milestone-content {
-            background: white;
-            padding: 35px;
-            border-radius: 20px;
-            flex: 1;
-            box-shadow: var(--shadow-sm);
-            border-left: 6px solid var(--roast-dark);
-        }
-
-        .milestone-title {
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: var(--neutral-900);
-            margin-bottom: 15px;
-        }
-
-        .milestone-description {
-            color: var(--neutral-600);
-            line-height: 1.6;
-        }
-
-        .milestone-impact {
-            background: rgba(47, 27, 20, 0.1);
-            padding: 15px;
-            border-radius: 10px;
-            margin-top: 15px;
-            font-size: 0.9rem;
-            color: var(--roast-dark);
-            font-weight: 500;
-        }
-
         /* Master Roaster Insights */
         .master-insights {
             background: linear-gradient(135deg, var(--roast-dark) 0%, var(--heat-red) 100%);
@@ -814,27 +614,18 @@
                 padding: 40px 24px;
             }
 
-            .chemical-reactions, .roastery-results, .matrix-grid {
+            .chemical-reactions, .matrix-grid {
                 grid-template-columns: 1fr;
             }
 
-            .component-card, .timeline-milestone {
+            .component-card {
                 flex-direction: column;
                 text-align: center;
             }
 
-            .component-icon, .milestone-year {
+            .component-icon {
                 margin-right: 0;
                 margin-bottom: 20px;
-            }
-
-            .roadmap-timeline::before {
-                display: none;
-            }
-
-            .roastery-awards {
-                flex-direction: column;
-                align-items: center;
             }
         }
     </style>
@@ -878,7 +669,6 @@
 
                 <div class="roasting-science">
                     <div class="science-header">
-                        <div class="science-badge">IFT Fellow Research Initiative</div>
                         <div class="science-title">The $67 Billion Flavor Chemistry Revolution</div>
                         <div class="science-subtitle">Digital twin roasting optimization transforming the global coffee industry's pursuit of flavor perfection, consistency, and sustainable premium positioning</div>
                     </div>
@@ -960,59 +750,6 @@
                     </div>
                 </div>
 
-                <h2>Case Study: Blue Bottle Coffee's Precision Roasting Revolution</h2>
-
-                <div class="premium-roastery">
-                    <div class="roastery-header">
-                        <div class="roastery-awards">
-                            <div class="award-badge gold">James Beard Outstanding Coffee</div>
-                            <div class="award-badge">SCAA Roaster of the Year</div>
-                            <div class="award-badge specialty">Specialty Coffee Pioneer</div>
-                        </div>
-                        <div class="roastery-title">Industrial-Scale Artisanal Excellence</div>
-                        <div class="roastery-company">Blue Bottle Coffee Global Roasting Operations</div>
-                    </div>
-                    
-                    <p><strong>Challenge:</strong> Scaling artisanal roasting quality across 17 roastery locations while maintaining the distinctive flavor profiles that built their reputation, requiring 95%+ consistency in cup scores across 2.3 million pounds of annual production.</p>
-                    
-                    <p><strong>Digital Twin Innovation:</strong> Implementation of a unified roasting intelligence platform that captures master roaster expertise, models bean-specific optimal development, and provides real-time guidance to achieve consistent excellence regardless of location or operator experience.</p>
-                    
-                    <div class="roastery-results">
-                        <div class="result-card">
-                            <div class="result-value">96.2%</div>
-                            <div class="result-metric">Consistency Achievement</div>
-                            <div class="result-context">Cup score variation ±0.3 points</div>
-                        </div>
-                        <div class="result-card">
-                            <div class="result-value">47%</div>
-                            <div class="result-metric">Training Time Reduction</div>
-                            <div class="result-context">New roaster competency</div>
-                        </div>
-                        <div class="result-card">
-                            <div class="result-value">89%</div>
-                            <div class="result-metric">Energy Efficiency Gain</div>
-                            <div class="result-context">Optimized thermal profiles</div>
-                        </div>
-                        <div class="result-card">
-                            <div class="result-value">$3.7M</div>
-                            <div class="result-metric">Quality Premium Value</div>
-                            <div class="result-context">Annual consistency benefits</div>
-                        </div>
-                        <div class="result-card">
-                            <div class="result-value">73%</div>
-                            <div class="result-metric">Development Speed</div>
-                            <div class="result-context">New blend optimization</div>
-                        </div>
-                        <div class="result-card">
-                            <div class="result-value">99.1%</div>
-                            <div class="result-metric">Quality Acceptance Rate</div>
-                            <div class="result-context">Eliminated off-flavors</div>
-                        </div>
-                    </div>
-                    
-                    <p><strong>Revolutionary Discovery:</strong> The digital twin revealed that micro-adjustments in development time ratio (DTR) based on origin-specific bean density created signature flavor enhancement opportunities. This insight led to proprietary roasting profiles that increased customer loyalty by 34% and enabled premium pricing strategies.</p>
-                </div>
-
                 <h2>The Art of Flavor Engineering</h2>
 
                 <p><strong>Modern coffee roasting has evolved into a sophisticated form of flavor engineering where digital twin technology enables roasters to design specific taste experiences with scientific precision.</strong> By understanding the relationship between thermal input, chemical transformation, and sensory outcome, roasters can create reproducible flavor profiles that meet exacting standards while exploring new taste territories.</p>
@@ -1073,58 +810,6 @@
                     <li><strong>Equipment longevity:</strong> Predictive maintenance reducing equipment replacement frequency</li>
                     <li><strong>Supply chain integration:</strong> Better green coffee utilization through origin-specific optimization</li>
                 </ul>
-
-                <h2>Future Innovation Roadmap: 2025-2030</h2>
-
-                <div class="innovation-roadmap">
-                    <div class="architecture-title" style="color: var(--roast-medium); margin-bottom: 30px;">Roasting Technology Evolution</div>
-                    <div class="roadmap-timeline">
-                        <div class="timeline-milestone">
-                            <div class="milestone-year">2025</div>
-                            <div class="milestone-content">
-                                <div class="milestone-title">Predictive Flavor Modeling</div>
-                                <div class="milestone-description">AI systems achieve 95%+ accuracy in predicting final cup scores based on green coffee analysis and roasting parameters, enabling perfect first-roast outcomes.</div>
-                                <div class="milestone-impact">Quality Impact: Elimination of trial roasts, 60% reduction in product development time</div>
-                            </div>
-                        </div>
-                        
-                        <div class="timeline-milestone">
-                            <div class="milestone-year">2026</div>
-                            <div class="milestone-content">
-                                <div class="milestone-title">Molecular Roasting Control</div>
-                                <div class="milestone-description">Real-time chemical compound monitoring enables precise control of specific flavor molecules during roasting, creating designer coffee experiences.</div>
-                                <div class="milestone-impact">Innovation Impact: 500+ distinct flavor profile variations, premium market expansion</div>
-                            </div>
-                        </div>
-                        
-                        <div class="timeline-milestone">
-                            <div class="milestone-year">2027</div>
-                            <div class="milestone-content">
-                                <div class="milestone-title">Autonomous Roasting Systems</div>
-                                <div class="milestone-description">Fully automated roasting operations with AI-guided quality control achieve master roaster-level consistency without human intervention.</div>
-                                <div class="milestone-impact">Efficiency Impact: 24/7 operations, 85% labor cost reduction, perfect consistency</div>
-                            </div>
-                        </div>
-                        
-                        <div class="timeline-milestone">
-                            <div class="milestone-year">2028</div>
-                            <div class="milestone-content">
-                                <div class="milestone-title">Personalized Coffee Creation</div>
-                                <div class="milestone-description">Custom roasting profiles based on individual taste preferences and genetic taste sensitivity analysis, creating personalized coffee experiences.</div>
-                                <div class="milestone-impact">Market Impact: Premium personalization segment, direct consumer relationships</div>
-                            </div>
-                        </div>
-                        
-                        <div class="timeline-milestone">
-                            <div class="milestone-year">2030</div>
-                            <div class="milestone-content">
-                                <div class="milestone-title">Quantum Flavor Engineering</div>
-                                <div class="milestone-description">Advanced computational chemistry enables design of entirely new flavor compounds and roasting techniques previously impossible to achieve or imagine.</div>
-                                <div class="milestone-impact">Revolutionary Impact: New coffee categories, expanded flavor universe</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
                 <h2>The Economics of Roasting Excellence</h2>
 
