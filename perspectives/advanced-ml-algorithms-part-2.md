@@ -9,4 +9,4 @@ For forecasting and risk management, more powerful models are required. **XGBoos
 Finally, to handle the overwhelming complexity of modern data, we use dimensionality reduction techniques like **Principal Component Analysis (PCA)**. It can reduce the complexity of spectroscopic data from raw ingredients by 73%, while still explaining 89% of what determines quality. This enables rapid, automated ingredient authentication that would be manually impossible. Together, these advanced algorithms provide the strategic intelligence necessary to not only compete but to lead the future of the food and beverage industry.
 
 ---
-*Published on July 14, 2025*
+*Published on July 1, 2025*
