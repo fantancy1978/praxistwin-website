@@ -1,3 +1,10 @@
+---
+title: "Why Agri-Food is the Next Digital Blue Ocean"
+date: "2025-07-06"
+author: "PraxisTwin Global Research"
+category: "Perspectives"
+---
+
 # Why Agri-Food is the Next Digital Blue Ocean
 
 Many people consider agriculture a "traditional industry" unrelated to high technology. But I argue that **the agri-food sector is experiencing a quiet technological revolution.**
@@ -17,4 +24,4 @@ The transformation isn't just about technology—it's about reimagining how we p
 **The ultimate goal of technological innovation is enabling everyone to enjoy safer, more nutritious food.** This isn't just a business opportunity—it's a social responsibility.
 
 ---
-*Published on July 13, 2025*
+*Published on July 6, 2025*
