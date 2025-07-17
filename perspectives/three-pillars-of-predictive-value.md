@@ -1,7 +1,7 @@
 ---
 title: "The Value Chain Collapse: Why Your Predictive Analytics Program Is Failing"
 subtitle: "You have brilliant models and endless data, but where are the profits?"
-date: "2025-07-13"
+date: "2025-07-2"
 author: "PraxisTwin Strategic Insights"
 category: "Executive Strategy"
 tags: ["Predictive Analytics", "Value Chain", "ROI", "Digital Transformation", "Operational Excellence"]
