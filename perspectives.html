@@ -350,9 +350,6 @@
                     file.name.endsWith('.md') && file.type === 'file'
                 );
 
-                // Sort files by name (newest first)
-                markdownFiles.sort((a, b) => b.name.localeCompare(a.name));
-
                 const blogGrid = document.getElementById('blogGrid');
                 const loading = document.getElementById('loading');
                 const errorDiv = document.getElementById('error');
@@ -364,24 +361,42 @@
                     return;
                 }
 
-                // Load content for each file
+                // Load content for each file and create articles array
+                const articles = [];
+                
                 for (const file of markdownFiles) {
                     try {
                         const contentResponse = await fetch(file.download_url);
                         const content = await contentResponse.text();
                         
-                        // Parse markdown content
-                        const title = extractTitle(content);
-                        const excerpt = extractExcerpt(content);
+                        // Parse markdown content and front matter
+                        const { frontMatter, bodyContent } = parseFrontMatter(content);
+                        const title = frontMatter.title || extractTitle(bodyContent);
+                        const excerpt = extractExcerpt(bodyContent);
+                        const date = frontMatter.date || '2025-07-13'; // 默认日期
                         const htmlFileName = file.name.replace('.md', '.html');
                         
-                        // Create blog card
-                        const blogCard = createBlogCard(title, excerpt, htmlFileName);
-                        blogGrid.appendChild(blogCard);
+                        articles.push({
+                            title,
+                            excerpt,
+                            date,
+                            htmlFileName,
+                            author: frontMatter.author || 'PraxisTwin Global Research',
+                            category: frontMatter.category || 'AI Analytics'
+                        });
                     } catch (error) {
                         console.warn(`Failed to load content for ${file.name}:`, error);
                     }
                 }
+
+                // Sort articles by date (newest first)
+                articles.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+                // Create blog cards
+                articles.forEach(article => {
+                    const blogCard = createBlogCard(article);
+                    blogGrid.appendChild(blogCard);
+                });
 
                 // Hide loading
                 loading.style.display = 'none';
@@ -391,6 +406,44 @@
                 document.getElementById('loading').style.display = 'none';
                 document.getElementById('error').style.display = 'block';
             }
+        }
+
+        // Parse front matter from markdown content
+        function parseFrontMatter(content) {
+            const frontMatterRegex = /^---\s*\n([\s\S]*?)\n---\s*\n([\s\S]*)$/;
+            const match = content.match(frontMatterRegex);
+            
+            if (!match) {
+                return { frontMatter: {}, bodyContent: content };
+            }
+            
+            const frontMatterText = match[1];
+            const bodyContent = match[2];
+            
+            const frontMatter = {};
+            frontMatterText.split('\n').forEach(line => {
+                const colonIndex = line.indexOf(':');
+                if (colonIndex > 0) {
+                    const key = line.substring(0, colonIndex).trim();
+                    const value = line.substring(colonIndex + 1).trim().replace(/^["']|["']$/g, '');
+                    if (key && value) {
+                        frontMatter[key] = value;
+                    }
+                }
+            });
+            
+            return { frontMatter, bodyContent };
+        }
+
+        // Format date for display
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            const options = { 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric' 
+            };
+            return date.toLocaleDateString('en-US', options);
         }
 
         // Extract title from markdown content
@@ -418,18 +471,20 @@
         }
 
         // Create blog card element
-        function createBlogCard(title, excerpt, htmlFileName) {
-            const article = document.createElement('article');
-            article.className = 'blog-card';
+        function createBlogCard(article) {
+            const articleElement = document.createElement('article');
+            articleElement.className = 'blog-card';
             
-            article.innerHTML = `
-                <div class="blog-date">July 13, 2025</div>
-                <h2 class="blog-title">${title}</h2>
-                <p class="blog-excerpt">${excerpt}</p>
-                <a href="${htmlFileName}" class="blog-cta">Read Full Article →</a>
+            const formattedDate = formatDate(article.date);
+            
+            articleElement.innerHTML = `
+                <div class="blog-date">${formattedDate}</div>
+                <h2 class="blog-title">${article.title}</h2>
+                <p class="blog-excerpt">${article.excerpt}</p>
+                <a href="${article.htmlFileName}" class="blog-cta">Read Full Article →</a>
             `;
             
-            return article;
+            return articleElement;
         }
 
         // Load blogs when page loads
@@ -437,4 +492,3 @@
     </script>
 </body>
 </html>
-
