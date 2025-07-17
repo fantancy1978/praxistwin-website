@@ -376,6 +376,12 @@
                         const date = frontMatter.date || '2025-07-13'; // 默认日期
                         const htmlFileName = file.name.replace('.md', '.html');
                         
+                        // 调试信息
+                        console.log(`文件: ${file.name}`);
+                        console.log(`  Front matter日期: ${frontMatter.date || '未设置'}`);
+                        console.log(`  最终使用日期: ${date}`);
+                        console.log(`  格式化后: ${formatDate(date)}`);
+                        
                         articles.push({
                             title,
                             excerpt,
@@ -435,9 +441,12 @@
             return { frontMatter, bodyContent };
         }
 
-        // Format date for display
+        // Format date for display (避免时区问题)
         function formatDate(dateString) {
-            const date = new Date(dateString);
+            // 解析日期字符串，避免时区转换
+            const [year, month, day] = dateString.split('-').map(num => parseInt(num));
+            const date = new Date(year, month - 1, day); // month是0-based
+            
             const options = { 
                 year: 'numeric', 
                 month: 'long', 
