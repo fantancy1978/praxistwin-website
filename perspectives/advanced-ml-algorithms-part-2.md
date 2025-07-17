@@ -1,5 +1,7 @@
 # Traditional ML Algorithms in F&B Industry: Part 2 - Advanced Algorithms for Strategic Optimization
+
 *Published on July 5, 2025*
+
 While the fundamental algorithms discussed in Part 1 are essential for achieving operational excellence, a second tier of sophisticated machine learning techniques unlocks a higher level of strategic value. These models move beyond process optimization to answer complex business questions, uncover hidden market patterns, and provide a durable competitive advantage. This is how a food and beverage manufacturer evolves from an efficient operator into a predictive, data-driven enterprise.
 
 A key strategic challenge is understanding the market landscape. This is where unsupervised learning shines. **K-Means Clustering**, for instance, analyzes vast customer datasets to discover non-obvious segments based on purchasing behavior, not just demographics. This enables hyper-targeted marketing and product development, driving revenue growth of up to 23%. The same technique applied to suppliers can optimize procurement strategies, leading to cost reductions of 31%. To complement this, **Association Rules Learning** delves into transactional data to find "if-then" product relationships with up to 89% confidence. Uncovering that customers who buy artisanal cheese also frequently buy a specific cracker brand allows for strategic merchandising that has been shown to increase average transaction value by 18%.
