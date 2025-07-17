@@ -339,64 +339,135 @@
         // 自动加载博客文章
         async function loadBlogPosts() {
             try {
+                console.log("开始加载博客文章...");
+                
                 // GitHub API URL to get files from perspectives folder
                 const apiUrl = 'https://api.github.com/repos/fantancy1978/praxistwin-website/contents/perspectives';
                 
                 const response = await fetch(apiUrl);
                 const files = await response.json();
                 
-                // Filter only .md files
-                const markdownFiles = files.filter(file => 
-                    file.name.endsWith('.md') && file.type === 'file'
+                console.log("获取到文件列表:", files.length, "个文件");
+                
+                // Filter .md and .html files, prioritize .md files for content parsing
+                const relevantFiles = files.filter(file => 
+                    (file.name.endsWith('.md') || file.name.endsWith('.html')) && 
+                    file.type === 'file' &&
+                    file.name !== 'perspectives.html' // Exclude the main page
                 );
+
+                // Group files by base name to avoid duplicates
+                const fileGroups = new Map();
+                relevantFiles.forEach(file => {
+                    const baseName = file.name.replace(/\.(md|html)$/, '');
+                    if (!fileGroups.has(baseName)) {
+                        fileGroups.set(baseName, { md: null, html: null });
+                    }
+                    
+                    if (file.name.endsWith('.md')) {
+                        fileGroups.get(baseName).md = file;
+                    } else {
+                        fileGroups.get(baseName).html = file;
+                    }
+                });
+
+                console.log("文件组数量:", fileGroups.size);
 
                 const blogGrid = document.getElementById('blogGrid');
                 const loading = document.getElementById('loading');
                 const errorDiv = document.getElementById('error');
 
-                if (markdownFiles.length === 0) {
+                if (fileGroups.size === 0) {
                     loading.style.display = 'none';
                     errorDiv.style.display = 'block';
                     errorDiv.innerHTML = '<p>No articles found.</p>';
                     return;
                 }
 
-                // Load content for each file and create articles array
+                // Load content for each file group and create articles array
                 const articles = [];
                 
-                for (const file of markdownFiles) {
+                for (const [baseName, files] of fileGroups) {
                     try {
-                        const contentResponse = await fetch(file.download_url);
-                        const content = await contentResponse.text();
+                        console.log(`\n=== 处理文件: ${baseName} ===`);
                         
-                        // Parse markdown content and front matter
-                        const { frontMatter, bodyContent } = parseFrontMatter(content);
-                        const title = frontMatter.title || extractTitle(bodyContent);
-                        const excerpt = extractExcerpt(bodyContent);
-                        const date = frontMatter.date || '2025-07-13'; // 默认日期
-                        const htmlFileName = file.name.replace('.md', '.html');
+                        // Prefer .md files for content parsing, but ensure we have an .html file to link to
+                        const sourceFile = files.md || files.html;
+                        const linkTarget = files.html ? `perspectives/${files.html.name}` : `perspectives/${baseName}.html`;
                         
-                        // 调试信息
-                        console.log(`文件: ${file.name}`);
-                        console.log(`  Front matter日期: ${frontMatter.date || '未设置'}`);
-                        console.log(`  最终使用日期: ${date}`);
-                        console.log(`  格式化后: ${formatDate(date)}`);
+                        console.log(`  源文件: ${sourceFile ? sourceFile.name : '无'}`);
+                        console.log(`  链接目标: ${linkTarget}`);
                         
-                        articles.push({
-                            title,
-                            excerpt,
-                            date,
-                            htmlFileName,
-                            author: frontMatter.author || 'PraxisTwin Global Research',
-                            category: frontMatter.category || 'AI Analytics'
-                        });
+                        if (sourceFile && sourceFile.name.endsWith('.md')) {
+                            // Parse markdown content
+                            const contentResponse = await fetch(sourceFile.download_url);
+                            const content = await contentResponse.text();
+                            
+                            console.log("文件内容前200字符:", content.substring(0, 200));
+                            
+                            // Parse markdown content and front matter
+                            const { frontMatter, bodyContent } = parseFrontMatter(content);
+                            
+                            console.log("解析的Front Matter:", frontMatter);
+                            
+                            const title = frontMatter.title || extractTitle(bodyContent);
+                            const excerpt = extractExcerpt(bodyContent);
+                            
+                            // 重要：日期处理逻辑
+                            let date = frontMatter.date;
+                            if (!date || date.trim() === '') {
+                                date = '2025-07-13'; // 默认日期
+                                console.log("  ❌ 没有找到日期，使用默认日期:", date);
+                            } else {
+                                console.log("  ✅ 找到日期:", date);
+                            }
+                            
+                            console.log("  标题:", title);
+                            console.log("  日期:", date);
+                            console.log("  格式化后:", formatDate(date));
+                            
+                            articles.push({
+                                title,
+                                excerpt,
+                                date,
+                                htmlFileName: linkTarget, // 使用完整路径
+                                author: frontMatter.author || 'PraxisTwin Global Research',
+                                category: frontMatter.category || 'AI Analytics'
+                            });
+                            
+                        } else if (sourceFile && sourceFile.name.endsWith('.html')) {
+                            // For HTML files, create a basic card using metadata
+                            const title = formatTitle(baseName);
+                            const excerpt = 'Expert insights on digital transformation and operational excellence.';
+                            const date = '2025-07-13'; // 默认日期
+                            
+                            console.log(`  HTML文件: ${title} -> ${linkTarget}`);
+                            
+                            articles.push({
+                                title,
+                                excerpt,
+                                date,
+                                htmlFileName: linkTarget, // 使用完整路径
+                                author: 'PraxisTwin Global Research',
+                                category: 'AI Analytics'
+                            });
+                        }
+                        
                     } catch (error) {
-                        console.warn(`Failed to load content for ${file.name}:`, error);
+                        console.error(`处理文件 ${baseName} 时出错:`, error);
                     }
                 }
 
+                console.log("\n=== 所有文章处理完成 ===");
+                console.log("文章数量:", articles.length);
+
                 // Sort articles by date (newest first)
                 articles.sort((a, b) => new Date(b.date) - new Date(a.date));
+                
+                console.log("排序后的文章:");
+                articles.forEach((article, index) => {
+                    console.log(`${index + 1}. ${article.title} - ${article.date} -> ${article.htmlFileName}`);
+                });
 
                 // Create blog cards
                 articles.forEach(article => {
@@ -406,34 +477,51 @@
 
                 // Hide loading
                 loading.style.display = 'none';
+                
+                console.log("✅ 博客加载完成!");
 
             } catch (error) {
-                console.error('Error loading blog posts:', error);
+                console.error('加载博客文章时发生错误:', error);
                 document.getElementById('loading').style.display = 'none';
                 document.getElementById('error').style.display = 'block';
             }
         }
 
-        // Parse front matter from markdown content
+        // Parse front matter from markdown content (增强版)
         function parseFrontMatter(content) {
-            const frontMatterRegex = /^---\s*\n([\s\S]*?)\n---\s*\n([\s\S]*)$/;
+            console.log("  开始解析Front Matter...");
+            
+            // 更严格的front matter正则表达式
+            const frontMatterRegex = /^---\s*[\r\n]+([\s\S]*?)[\r\n]+---\s*[\r\n]+([\s\S]*)$/;
             const match = content.match(frontMatterRegex);
             
             if (!match) {
+                console.log("  ❌ 没有找到Front Matter");
                 return { frontMatter: {}, bodyContent: content };
             }
             
+            console.log("  ✅ 找到Front Matter");
             const frontMatterText = match[1];
             const bodyContent = match[2];
             
+            console.log("  Front Matter文本:", frontMatterText);
+            
             const frontMatter = {};
-            frontMatterText.split('\n').forEach(line => {
+            frontMatterText.split(/[\r\n]+/).forEach(line => {
+                line = line.trim();
+                if (line === '') return;
+                
                 const colonIndex = line.indexOf(':');
                 if (colonIndex > 0) {
                     const key = line.substring(0, colonIndex).trim();
-                    const value = line.substring(colonIndex + 1).trim().replace(/^["']|["']$/g, '');
+                    let value = line.substring(colonIndex + 1).trim();
+                    
+                    // 移除引号
+                    value = value.replace(/^["']|["']$/g, '');
+                    
                     if (key && value) {
                         frontMatter[key] = value;
+                        console.log(`    ${key}: "${value}"`);
                     }
                 }
             });
@@ -441,24 +529,36 @@
             return { frontMatter, bodyContent };
         }
 
-        // Format date for display (避免时区问题)
+        // Format date for display (修复时区问题)
         function formatDate(dateString) {
-            // 解析日期字符串，避免时区转换
-            const [year, month, day] = dateString.split('-').map(num => parseInt(num));
-            const date = new Date(year, month - 1, day); // month是0-based
-            
-            const options = { 
-                year: 'numeric', 
-                month: 'long', 
-                day: 'numeric' 
-            };
-            return date.toLocaleDateString('en-US', options);
+            try {
+                // 解析日期字符串，避免时区转换
+                const [year, month, day] = dateString.split('-').map(num => parseInt(num));
+                const date = new Date(year, month - 1, day); // month是0-based
+                
+                const options = { 
+                    year: 'numeric', 
+                    month: 'long', 
+                    day: 'numeric' 
+                };
+                return date.toLocaleDateString('en-US', options);
+            } catch (error) {
+                console.error("日期格式化错误:", error, "原始日期:", dateString);
+                return dateString; // 返回原始字符串作为备用
+            }
+        }
+
+        // Format title from filename
+        function formatTitle(baseName) {
+            return baseName
+                .replace(/-/g, ' ')
+                .replace(/\b\w/g, l => l.toUpperCase());
         }
 
         // Extract title from markdown content
         function extractTitle(content) {
             const titleMatch = content.match(/^#\s+(.+)$/m);
-            return titleMatch ? titleMatch[1] : 'Untitled Article';
+            return titleMatch ? titleMatch[1].trim() : 'Untitled Article';
         }
 
         // Extract excerpt from markdown content
@@ -497,7 +597,10 @@
         }
 
         // Load blogs when page loads
-        document.addEventListener('DOMContentLoaded', loadBlogPosts);
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log("页面加载完成，开始加载博客...");
+            loadBlogPosts();
+        });
     </script>
 </body>
 </html>
