@@ -1,3 +1,10 @@
+---
+title: "Traditional ML Algorithms in F&B Industry: Part 2 - Advanced Algorithms for Strategic Optimization"
+date: "2025-07-01"
+author: "PraxisTwin Global Research"
+category: "AI Strategy"
+---
+
 # Traditional ML Algorithms in F&B Industry: Part 2 - Advanced Algorithms for Strategic Optimization
 
 *Published on July 5, 2025*
